@@ -4,9 +4,9 @@ import { GrLinkedin } from "react-icons/gr";
 
 const HeroSection = () => {
   return (
-    <div className="min-h-[90vh] ">
-      <div className="max-w-7xl mx-auto ">
-        <div className="flex h-[94vh] justify-around items-center gap-4">
+    <div className="min-h-[90vh]">
+      <div className="max-w-7xl mx-auto">
+        <div className="md:flex h-[94vh] justify-around items-center gap-4">
           <div className="space-y-3">
             <h1 className="text-3xl font-bold">Hello, It's Me</h1>
             <h1 className="text-6xl font-bold">Anamul Haque</h1>

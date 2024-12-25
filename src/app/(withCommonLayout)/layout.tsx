@@ -9,8 +9,8 @@ const layout = ({ children }: { children: ReactNode }) => {
       {/* <main className="container mx-auto max-w-7xl md:px-4 px-2 flex-grow"> */}
       <main className="h-screen">
         {children}
-      </main>
       <Footer />
+      </main>
     </div>
   );
 };
