@@ -17,10 +17,11 @@ const AboutPage = () => {
             <h1 className="text-4xl font-bold">About Me</h1>
             <h1 className="text-2xl font-bold">Full Stack Developer</h1>
             <h1 className="">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam
-              dolores fugit voluptates veritatis odit magnam officiis cum soluta
-              iste dolor in id ipsa, illo explicabo veniam dignissimos. Facere,
-              inventore quia!
+              Full-Stack Web Developer with 2+ years of experience in scalable
+              web application development, specialising in backend systems.
+              Passionate about optimizing web functionalities through efficient
+              solutions, solving complex problems, and delivering exceptional
+              user experiences.
             </h1>
             <div className="pt-4">
               <button className="bg-blue-500 font-semibold text-lg rounded-full py-2 px-5">
