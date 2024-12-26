@@ -9,12 +9,12 @@ import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import { toast } from "sonner";
 
 const ContactInfo = () => {
-  const [isLoading, setIsLoading] = useState(false); // Loading state for the form submission
+  const [isLoading, setIsLoading] = useState(false);
   const form: any = useRef();
 
   const sendEmail = (e: any) => {
     e.preventDefault();
-    setIsLoading(true); // Set loading state when form is being submitted
+    setIsLoading(true); 
 
     emailjs
       .sendForm(
@@ -25,14 +25,14 @@ const ContactInfo = () => {
       )
       .then(
         (result) => {
-          setIsLoading(false); // Set loading state to false when the email is sent
+          setIsLoading(false); 
           if (result) {
             toast.success("Email sent successfully!");
-            form.current.reset(); // Reset the form fields after successful submission
+            form.current.reset(); 
           }
         },
         (error) => {
-          setIsLoading(false); // Set loading state to false if there was an error
+          setIsLoading(false); 
           console.log(error.text);
           toast.error("Error sending email.");
         }
@@ -48,7 +48,7 @@ const ContactInfo = () => {
           </h1>
           <div className="grid md:grid-cols-2 gap-4  max-w-3xl mx-auto">
             {/* Address Section */}
-            <div className="bg-default-100 shadow-lg rounded-md p-5 flex items-center gap-5">
+            <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
               <div className="btn rounded-full text-xl">
                 <FaLocationDot />
               </div>
@@ -59,43 +59,43 @@ const ContactInfo = () => {
             </div>
 
             {/* Social Profiles Section */}
-            <div className="p-5 flex items-center gap-5 bg-default-100 shadow-lg rounded-md">
+            <div className="p-5 flex items-center gap-5 bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md">
               <div className="btn rounded-full text-xl">
                 <IoShareSocialOutline />
               </div>
               <div>
                 <h2 className="text-xl font-bold">Social Profiles</h2>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-3">
                   <a
                     href="https://www.linkedin.com/in/anamul-haque-772264299/"
                     target="blank"
                     rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-white"
+                    className="btn glass rounded-full btn-sm text-default-800 hover:text-default-500 transition-colors"
                   >
-                    <FaLinkedin />
+                    <FaLinkedin className="text-xl" />
                   </a>
                   <a
                     href="https://github.com/Anamul9901"
                     target="blank"
                     rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-white"
+                    className="btn glass rounded-full btn-sm text-default-800 hover:text-default-500 transition-colors"
                   >
-                    <FaGithub />
+                    <FaGithub className="text-xl" />
                   </a>
                   <a
                     href="https://www.facebook.com/Anamul114"
                     target="blank"
                     rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-white"
+                    className="btn glass rounded-full btn-sm text-default-800 hover:text-default-500 transition-colors"
                   >
-                    <FaFacebook />
+                    <FaFacebook className="text-xl" />
                   </a>
                 </div>
               </div>
             </div>
 
             {/* Email Section */}
-            <div className="bg-default-100 shadow-lg rounded-md p-5 flex items-center gap-5">
+            <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
               <div className="btn rounded-full text-xl">
                 <MdOutlineMail />
               </div>
@@ -106,7 +106,7 @@ const ContactInfo = () => {
             </div>
 
             {/* Phone Section */}
-            <div className="bg-default-100 shadow-lg rounded-md p-5 flex items-center gap-5">
+            <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
               <div className="btn rounded-full text-xl">
                 <IoMdCall />
               </div>

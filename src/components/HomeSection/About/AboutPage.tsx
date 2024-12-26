@@ -17,7 +17,7 @@ const AboutPage = () => {
             <h1 className="text-4xl font-bold">About Me</h1>
             <h1 className="text-2xl font-bold">Full Stack Developer</h1>
             <h1 className="">
-              Full-Stack Web Developer with 2+ years of experience in scalable
+              Full-Stack Web Developer with 1+ years of experience in scalable
               web application development, specialising in backend systems.
               Passionate about optimizing web functionalities through efficient
               solutions, solving complex problems, and delivering exceptional

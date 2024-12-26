@@ -16,16 +16,16 @@ const Skills = async () => {
 
   return (
     <div className="min-h-[60vh]">
-      <div className="max-w-7xl mx-auto py-8">
-        <h1 className="text-4xl font-bold text-center mb-20">Skills</h1>
-        <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-3 gap-6 items-center justify-center">
+      <div className="max-w-7xl mx-auto py-8 px-4">
+        <h1 className="text-4xl font-bold text-center mb-20">My Skills</h1>
+        <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-3 md:gap-6 gap-2 items-center justify-center">
           {skills.map((skill: any) => (
             <div
               key={skill._id}
               className="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition duration-300 items-center"
             >
               {/* Skill Image and Name */}
-              <div className="flex items-center bg-default-100">
+              <div className="flex items-center bg-default-100 hover:bg-default-200 hover:scale-105">
                 {/* Skill Image (Logo) */}
                 <div className="">
                   <Image

@@ -13,14 +13,14 @@ const Blogs = async () => {
 
   return (
     <div className="min-h-[70vh]">
-      <div className="max-w-7xl mx-auto py-8">
+      <div className="max-w-7xl mx-auto py-8 px-4">
         <h2 className="text-4xl font-bold text-center mb-6 py-10">Our Blogs</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs?.map((blog: any) => (
             <Link
             href={`/blog/${blog._id}`}
               key={blog._id}
-              className="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition bg-default-50 duration-300 hover:cursor-pointer"
+              className="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition bg-default-50 hover:bg-default-100 duration-300 hover:cursor-pointer"
             >
               {/* Blog Image */}
               <div className="relative w-full h-48">
