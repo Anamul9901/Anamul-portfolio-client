@@ -15,26 +15,43 @@ const HeroSection = () => {
             </h1>
 
             <div className="flex justify-start items-center gap-4 pt-4">
-              <button className="border px-4 py-4  rounded-full">
-                <FaFacebook />
-              </button>
-              <button className="border px-4 py-4 rounded-full">
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/anamul-haque-772264299/"
+                className="border px-3 py-3 rounded-full text-xl hover:bg-default-300"
+              >
                 <GrLinkedin />
-              </button>
-              <button className="border px-4 py-4 rounded-full">
+              </a>
+              <a
+                target="_blank"
+                href="https://github.com/Anamul9901"
+                className="border px-3 py-3 rounded-full text-xl hover:bg-default-300"
+              >
                 <FaGithub />
-              </button>
+              </a>
+              <a
+                target="_blank"
+                href="https://www.facebook.com/Anamul114"
+                className="border px-3 py-3  rounded-full text-xl hover:bg-default-300"
+              >
+                <FaFacebook />
+              </a>
             </div>
             <div className="pt-4">
-              <button className="bg-blue-500 font-semibold text-lg rounded-full py-2 px-5">
-                Download CV
-              </button>
+              <a
+                href="/Anamul_Resume.pdf" // Replace this with the actual path to your CV
+                download="Anamul-Resume.pdf" // The default file name for the download
+              >
+                <button className="bg-blue-500 font-semibold text-lg rounded-full py-2 px-5">
+                  Download CV
+                </button>
+              </a>
             </div>
           </div>
           <div>
             <Image
               src={"https://i.ibb.co/QJ3NGXj/Anamul-Haque-removebg.png"}
-              alt=""
+              alt="Photo"
               height={400}
               width={400}
             />
