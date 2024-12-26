@@ -51,7 +51,7 @@ const SingleProject = () => {
     <div className="h-[94vh]">
       <div className="max-w-4xl mx-auto p-8">
         <h1 className="text-3xl font-bold mb-4">{project.name}</h1>
-        <p className="text-neutral-400 mb-6">{project.description}</p>
+        <p className="text-default-500 mb-6">{project.description}</p>
         <img
           src={project.image}
           alt={project.name}
