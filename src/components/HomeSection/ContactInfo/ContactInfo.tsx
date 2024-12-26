@@ -41,7 +41,7 @@ const ContactInfo = () => {
 
   return (
     <div className="min-h-[60vh]">
-      <div className="style max-w-7xl mx-auto">
+      <div className="style max-w-7xl mx-auto px-4">
         <div className="pt-20 md:h-[100vh] items-center">
           <h1 className="text-4xl text-center font-bold py-12">
             Contact Information
@@ -118,7 +118,7 @@ const ContactInfo = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="pt-10">
+          <div className="py-12">
             <form
               ref={form}
               onSubmit={sendEmail}
@@ -128,8 +128,8 @@ const ContactInfo = () => {
                 Email Me
               </h2>
 
-              <div className="flex justify-center items-center">
-                <div className="space-y-4">
+              <div className="flex justify-center">
+                <div className="space-y-4 w-full md:w-auto">
                   {/* Name Input */}
                   <div>
                     <input

@@ -6,8 +6,7 @@ const Education = () => {
         <div className="grid md:grid-cols-2 md:gap-6 gap-4">
           {/* Address Section */}
           <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
-            <div className="btn rounded-full text-xl"></div>
-            <div className="space-y-1">
+            <div className="space-y-1 px-3">
               <h2 className="text-lg font-bold">
                 Junior School Certificate (JSC)
               </h2>
@@ -23,7 +22,7 @@ const Education = () => {
 
           {/* Address Section */}
           <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5 ">
-            <div className="space-y-2">
+            <div className="space-y-2 px-3">
               <h2 className="text-lg font-bold">
                 Secondary School Certificate (SSC)
               </h2>
@@ -39,8 +38,7 @@ const Education = () => {
 
           {/* Email Section */}
           <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
-            <div className="btn rounded-full text-xl"></div>
-            <div className="space-y-2">
+            <div className="space-y-2 px-3">
               <h2 className="text-lg font-bold">
                 Higher Secondary Certificate (HSC)
               </h2>
@@ -54,8 +52,7 @@ const Education = () => {
 
           {/* Phone Section */}
           <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
-            <div className="btn rounded-full text-xl"></div>
-            <div className="space-y-2">
+            <div className="space-y-2 px-3">
               <h2 className="text-lg font-bold">
                 Computer Science and Engineering (CSE)
               </h2>
