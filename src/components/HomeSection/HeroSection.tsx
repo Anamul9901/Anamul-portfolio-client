@@ -16,21 +16,21 @@ const HeroSection = () => {
 
             <div className="flex justify-start items-center gap-4 pt-4">
               <a
-                target="_blank"
+                target="blank"
                 href="https://www.linkedin.com/in/anamul-haque-772264299/"
                 className="border px-3 py-3 rounded-full text-xl hover:bg-default-300"
               >
                 <GrLinkedin />
               </a>
               <a
-                target="_blank"
+                target="blank"
                 href="https://github.com/Anamul9901"
                 className="border px-3 py-3 rounded-full text-xl hover:bg-default-300"
               >
                 <FaGithub />
               </a>
               <a
-                target="_blank"
+                target="blank"
                 href="https://www.facebook.com/Anamul114"
                 className="border px-3 py-3  rounded-full text-xl hover:bg-default-300"
               >
