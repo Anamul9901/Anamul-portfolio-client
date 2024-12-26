@@ -1,5 +1,3 @@
-import React from "react";
-
 import "@/src/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";

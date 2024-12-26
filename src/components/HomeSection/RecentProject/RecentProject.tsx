@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const RecentProject = async () => {
   const res = await fetch(
@@ -48,14 +49,12 @@ const RecentProject = async () => {
                       >
                         Link
                       </a>
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={project?.frLive}
+                      <Link
+                        href={ `/project/${project._id}`}
                         className="px-4 py-2 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition"
                       >
                         View
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
