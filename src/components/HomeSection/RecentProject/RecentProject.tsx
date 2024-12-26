@@ -10,10 +10,9 @@ const RecentProject = async () => {
   );
   const allProjects = await res.json();
   const projects = allProjects?.data;
-  console.log("projects", projects);
 
   return (
-    <div className="min-h-screen border">
+    <div className="min-h-screen">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center py-8">Recent Projects</h1>
         <div className="flex justify-center">
@@ -50,7 +49,7 @@ const RecentProject = async () => {
                         Link
                       </a>
                       <Link
-                        href={ `/project/${project._id}`}
+                        href={`/project/${project._id}`}
                         className="px-4 py-2 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition"
                       >
                         View
