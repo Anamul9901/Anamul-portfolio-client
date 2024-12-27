@@ -4,7 +4,8 @@ const Skills = async () => {
   const res = await fetch(
     "https://anamul-portfolio-backend.vercel.app/api/v1/skill/all",
     {
-      cache: "force-cache", // Ensures caching for performance
+      method: "GET",
+      cache: "default",
     }
   );
   const data = await res.json();
@@ -25,10 +26,11 @@ const Skills = async () => {
               className="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition duration-300 items-center"
             >
               {/* Skill Image and Name */}
-              <div className="flex items-center bg-default-100 hover:bg-default-200 hover:scale-105">
+              <div className="flex w-full items-center justify-between bg-default-100 hover:bg-default-200 hover:scale-105 md:px-4 px-1">
                 {/* Skill Image (Logo) */}
-                <div className="">
+                <div className="w-[40px] h-[50px] flex justify-center items-center">
                   <Image
+                    className="w-20"
                     src={skill.image}
                     alt={skill.name}
                     height={100}
@@ -37,7 +39,7 @@ const Skills = async () => {
                 </div>
 
                 {/* Skill Name */}
-                <div className="ml-4">
+                <div className="ml-4 w">
                   <h2 className="text-sm">{skill.name}</h2>
                   {/* {skill.title && (
                     <p className="text-sm text-gray-600">{skill.title}</p>
