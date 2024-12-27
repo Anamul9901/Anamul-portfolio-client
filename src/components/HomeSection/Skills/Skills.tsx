@@ -5,7 +5,7 @@ const Skills = async () => {
     "https://anamul-portfolio-backend.vercel.app/api/v1/skill/all",
     {
       method: "GET",
-      cache: "default",
+      cache: "no-cache",
     }
   );
   const data = await res.json();

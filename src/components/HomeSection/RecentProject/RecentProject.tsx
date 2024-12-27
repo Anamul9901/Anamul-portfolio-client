@@ -6,7 +6,7 @@ const RecentProject = async () => {
     "https://anamul-portfolio-backend.vercel.app/api/v1/project/all",
     {
       method: "GET",
-      cache: "default",
+      cache: "no-cache",
     }
   );
   const allProjects = await res.json();

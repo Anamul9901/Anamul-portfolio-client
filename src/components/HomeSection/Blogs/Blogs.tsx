@@ -6,7 +6,7 @@ const Blogs = async () => {
     "https://anamul-portfolio-backend.vercel.app/api/v1/blog/all",
     {
       method: "GET",
-      cache: "default",
+      cache: "no-cache",
     }
   );
   const data = await res.json();
