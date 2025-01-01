@@ -48,9 +48,9 @@ const SingleProject = () => {
     );
 
   return (
-    <div className="h-[94vh]">
+    <div className="h-[100vh] pt-20">
       <div className="max-w-4xl mx-auto p-8">
-        <h1 className="text-3xl font-bold mb-4">{project.name}</h1>
+        <h1 className="md:text-2xl text-xl font-bold mb-4">{project.name}</h1>
         <p className="text-default-500 mb-6">{project.description}</p>
         <img
           src={project.image}
@@ -59,13 +59,13 @@ const SingleProject = () => {
         />
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <h2 className="font-bold text-lg mb-2">Frontend Links</h2>
+            <h2 className="font-bold md:text-lg mb-2">Frontend Links</h2>
             <p>
               <a
                 href={project.frLive}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
+                className="text-teal-500 hover:underline"
               >
                 Live
               </a>
@@ -75,20 +75,20 @@ const SingleProject = () => {
                 href={project.frRepo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
+                className="text-teal-500 hover:underline"
               >
                 Repository
               </a>
             </p>
           </div>
           <div>
-            <h2 className="font-bold text-lg mb-2">Backend Links</h2>
+            <h2 className="font-bold md:text-lg mb-2">Backend Links</h2>
             <p>
               <a
                 href={project.bcLive}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
+                className="text-teal-500 hover:underline"
               >
                 Live
               </a>
@@ -98,7 +98,7 @@ const SingleProject = () => {
                 href={project.bcRepo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
+                className="text-teal-500 hover:underline"
               >
                 Repository
               </a>

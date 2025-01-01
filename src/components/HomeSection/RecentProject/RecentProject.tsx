@@ -45,9 +45,9 @@ const RecentProject = async () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         href={project?.frLive}
-                        className="px-4 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition"
+                        className="px-4 py-2 bg-teal-500 text-white text-sm rounded-lg hover:bg-teal-600 transition"
                       >
-                        Link
+                        Live
                       </a>
                       <Link
                         href={`/project/${project._id}`}

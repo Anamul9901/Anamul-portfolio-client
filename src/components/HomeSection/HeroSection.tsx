@@ -30,7 +30,7 @@ const HeroSection = () => {
         <div className="md:space-y-3 space-y-1 text-center md:text-left">
           <h1 className="md:text-3xl text-xl font-bold">{"Hello, It's Me"}</h1>
           <h1 className="md:text-6xl text-4xl font-bold">Anamul Haque</h1>
-          <h1 className="md:text-3xl text-xl font-bold text-blue-500">
+          <h1 className="md:text-3xl text-xl font-bold text-teal-500">
             {"I'm"} <span> </span>
             <span id="typewriter"></span>
           </h1>
@@ -38,28 +38,28 @@ const HeroSection = () => {
             <a
               target="blank"
               href="https://www.linkedin.com/in/anamul-haque-772264299/"
-              className="border md:px-3 md:py-3 p-2 rounded-full text-xl hover:bg-default-300"
+              className="border-teal-400 hover:border-white border md:px-3 md:py-3 p-2 rounded-full text-xl hover:text-teal-400"
             >
               <GrLinkedin />
             </a>
             <a
               target="blank"
               href="https://github.com/Anamul9901"
-              className="border md:px-3 md:py-3 p-2 rounded-full text-xl hover:bg-default-300"
+              className="border-teal-400 hover:border-white border md:px-3 md:py-3 p-2 rounded-full text-xl hover:text-teal-400"
             >
               <FaGithub />
             </a>
             <a
               target="blank"
               href="https://www.facebook.com/Anamul114"
-              className="border md:px-3 md:py-3 p-2 rounded-full text-xl hover:bg-default-300"
+              className="border-teal-400 hover:border-white border md:px-3 md:py-3 p-2 rounded-full text-xl hover:text-teal-400"
             >
               <FaFacebook />
             </a>
           </div>
           <div className="pt-4">
             <a href="/Anamul_Resume.pdf" download="Anamul-Resume.pdf">
-              <button className="bg-blue-500 hover:bg-blue-700 font-semibold text-lg rounded-full md:py-2 md:px-5 py-2 px-4">
+              <button className="bg-teal-600 hover:bg-teal-700 font-semibold text-lg rounded-full md:py-2 md:px-5 py-2 px-4">
                 Download CV
               </button>
             </a>

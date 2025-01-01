@@ -3,7 +3,7 @@ import myImage from '../../../../public/Anamul-Haque-removebg.png'
 
 const AboutPage = () => {
   return (
-    <div className="">
+    <div className="pt-12">
       <div className="max-w-7xl mx-auto md:px-4 px-8 ">
         <div className="md:flex h-[50vh] justify-around items-center gap-4">
           <div className="flex justify-center items-center pb-12 md:w-[40%]">

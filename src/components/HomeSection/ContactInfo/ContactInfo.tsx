@@ -14,7 +14,7 @@ const ContactInfo = () => {
 
   const sendEmail = (e: any) => {
     e.preventDefault();
-    setIsLoading(true); 
+    setIsLoading(true);
 
     emailjs
       .sendForm(
@@ -25,14 +25,14 @@ const ContactInfo = () => {
       )
       .then(
         (result) => {
-          setIsLoading(false); 
+          setIsLoading(false);
           if (result) {
             toast.success("Email sent successfully!");
-            form.current.reset(); 
+            form.current.reset();
           }
         },
         (error) => {
-          setIsLoading(false); 
+          setIsLoading(false);
           console.log(error.text);
           toast.error("Error sending email.");
         }
@@ -70,7 +70,7 @@ const ContactInfo = () => {
                     href="https://www.linkedin.com/in/anamul-haque-772264299/"
                     target="blank"
                     rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-default-800 hover:text-default-500 transition-colors"
+                    className="btn glass rounded-full btn-sm text-teal-500 hover:text-teal-700 transition-colors"
                   >
                     <FaLinkedin className="text-xl" />
                   </a>
@@ -78,7 +78,7 @@ const ContactInfo = () => {
                     href="https://github.com/Anamul9901"
                     target="blank"
                     rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-default-800 hover:text-default-500 transition-colors"
+                    className="btn glass rounded-full btn-sm text-teal-500 hover:text-teal-700 transition-colors"
                   >
                     <FaGithub className="text-xl" />
                   </a>
@@ -86,7 +86,7 @@ const ContactInfo = () => {
                     href="https://www.facebook.com/Anamul114"
                     target="blank"
                     rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-default-800 hover:text-default-500 transition-colors"
+                    className="btn glass rounded-full btn-sm text-teal-500 hover:text-teal-700 transition-colors"
                   >
                     <FaFacebook className="text-xl" />
                   </a>
@@ -124,9 +124,7 @@ const ContactInfo = () => {
               onSubmit={sendEmail}
               className="max-w-lg mx-auto bg-default-100 p-6 rounded-lg shadow-lg "
             >
-              <h2 className="text-2xl font-bold text-center mb-6">
-                Email Me
-              </h2>
+              <h2 className="text-2xl font-bold text-center mb-6">Email Me</h2>
 
               <div className="flex justify-center">
                 <div className="space-y-4 w-full md:w-auto">
@@ -165,7 +163,7 @@ const ContactInfo = () => {
                   {/* Submit Button */}
                   <div className="flex justify-center pt-4">
                     <input
-                      className="btn btn-primary bg-blue-500 font-semibold py-2 px-6 rounded-full hover:bg-blue-800 transition-colors"
+                      className="btn btn-primary bg-teal-500 font-semibold py-2 px-6 rounded-full hover:bg-teal-800 transition-colors"
                       type="submit"
                       value={isLoading ? "Sending..." : "Send Message"} // Display loading text while submitting
                       disabled={isLoading} // Disable the submit button when loading

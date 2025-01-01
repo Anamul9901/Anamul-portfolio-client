@@ -1,17 +1,34 @@
 "use client";
 
 import { Link } from "react-scroll";
+import NextLink from "next/link";
 
 export const Navbar = () => {
   const navItem = (
     <>
       <li>
-        <Link to="home" spy={true} smooth={true} offset={-65} duration={500}>
+        <Link
+          to="home"
+          spy={true}
+          smooth={true}
+          offset={-65}
+          duration={500}
+          activeClass="text-teal-500 underline"
+          className="hover:text-teal-400 hover:underline transition-colors duration-300"
+        >
           Home
         </Link>
       </li>
       <li>
-        <Link to="about" spy={true} smooth={true} offset={5} duration={500}>
+        <Link
+          to="about"
+          spy={true}
+          smooth={true}
+          offset={5}
+          duration={500}
+          activeClass="text-teal-500 underline"
+          className="hover:text-teal-400 hover:underline transition-colors duration-300"
+        >
           About
         </Link>
       </li>
@@ -22,6 +39,8 @@ export const Navbar = () => {
           smooth={true}
           offset={50}
           duration={500}
+          activeClass="text-teal-500 underline"
+          className="hover:text-teal-400 hover:underline transition-colors duration-300"
         >
           Education
         </Link>
@@ -31,8 +50,10 @@ export const Navbar = () => {
           to="skills"
           spy={true}
           smooth={true}
-          offset={-20}
+          offset={50}
           duration={500}
+          activeClass="text-teal-500 underline"
+          className="hover:text-teal-400 hover:underline transition-colors duration-300"
         >
           Skills
         </Link>
@@ -44,6 +65,8 @@ export const Navbar = () => {
           smooth={true}
           offset={50}
           duration={500}
+          activeClass="text-teal-500 underline"
+          className="hover:text-teal-400 hover:underline transition-colors duration-300"
         >
           Projects
         </Link>
@@ -55,6 +78,8 @@ export const Navbar = () => {
           smooth={true}
           offset={50}
           duration={500}
+          activeClass="text-teal-500 underline"
+          className="hover:text-teal-400 hover:underline transition-colors duration-300"
         >
           Blogs
         </Link>
@@ -66,6 +91,8 @@ export const Navbar = () => {
           smooth={true}
           offset={50}
           duration={500}
+          activeClass="text-teal-500 underline"
+          className="hover:text-teal-400 hover:underline transition-colors duration-300"
         >
           Contact
         </Link>
@@ -85,7 +112,7 @@ export const Navbar = () => {
             {/* Hamburger Menu for Mobile */}
             <div className="md:hidden">
               <button
-                className="p-2 text-white"
+                className="p-2 text-teal-400"
                 onClick={() => {
                   const menu = document.getElementById("mobile-menu");
                   if (menu) {
@@ -110,24 +137,28 @@ export const Navbar = () => {
               </button>
             </div>
 
-            {/* Logo */}
-            <Link to="home" className="flex items-center justify-start w-full">
-              <h2 className="font-bold text-xl uppercase">Anamul Haque</h2>
-            </Link>
+            {/* Logo with Next.js Link for Home Page */}
+            <NextLink href="/" passHref>
+              <h2 className="font-bold text-xl uppercase text-teal-500 px-4 hover:cursor-pointer">
+                Anamul Haque
+              </h2>
+            </NextLink>
           </div>
 
           {/* Right Section: Desktop Menu */}
           <div className="hidden md:flex w-full justify-end items-center">
-            <ul className="flex space-x-3">{navItem}</ul>
+            <ul className="flex space-x-3 hover:cursor-pointer px-4 text-sm">
+              {navItem}
+            </ul>
           </div>
         </div>
 
         {/* Mobile Dropdown Menu */}
         <div
           id="mobile-menu"
-          className="md:hidden hidden bg-black/50 p-4 absolute top-16 left-0 right-0"
+          className="md:hidden hidden w-[200px] ml-[20px] mt-2 rounded-md bg-black/50 p-4 absolute top-16 left-0 right-0"
         >
-          <ul className="space-y-4">{navItem}</ul>
+          <ul className="space-y-4 hover:cursor-pointer">{navItem}</ul>
         </div>
       </div>
     </div>
