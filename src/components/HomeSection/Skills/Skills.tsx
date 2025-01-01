@@ -16,9 +16,11 @@ const Skills = async () => {
   }
 
   return (
-    <div className="min-h-[60vh]">
-      <div className="max-w-7xl mx-auto py-8 px-4">
-        <h1 className="md:text-4xl text-2xl font-bold text-center mb-14 pt-8 md:pt-0">My Skills</h1>
+    <div className="min-h-[60vh] pt-8 py-8">
+      <div className="max-w-7xl mx-auto  px-4">
+        <h1 className="md:text-4xl text-2xl font-bold text-center mb-14 md:pt-0">
+          My Skills
+        </h1>
         <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-3 md:gap-6 gap-2 items-center justify-center">
           {skills.map((skill: any) => (
             <div

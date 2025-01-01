@@ -1,6 +1,7 @@
+
 const Education = () => {
   return (
-    <div className="min-h-[80vh] md:pt-28">
+    <div className=" md:pt-28 min-h-[80vh]">
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="md:text-4xl text-2xl text-center font-bold pb-12">
           Education

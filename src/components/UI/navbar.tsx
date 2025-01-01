@@ -1,83 +1,135 @@
 "use client";
-import {
-  Navbar as NextUINavbar,
-  NavbarContent,
-  NavbarMenu,
-  NavbarMenuToggle,
-  NavbarBrand,
-  NavbarItem,
-  NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
-import { divider, link as linkStyles } from "@nextui-org/theme";
-import NextLink from "next/link";
-import { Logo } from "../icons";
-import { siteConfig } from "../../config/site";
-import { ThemeSwitch } from "../theme-switch";
-import { HiMiniShoppingCart } from "react-icons/hi2";
-import clsx from "clsx";
-import { useEffect, useState } from "react";
+
+import { Link } from "react-scroll";
 
 export const Navbar = () => {
+  const navItem = (
+    <>
+      <li>
+        <Link to="home" spy={true} smooth={true} offset={-65} duration={500}>
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link to="about" spy={true} smooth={true} offset={5} duration={500}>
+          About
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="education"
+          spy={true}
+          smooth={true}
+          offset={50}
+          duration={500}
+        >
+          Education
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="skills"
+          spy={true}
+          smooth={true}
+          offset={-20}
+          duration={500}
+        >
+          Skills
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="projects"
+          spy={true}
+          smooth={true}
+          offset={50}
+          duration={500}
+        >
+          Projects
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="blogs"
+          spy={true}
+          smooth={true}
+          offset={50}
+          duration={500}
+        >
+          Blogs
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="contact"
+          spy={true}
+          smooth={true}
+          offset={50}
+          duration={500}
+        >
+          Contact
+        </Link>
+      </li>
+    </>
+  );
+
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            {/* <Logo /> */}
-            <p className="font-bold text-inherit">ANAMUL HAQUE</p>
-          </NextLink>
-        </NavbarBrand>
-        <ul className="hidden md:inline-block gap-4 justify-start ml-2">
-          <div className="flex gap-4">
-            {siteConfig.navItems.map((item) => (
-              <NavbarItem key={item.href}>
-                <NextLink
-                  className={clsx(
-                    linkStyles({ color: "foreground" }),
-                    "data-[active=true]:text-primary data-[active=true]:font-medium"
-                  )}
-                  color="foreground"
-                  href={item.href}
-                >
-                  {item.label}
-                </NextLink>
-              </NavbarItem>
-            ))}
-          </div>
-        </ul>
-      </NavbarContent>
-
-      <NavbarContent className=" basis-1/5 sm:basis-full" justify="end">
-        <NavbarItem className="flex justify-center items-center gap-3">
-          <ThemeSwitch />
-        </NavbarItem>
-        <div className="md:hidden w-[30px] h-[30px]">
-          <NavbarMenuToggle className="w-full h-full" />
-        </div>
-      </NavbarContent>
-
-      <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href="#"
-                size="lg"
+    <div
+      className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md text-white"
+      style={{ backdropFilter: "blur(10px)" }}
+    >
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="flex items-center justify-between p-4">
+          {/* Left Section: Hamburger Menu and Logo */}
+          <div className="flex items-center justify-between w-full">
+            {/* Hamburger Menu for Mobile */}
+            <div className="md:hidden">
+              <button
+                className="p-2 text-white"
+                onClick={() => {
+                  const menu = document.getElementById("mobile-menu");
+                  if (menu) {
+                    menu.classList.toggle("hidden");
+                  }
+                }}
               >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Logo */}
+            <Link to="home" className="flex items-center justify-start w-full">
+              <h2 className="font-bold text-xl uppercase">Anamul Haque</h2>
+            </Link>
+          </div>
+
+          {/* Right Section: Desktop Menu */}
+          <div className="hidden md:flex w-full justify-end items-center">
+            <ul className="flex space-x-3">{navItem}</ul>
+          </div>
         </div>
-      </NavbarMenu>
-    </NextUINavbar>
+
+        {/* Mobile Dropdown Menu */}
+        <div
+          id="mobile-menu"
+          className="md:hidden hidden bg-black/50 p-4 absolute top-16 left-0 right-0"
+        >
+          <ul className="space-y-4">{navItem}</ul>
+        </div>
+      </div>
+    </div>
   );
 };

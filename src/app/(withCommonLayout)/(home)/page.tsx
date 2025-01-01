@@ -9,13 +9,33 @@ import Skills from "@/src/components/HomeSection/Skills/Skills";
 const HomePage = () => {
   return (
     <div>
-      <HeroSection />
-      <AboutPage />
-      <Education />
-      <Skills />
-      <RecentProject />
-      <Blogs />
-      <ContactInfo />
+      <div id="home">
+        <HeroSection />
+      </div>
+
+      <div id="about">
+        <AboutPage />
+      </div>
+
+      <div id="education">
+        <Education />
+      </div>
+
+      <div id="skills">
+        <Skills />
+      </div>
+
+      <div id="projects">
+        <RecentProject />
+      </div>
+
+      <div id="blogs">
+        <Blogs />
+      </div>
+
+      <div id="contact">
+        <ContactInfo />
+      </div>
     </div>
   );
 };
