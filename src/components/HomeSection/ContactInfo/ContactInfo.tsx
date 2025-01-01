@@ -40,10 +40,10 @@ const ContactInfo = () => {
   };
 
   return (
-    <div className="min-h-[60vh]">
+    <div className="min-h-[60vh] pb-10">
       <div className="style max-w-7xl mx-auto px-4">
         <div className="pt-20 md:h-[100vh] items-center">
-          <h1 className="text-4xl text-center font-bold py-12">
+          <h1 className="md:text-4xl text-2xl text-center font-bold py-16">
             Contact Information
           </h1>
           <div className="grid md:grid-cols-2 gap-4  max-w-3xl mx-auto">

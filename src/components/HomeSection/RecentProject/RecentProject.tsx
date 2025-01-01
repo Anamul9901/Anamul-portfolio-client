@@ -15,8 +15,8 @@ const RecentProject = async () => {
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center py-8">Recent Projects</h1>
-        <div className="flex justify-center">
+        <h1 className="md:text-4xl text-2xl font-bold text-center py-8 pt-32">Recent Projects</h1>
+        <div className="flex justify-center pt-12">
           <div className="grid md:grid-cols-3 grid-cols-1 gap-8 px-4">
             {projects?.map((project: any) => (
               <div
