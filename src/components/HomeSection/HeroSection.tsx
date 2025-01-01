@@ -31,7 +31,7 @@ const HeroSection = () => {
           <h1 className="md:text-3xl text-xl font-bold">{"Hello, It's Me"}</h1>
           <h1 className="md:text-6xl text-4xl font-bold">Anamul Haque</h1>
           <h1 className="md:text-3xl text-xl font-bold text-blue-500">
-            I'm&nbsp;
+            {"I'm"} <span> </span>
             <span id="typewriter"></span>
           </h1>
           <div className="flex md:justify-start justify-center items-center gap-4 pt-4">
