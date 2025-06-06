@@ -40,7 +40,7 @@ const ContactInfo = () => {
   };
 
   return (
-    <div className="min-h-[60vh] pb-10">
+    <div className="min-h-[70vh] md:pb-32">
       <div className="style max-w-7xl mx-auto px-4">
         <div className="pt-20 md:h-[100vh] items-center">
           <h1 className="md:text-4xl text-2xl text-center font-bold py-16">
@@ -83,7 +83,7 @@ const ContactInfo = () => {
                     <FaGithub className="text-xl" />
                   </a>
                   <a
-                    href="https://www.facebook.com/Anamul114"
+                    href="https://www.facebook.com/anamul9901"
                     target="blank"
                     rel="noopener noreferrer"
                     className="btn glass rounded-full btn-sm text-teal-500 hover:text-teal-700 transition-colors"

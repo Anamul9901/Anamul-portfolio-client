@@ -51,7 +51,7 @@ const HeroSection = () => {
             </a>
             <a
               target="blank"
-              href="https://www.facebook.com/Anamul114"
+              href="https://www.facebook.com/anamul9901"
               className="border-teal-400 hover:border-white border md:px-3 md:py-3 p-2 rounded-full text-xl hover:text-teal-400"
             >
               <FaFacebook />
