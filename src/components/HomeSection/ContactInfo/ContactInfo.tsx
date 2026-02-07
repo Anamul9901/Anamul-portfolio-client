@@ -1,18 +1,19 @@
 "use client";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { FaLocationDot } from "react-icons/fa6";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { MdOutlineMail } from "react-icons/md";
-import { IoMdCall } from "react-icons/io";
-import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaLocationDot, FaEnvelope, FaPhone } from "react-icons/fa6";
+import { FaLinkedin, FaGithub, FaFacebook } from "react-icons/fa";
+import { SiCodechef, SiCodeforces } from "react-icons/si";
 import { toast } from "sonner";
+import { useScrollAnimation, staggerContainer, staggerItem } from "@/src/hooks/useScrollAnimation";
 
 const ContactInfo = () => {
+  const { ref, controls } = useScrollAnimation(0.2);
   const [isLoading, setIsLoading] = useState(false);
-  const form: any = useRef();
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e: any) => {
+  const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -20,162 +21,193 @@ const ContactInfo = () => {
       .sendForm(
         "service_qo1r6jo",
         "template_0h2ytja",
-        form.current,
+        formRef.current!,
         "pbLzIm3Ta3Mtb_nbp"
       )
       .then(
         (result) => {
           setIsLoading(false);
           if (result) {
-            toast.success("Email sent successfully!");
-            form.current.reset();
+            toast.success("Message sent successfully!");
+            formRef.current?.reset();
           }
         },
         (error) => {
           setIsLoading(false);
           console.log(error.text);
-          toast.error("Error sending email.");
+          toast.error("Error sending message. Please try again.");
         }
       );
   };
 
+  const contactInfo = [
+    {
+      icon: FaLocationDot,
+      title: "Location",
+      value: "Mirpur, Dhaka, Bangladesh",
+    },
+    {
+      icon: FaEnvelope,
+      title: "Email",
+      value: "anamulhaque9901@gmail.com",
+      href: "mailto:anamulhaque9901@gmail.com",
+    },
+    {
+      icon: FaPhone,
+      title: "Phone",
+      value: "+8801864668089",
+      href: "tel:+8801864668089",
+    },
+  ];
+
+  const socialLinks = [
+    { href: "https://www.linkedin.com/in/anamul-haque-772264299/", icon: FaLinkedin, label: "LinkedIn" },
+    { href: "https://github.com/Anamul9901", icon: FaGithub, label: "GitHub" },
+    { href: "https://www.facebook.com/Anamul114", icon: FaFacebook, label: "Facebook" },
+    { href: "https://www.codechef.com/users/anamul9901", icon: SiCodechef, label: "CodeChef" },
+    { href: "https://codeforces.com/profile/Anamul9901", icon: SiCodeforces, label: "Codeforces" },
+  ];
+
   return (
-    <div className="min-h-[70vh] md:pb-32">
-      <div className="style max-w-7xl mx-auto px-4">
-        <div className="pt-20 md:h-[100vh] items-center">
-          <h1 className="md:text-4xl text-2xl text-center font-bold py-16">
-            Contact Information
-          </h1>
-          <div className="grid md:grid-cols-2 gap-4  max-w-3xl mx-auto">
-            {/* Address Section */}
-            <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
-              <div className="btn rounded-full text-xl">
-                <FaLocationDot />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold">My Address</h2>
-                <p>Dhaka, Bangladesh</p>
-              </div>
-            </div>
+    <section className="py-20 md:py-32 relative" ref={ref}>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
 
-            {/* Social Profiles Section */}
-            <div className="p-5 flex items-center gap-5 bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md">
-              <div className="btn rounded-full text-xl">
-                <IoShareSocialOutline />
+      <div className="section-container relative z-10">
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          variants={staggerContainer}
+        >
+          {/* Section Header */}
+          <motion.div variants={staggerItem} className="text-center mb-16">
+            <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
+              Get In Touch
+            </span>
+            <h2 className="section-heading mt-2 mb-0">
+              Contact <span className="gradient-text">Me</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            {/* Contact Info */}
+            <motion.div variants={staggerItem} className="space-y-6">
+              <h3 className="text-xl font-bold mb-6">Let&apos;s talk about everything!</h3>
+              <p className="text-default-500 mb-8">
+                I&apos;m available for freelance projects, full-time positions, and collaborations.
+                Feel free to reach out if you have a project in mind or just want to say hi!
+              </p>
+
+              {/* Contact Cards */}
+              <div className="space-y-4">
+                {contactInfo.map((info, index) => (
+                  <motion.div
+                    key={index}
+                    variants={staggerItem}
+                    className="glass-card p-4 flex items-center gap-4 card-hover"
+                  >
+                    <div className="p-3 rounded-xl bg-teal-500/10 text-teal-500 text-xl">
+                      <info.icon />
+                    </div>
+                    <div>
+                      <p className="text-default-500 text-sm">{info.title}</p>
+                      {info.href ? (
+                        <a
+                          href={info.href}
+                          className="font-medium text-white hover:text-teal-400 transition-colors"
+                        >
+                          {info.value}
+                        </a>
+                      ) : (
+                        <p className="font-medium text-white">{info.value}</p>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-              <div>
-                <h2 className="text-xl font-bold">Social Profiles</h2>
-                <div className="flex items-center gap-3">
-                  <a
-                    href="https://www.linkedin.com/in/anamul-haque-772264299/"
-                    target="blank"
-                    rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-teal-500 hover:text-teal-700 transition-colors"
-                  >
-                    <FaLinkedin className="text-xl" />
-                  </a>
-                  <a
-                    href="https://github.com/Anamul9901"
-                    target="blank"
-                    rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-teal-500 hover:text-teal-700 transition-colors"
-                  >
-                    <FaGithub className="text-xl" />
-                  </a>
-                  <a
-                    href="https://www.facebook.com/anamul9901"
-                    target="blank"
-                    rel="noopener noreferrer"
-                    className="btn glass rounded-full btn-sm text-teal-500 hover:text-teal-700 transition-colors"
-                  >
-                    <FaFacebook className="text-xl" />
-                  </a>
+
+              {/* Social Links */}
+              <motion.div variants={staggerItem} className="pt-6">
+                <p className="text-default-500 text-sm mb-4">Find me on</p>
+                <div className="flex gap-3">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-xl bg-default-100/50 text-default-400 hover:bg-teal-500 hover:text-white transition-all duration-300 text-lg"
+                      aria-label={social.label}
+                    >
+                      <social.icon />
+                    </a>
+                  ))}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            {/* Email Section */}
-            <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
-              <div className="btn rounded-full text-xl">
-                <MdOutlineMail />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold">Email Me</h2>
-                <p>anamulhaque9901@gmail.com</p>
-              </div>
-            </div>
+            {/* Contact Form */}
+            <motion.div variants={staggerItem}>
+              <form
+                ref={formRef}
+                onSubmit={sendEmail}
+                className="glass-card p-8 space-y-6"
+              >
+                <h3 className="text-xl font-bold text-center mb-6">Send a Message</h3>
 
-            {/* Phone Section */}
-            <div className="bg-default-100 hover:bg-default-200 hover:scale-105 shadow-lg rounded-md p-5 flex items-center gap-5">
-              <div className="btn rounded-full text-xl">
-                <IoMdCall />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold">Call Me</h2>
-                <p>+8809696668089</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="py-12">
-            <form
-              ref={form}
-              onSubmit={sendEmail}
-              className="max-w-lg mx-auto bg-default-100 p-6 rounded-lg shadow-lg "
-            >
-              <h2 className="text-2xl font-bold text-center mb-6">Email Me</h2>
-
-              <div className="flex justify-center">
-                <div className="space-y-4 w-full md:w-auto">
-                  {/* Name Input */}
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      className="input border input-bordered w-full md:w-96 py-3 px-4 rounded-md "
-                      name="from_name"
-                      required
-                    />
-                  </div>
-
-                  {/* Email Input */}
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      className="input border input-bordered w-full md:w-96 py-3 px-4 rounded-md "
-                      name="from_email"
-                      required
-                    />
-                  </div>
-
-                  {/* Message Input */}
-                  <div>
-                    <textarea
-                      placeholder="Your Message"
-                      className="input border input-bordered w-full md:w-96 py-3 px-4 rounded-md  h-32"
-                      name="message"
-                      required
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="flex justify-center pt-4">
-                    <input
-                      className="btn btn-primary bg-teal-500 font-semibold py-2 px-6 rounded-full hover:bg-teal-800 transition-colors"
-                      type="submit"
-                      value={isLoading ? "Sending..." : "Send Message"} // Display loading text while submitting
-                      disabled={isLoading} // Disable the submit button when loading
-                    />
-                  </div>
+                {/* Name Input */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    name="from_name"
+                    required
+                    placeholder="Your Name"
+                    className="w-full px-4 py-3 bg-default-100/50 border border-default-200/30 rounded-xl focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 transition-all text-white placeholder:text-default-500"
+                  />
                 </div>
-              </div>
-            </form>
+
+                {/* Email Input */}
+                <div className="relative">
+                  <input
+                    type="email"
+                    name="from_email"
+                    required
+                    placeholder="Your Email"
+                    className="w-full px-4 py-3 bg-default-100/50 border border-default-200/30 rounded-xl focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 transition-all text-white placeholder:text-default-500"
+                  />
+                </div>
+
+                {/* Message Input */}
+                <div className="relative">
+                  <textarea
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder="Your Message"
+                    className="w-full px-4 py-3 bg-default-100/50 border border-default-200/30 rounded-xl focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 transition-all text-white placeholder:text-default-500 resize-none"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isLoading ? (
+                    <>
+                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
+                </button>
+              </form>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 
