@@ -65,7 +65,7 @@ const HeroSection = () => {
 
   const stats = [
     { value: "2+", label: "Years Exp" },
-    { value: "5+", label: "Projects" },
+    { value: "25+", label: "Projects" },
     { value: "ICPC", label: "Finalist" },
   ];
 
@@ -157,7 +157,7 @@ const HeroSection = () => {
               variants={itemVariants}
               className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
             >
-              <a href="/Anamul_Resume.pdf" download="Anamul-Haque-Resume.pdf">
+              <a href="/Anamul_Haque_Resume_2026.pdf" download="Anamul_Haque_Resume.pdf">
                 <button className="btn-primary flex items-center justify-center gap-2 w-full sm:w-auto">
                   <FaDownload />
                   Download CV
@@ -171,7 +171,7 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Image Section */}
+          {/* Image Section - Premium Redesign */}
           <motion.div
             className="flex-1 flex justify-center"
             variants={imageVariants}
@@ -179,38 +179,150 @@ const HeroSection = () => {
             animate="visible"
           >
             <div className="relative">
-              {/* Glow effect behind image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/30 to-purple-500/30 rounded-full blur-3xl scale-110" />
+              {/* Outer rotating ring */}
+              {/* <motion.div
+                className="absolute inset-0 -m-4"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <svg viewBox="0 0 400 400" className="w-full h-full">
+                  <defs>
+                    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.6" />
+                      <stop offset="50%" stopColor="#a855f7" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.6" />
+                    </linearGradient>
+                  </defs>
+                  <circle
+                    cx="200"
+                    cy="200"
+                    r="195"
+                    fill="none"
+                    stroke="url(#heroGradient)"
+                    strokeWidth="2"
+                    strokeDasharray="20 10"
+                  />
+                </svg>
+              </motion.div> */}
 
-              {/* Image container with border */}
+              {/* Inner counter-rotating ring */}
               <motion.div
-                className="relative z-10 rounded-full overflow-hidden gradient-border p-1"
-                animate={{ y: [0, -10, 0] }}
+                className="absolute inset-0 -m-1"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              >
+                <svg viewBox="0 0 400 400" className="w-full h-full">
+                  <circle
+                    cx="200"
+                    cy="200"
+                    r="190"
+                    fill="none"
+                    stroke="url(#heroGradient)"
+                    strokeWidth="1"
+                    strokeDasharray="5 15"
+                    opacity="0.5"
+                  />
+                </svg>
+              </motion.div>
+
+              {/* Glowing background blur */}
+              <div className="absolute inset-0 -m-8 bg-gradient-to-br from-teal-500/20 via-cyan-500/10 to-purple-500/20 rounded-full blur-2xl" />
+
+              {/* Main image with hexagon-like shape */}
+              <motion.div
+                className="relative z-10"
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <div className="bg-gradient-to-br from-default-100 to-default-200 rounded-full p-4">
-                  <Image
-                    src={myImage}
-                    alt="Anamul Haque"
-                    height={350}
-                    width={350}
-                    priority
-                    className="rounded-full"
+                {/* Clip path container */}
+                <div className="relative w-[320px] h-[320px] md:w-[380px] md:h-[380px]">
+                  {/* Gradient border ring */}
+                  <div
+                    className="absolute inset-0 rounded-full p-[3px]"
+                    style={{
+                      background: "linear-gradient(135deg, #14b8a6 0%, #06b6d4 25%, #a855f7 50%, #06b6d4 75%, #14b8a6 100%)",
+                    }}
+                  >
+                    <div className="w-full h-full rounded-full bg-[#0a0a0a]" />
+                  </div>
+
+                  {/* Image */}
+                  <div className="absolute inset-[6px] rounded-full overflow-hidden bg-gradient-to-br from-default-100/80 to-default-200/60">
+                    <Image
+                      src={myImage}
+                      alt="Anamul Haque"
+                      fill
+                      priority
+                      className="object-cover scale-110 object-top"
+                    />
+                  </div>
+
+                  {/* Shine effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: "linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%)",
+                    }}
+                    animate={{
+                      backgroundPosition: ["200% 200%", "-200% -200%"],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatDelay: 2,
+                    }}
                   />
                 </div>
               </motion.div>
 
-              {/* Floating decorative elements */}
+              {/* Floating particles */}
               <motion.div
-                className="absolute -top-4 -right-4 w-8 h-8 bg-teal-500 rounded-full"
-                animate={{ y: [0, -15, 0], opacity: [0.5, 1, 0.5] }}
+                className="absolute -top-2 -right-2 w-4 h-4 bg-teal-500 rounded-full shadow-lg shadow-teal-500/50"
+                animate={{
+                  y: [0, -20, 0],
+                  x: [0, 10, 0],
+                  scale: [1, 1.2, 1],
+                }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
-                className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-500 rounded-full"
-                animate={{ y: [0, 15, 0], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                className="absolute top-1/4 -right-6 w-2 h-2 bg-cyan-400 rounded-full"
+                animate={{
+                  y: [0, 15, 0],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               />
+              <motion.div
+                className="absolute -bottom-2 -left-2 w-3 h-3 bg-purple-500 rounded-full shadow-lg shadow-purple-500/50"
+                animate={{
+                  y: [0, 15, 0],
+                  x: [0, -10, 0],
+                  scale: [1, 1.3, 1],
+                }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              />
+              <motion.div
+                className="absolute bottom-1/4 -left-6 w-2 h-2 bg-teal-400 rounded-full"
+                animate={{
+                  y: [0, -15, 0],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              />
+
+              {/* Status badge */}
+              {/* <motion.div
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-default-100/80 backdrop-blur-sm border border-teal-500/30 shadow-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.5 }}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <span className="text-sm text-default-400 font-medium">Available for work</span>
+                </div>
+              </motion.div> */}
             </div>
           </motion.div>
         </div>
