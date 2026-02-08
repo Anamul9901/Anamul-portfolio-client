@@ -1,0 +1,51 @@
+yarn run v1.22.22
+$ next build
+⚠ `eslint` configuration in next.config.js is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+⚠ Invalid next.config.js options detected: 
+⚠     Unrecognized key(s) in object: 'eslint'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+▲ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+./src/components/GoToTop/GoToTop.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at lt (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/tailwindcss/dist/lib.js:38:1643)]
+    at turbopack:///[turbopack-node]/transforms/postcss.ts:56:14 [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__6d51cb5d._.js:165:20]
+    [at <anonymous>]
+    at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__6d51cb5d._.js:155:35]
+    at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__44695d76._.js:429:26]
+
+Import trace:
+  Client Component Browser:
+    ./src/components/GoToTop/GoToTop.css [Client Component Browser]
+    ./src/components/GoToTop/GoToTop.tsx [Client Component Browser]
+    ./src/lib/Providers/index.tsx [Client Component Browser]
+    ./src/lib/Providers/index.tsx [Server Component]
+    ./src/app/layout.tsx [Server Component]
+
+
+./src/styles/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at lt (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/tailwindcss/dist/lib.js:38:1643)]
+    at turbopack:///[turbopack-node]/transforms/postcss.ts:56:14 [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__6d51cb5d._.js:165:20]
+    [at <anonymous>]
+    at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__6d51cb5d._.js:155:35]
+    at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__44695d76._.js:429:26]
+
+Import trace:
+  Client Component Browser:
+    ./src/styles/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+    at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__6d51cb5d._.js:155:35])
+    at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__44695d76._.js:429:26])
+    at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__6d51cb5d._.js:155:35])
+    at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__44695d76._.js:429:26])
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

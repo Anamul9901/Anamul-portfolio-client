@@ -22,17 +22,32 @@ const ProjectsPage = () => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
 
+    const [error, setError] = useState<string | null>(null);
+
     useEffect(() => {
         const fetchProjects = async () => {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+
             try {
                 const res = await fetch(
                     "https://anamul-portfolio-backend.vercel.app/api/v1/project/all",
-                    { cache: "no-cache" }
+                    {
+                        cache: "no-store",
+                        signal: controller.signal
+                    }
                 );
+                clearTimeout(timeoutId);
+
+                if (!res.ok) {
+                    throw new Error(`API Error: ${res.status}`);
+                }
+
                 const data = await res.json();
                 setProjects(data?.data || []);
-            } catch (error) {
-                console.error("Error fetching projects:", error);
+            } catch (err: any) {
+                console.error("Error fetching projects:", err);
+                setError(err.message || "Failed to load projects");
             } finally {
                 setLoading(false);
             }
@@ -85,7 +100,20 @@ const ProjectsPage = () => {
                 </motion.div>
 
                 {/* Loading State */}
-                {loading ? (
+                {error ? (
+                    <div className="text-center py-20">
+                        <div className="glass-card p-8 max-w-md mx-auto border-red-500/20">
+                            <h3 className="text-xl font-bold text-red-500 mb-2">Error Loading Projects</h3>
+                            <p className="text-default-400 mb-4">{error}</p>
+                            <button
+                                onClick={() => window.location.reload()}
+                                className="px-6 py-2 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all"
+                            >
+                                Retry
+                            </button>
+                        </div>
+                    </div>
+                ) : loading ? (
                     <div className="flex flex-col items-center justify-center py-20">
                         <div className="w-16 h-16 border-4 border-teal-500/20 border-t-teal-500 rounded-full animate-spin mb-4" />
                         <p className="text-default-500 animate-pulse">Loading projects...</p>

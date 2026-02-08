@@ -208,7 +208,7 @@ const RecentProject = () => {
                     </a>
                     <Link
                       href={`/project/${project._id}`}
-                      className="flex-1 py-2.5 text-center rounded-xl bg-white/5 border border-white/10 text-default-600 text-sm font-medium hover:bg-white/10 hover:text-white transition-all duration-300"
+                      className="flex-1 py-2.5 text-center rounded-xl bg-white/5 border border-white/10 text-default-300 text-sm font-medium hover:bg-white/10 hover:text-white transition-all duration-300"
                     >
                       View Details
                     </Link>

@@ -4,13 +4,12 @@ import * as React from "react";
 import { NextUIProvider } from "@nextui-org/system";
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { ThemeProviderProps } from "next-themes/dist/types";
 import { Toaster } from "sonner";
 import GoToTop from "@/src/components/GoToTop/GoToTop";
 
 export interface ProvidersProps {
   children: React.ReactNode;
-  themeProps?: ThemeProviderProps;
+  themeProps?: React.ComponentProps<typeof NextThemesProvider>;
 }
 
 export function Providers({ children, themeProps }: ProvidersProps) {

@@ -1,7 +1,7 @@
-import { nextui } from "@nextui-org/theme";
+const { nextui } = require("@nextui-org/theme");
 
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",

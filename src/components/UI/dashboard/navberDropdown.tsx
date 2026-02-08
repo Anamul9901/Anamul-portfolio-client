@@ -35,11 +35,12 @@ const NavberDropdown = () => {
             Profile
           </DropdownItem>
         ) : null} */}
-            <DropdownItem
-              onClick={() => handleNavigation("/dashboard?key=dashboard")}
-            >
-              Dashboard
-            </DropdownItem>
+        <DropdownItem
+          key="dashboard"
+          onClick={() => handleNavigation("/dashboard?key=dashboard")}
+        >
+          Dashboard
+        </DropdownItem>
 
       </DropdownMenu>
     </Dropdown>

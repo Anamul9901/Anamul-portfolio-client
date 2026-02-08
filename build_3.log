@@ -1,0 +1,43 @@
+yarn run v1.22.22
+$ next build
+⚠ `eslint` configuration in next.config.js is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+⚠ Invalid next.config.js options detected: 
+⚠     Unrecognized key(s) in object: 'eslint'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+▲ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+Error: `addUtilities({ ':root' : … })` defines an invalid utility selector. Utilities must be a single class name and start with a lowercase letter, eg. `.scrollbar-none`.
+    [2m[at addUtilities (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/tailwindcss/dist/lib.js:21:8742)][0m
+    [2m[at theme.extend.colors (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/@nextui-org/theme/dist/index.js:10468:7)][0m
+    [2m[at nn (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/tailwindcss/dist/lib.js:27:2347)][0m
+    [2m[at on (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/tailwindcss/dist/lib.js:27:1178)][0m
+    [2m[at async un (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/tailwindcss/dist/lib.js:36:184)][0m
+    [2m[at async cn (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/tailwindcss/dist/lib.js:38:631)][0m
+    [2m[at async Xr (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/@tailwindcss/node/dist/index.js:10:3417)][0m
+    [2m[at async I (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/@tailwindcss/postcss/dist/index.js:10:3977)][0m
+    [2m[at async Object.Once (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/@tailwindcss/postcss/dist/index.js:10:4249)][0m
+    [2mat async LazyResult.runAsync (node_modules/postcss/lib/lazy-result.js:293:11) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/node_modules_fe693df6._.js:6206:21][0m
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./src/styles/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: /Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/src/styles/globals.css:1:1: `addUtilities({ ':root' : … })` defines an invalid utility selector. Utilities must be a single class name and start with a lowercase letter, eg. `.scrollbar-none`.
+    at Input.error (node_modules/postcss/lib/input.js:135:16) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/node_modules_fe693df6._.js:4651:22]
+    at Root.error (node_modules/postcss/lib/node.js:146:32) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/node_modules_fe693df6._.js:928:38]
+    [at Object.Once (/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/node_modules/@tailwindcss/postcss/dist/index.js:10:6911)]
+    at async LazyResult.runAsync (node_modules/postcss/lib/lazy-result.js:293:11) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/node_modules_fe693df6._.js:6206:21]
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__6d51cb5d._.js:172:36]
+    at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__44695d76._.js:443:31]
+
+Import trace:
+  Client Component Browser:
+    ./src/styles/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__6d51cb5d._.js:172:36])
+    at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23) [/Users/anamulhaque/Desktop/file/Programming/Level_2_web/PH-STN/Portfolio/portfolio-client/.next/build/chunks/[root-of-the-server]__44695d76._.js:443:31])
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
