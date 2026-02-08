@@ -6,6 +6,7 @@ import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
 
 const navItems = [
   { label: "Home", to: "home" },
@@ -18,8 +19,15 @@ const navItems = [
   { label: "Contact", to: "contact" },
 ];
 
+const socialLinks = [
+  { icon: FaGithub, href: "https://github.com/Anamul9901", label: "GitHub" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/anamul-haque9901/", label: "LinkedIn" },
+  { icon: FaFacebook, href: "https://www.facebook.com/anamul.haque9901", label: "Facebook" },
+];
+
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
@@ -34,6 +42,31 @@ export const Navbar = () => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
+
+  // Scroll Spy Logic
+  useEffect(() => {
+    if (!isHomePage) return;
+
+    const handleScroll = () => {
+      const sections = navItems.map(item => item.to);
+      let current = "";
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Check if top of section is near middle of viewport or mostly visible
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            current = section;
+          }
+        }
+      }
+      if (current) setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHomePage]);
 
   const menuVariants = {
     closed: {
@@ -159,34 +192,75 @@ export const Navbar = () => {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="md:hidden fixed top-16 right-0 bottom-0 w-64 glass bg-white/90 dark:bg-black/90 border-l border-white/5 z-50"
+              className="md:hidden fixed top-0 right-0 bottom-0 w-72 glass bg-white/95 dark:bg-black/95 border-l border-white/5 z-50 flex flex-col"
             >
-              <div className="p-4 space-y-2">
-                {navItems.map((item, index) => {
-                  const isActive = item.to === "projects" && pathname.startsWith("/projects");
-                  const linkHref = isHomePage
-                    ? `#${item.to}`
-                    : (item.to === "projects" ? "/projects" : `/#${item.to}`);
+              <div className="p-6 flex-grow flex flex-col">
+                <div className="flex justify-between items-center mb-8">
+                  <motion.div
+                    className="text-xl font-bold"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span className="gradient-text">Anamul</span>
+                    <span className="text-default-800 dark:text-white"> Haque</span>
+                  </motion.div>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 text-default-400 hover:text-red-500 transition-colors rounded-full hover:bg-red-500/10"
+                  >
+                    <HiX className="w-6 h-6" />
+                  </button>
+                </div>
 
-                  return (
-                    <motion.div
-                      key={item.to}
-                      custom={index}
-                      variants={itemVariants}
-                    >
-                      <NextLink
-                        href={linkHref}
-                        className={`block px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${isActive
-                          ? "text-teal-500 bg-teal-500/10"
-                          : "text-default-400 hover:text-teal-500 hover:bg-teal-500/5"
-                          }`}
-                        onClick={() => setIsOpen(false)}
+                <div className="space-y-1">
+                  {navItems.map((item, index) => {
+                    const isPageActive = item.to === "projects" && pathname.startsWith("/projects");
+                    const isSectionActive = isHomePage && activeSection === item.to;
+                    const isActive = isPageActive || isSectionActive;
+
+                    const linkHref = isHomePage
+                      ? `#${item.to}`
+                      : (item.to === "projects" ? "/projects" : `/#${item.to}`);
+
+                    return (
+                      <motion.div
+                        key={item.to}
+                        custom={index}
+                        variants={itemVariants}
                       >
-                        {item.label}
-                      </NextLink>
-                    </motion.div>
-                  );
-                })}
+                        <NextLink
+                          href={linkHref}
+                          className={`block px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer font-medium ${isActive
+                              ? "text-teal-500 bg-teal-500/10 translate-x-2"
+                              : "text-default-600 dark:text-default-500 hover:text-teal-500 hover:bg-teal-500/5 hover:translate-x-2"
+                            }`}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.label}
+                        </NextLink>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* Social Icons Footer */}
+                <div className="mt-auto pt-8 border-t border-white/10">
+                  <div className="flex justify-center gap-6">
+                    {socialLinks.map((social, index) => (
+                      <a
+                        key={index}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-default-400 hover:text-teal-500 transition-colors transform hover:scale-110"
+                      >
+                        <social.icon className="w-6 h-6" />
+                      </a>
+                    ))}
+                  </div>
+                  <p className="text-center text-xs text-default-400 mt-4">
+                    © 2026 Anamul Haque
+                  </p>
+                </div>
               </div>
             </motion.div>
           </>
