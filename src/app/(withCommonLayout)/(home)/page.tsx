@@ -39,9 +39,9 @@ const HomePage = () => {
         <RecentProject />
       </div>
 
-      <div id="blogs">
+      {/* <div id="blogs">
         <Blogs />
-      </div>
+      </div> */}
 
       <div id="contact">
         <ContactInfo />

@@ -14,7 +14,7 @@ const navItems = [
   { label: "Skills", to: "skills" },
   { label: "Education", to: "education" },
   { label: "Projects", to: "projects" },
-  { label: "Blogs", to: "blogs" },
+  // { label: "Blogs", to: "blogs" },
   { label: "Contact", to: "contact" },
 ];
 
