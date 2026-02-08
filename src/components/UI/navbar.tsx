@@ -66,7 +66,7 @@ export const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-[999]"
+      className="fixed top-0 left-0 right-0 z-[1000]"
     >
       <div className="glass bg-white/80 dark:bg-black/80 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -88,24 +88,11 @@ export const Navbar = () => {
                 <div key={item.to}>
                   {isHomePage ? (
                     item.to === 'projects' || item.to === 'blogs' ? (
-                      // Special case: Projects/Blogs might be actual pages?
-                      // Based on "navItems", "projects" is in valid items.
-                      // Assuming "projects" links to SECTION on home page OR separate page?
-                      // Wait, previous turn created "/projects" page.
-                      // If item.to is "projects", we should link to "/projects" PAGE?
-                      // Or is there a "projects" section on home? 
-                      // "RecentProject" section exists.
-                      // Let's assume standard behavior:
-                      // If separate page exists, link to it. 
-                      // BUT standard nav usually scrolls to section.
-                      // The user said "view all projects" page.
-                      // If the nav item "Projects" is clicked, does user expect section or page?
-                      // Usually section.
                       <ScrollLink
                         to={item.to}
                         spy={true}
                         smooth={true}
-                        offset={-80}
+                        offset={-50}
                         duration={500}
                         activeClass="text-teal-500 bg-teal-500/10"
                         className="px-3 py-2 rounded-lg text-sm font-medium text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer block"
@@ -117,7 +104,7 @@ export const Navbar = () => {
                         to={item.to}
                         spy={true}
                         smooth={true}
-                        offset={-80}
+                        offset={-2}
                         duration={500}
                         activeClass="text-teal-500 bg-teal-500/10"
                         className="px-3 py-2 rounded-lg text-sm font-medium text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer block"
@@ -156,46 +143,53 @@ export const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="md:hidden fixed top-16 right-0 bottom-0 w-64 glass border-l border-white/5"
-          >
-            <div className="p-4 space-y-2">
-              {navItems.map((item, index) => (
-                <motion.div
-                  key={item.to}
-                  custom={index}
-                  variants={itemVariants}
-                >
-                  {isHomePage ? (
-                    <ScrollLink
-                      to={item.to}
-                      spy={true}
-                      smooth={true}
-                      offset={-80}
-                      duration={500}
-                      activeClass="text-teal-500 bg-teal-500/10"
-                      className="block px-4 py-3 rounded-lg text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer"
-                      onClick={() => setIsOpen(false)}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+            />
+            {/* Menu Panel */}
+            <motion.div
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={menuVariants}
+              className="md:hidden fixed top-16 right-0 bottom-0 w-64 glass bg-white/90 dark:bg-black/90 border-l border-white/5 z-50"
+            >
+              <div className="p-4 space-y-2">
+                {navItems.map((item, index) => {
+                  const isActive = item.to === "projects" && pathname.startsWith("/projects");
+                  const linkHref = isHomePage
+                    ? `#${item.to}`
+                    : (item.to === "projects" ? "/projects" : `/#${item.to}`);
+
+                  return (
+                    <motion.div
+                      key={item.to}
+                      custom={index}
+                      variants={itemVariants}
                     >
-                      {item.label}
-                    </ScrollLink>
-                  ) : (
-                    <NextLink
-                      href={item.to === "projects" ? "/projects" : `/#${item.to}`}
-                      className="block px-4 py-3 rounded-lg text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </NextLink>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                      <NextLink
+                        href={linkHref}
+                        className={`block px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${isActive
+                          ? "text-teal-500 bg-teal-500/10"
+                          : "text-default-400 hover:text-teal-500 hover:bg-teal-500/5"
+                          }`}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.label}
+                      </NextLink>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>

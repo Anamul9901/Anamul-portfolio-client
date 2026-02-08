@@ -28,7 +28,7 @@ const AboutPage = () => {
           {/* Image Section */}
           <motion.div
             variants={fadeInLeft}
-            className="flex justify-center"
+            className="flex justify-center p-10 md:p-0"
           >
             <div className="relative">
               {/* Decorative frame */}
@@ -103,14 +103,14 @@ const AboutPage = () => {
             {/* Languages */}
             <motion.div variants={fadeInUp} className="pt-4">
               <h4 className="font-semibold mb-2">Languages</h4>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
+              <div className="flex flex-wrap gap-1 md:gap-2">
+                <span className="md:px-3 px-1 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
                   Bangla (Native)
                 </span>
-                <span className="px-3 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
+                <span className="md:px-3 px-1 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
                   English (Proficient)
                 </span>
-                <span className="px-3 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
+                <span className="md:px-3 px-1 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
                   Hindi (Basic)
                 </span>
               </div>
