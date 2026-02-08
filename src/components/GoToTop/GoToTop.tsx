@@ -32,7 +32,7 @@ const GoToTop = () => {
           onKeyDown={(e) =>
             e.key === "Enter" || e.key === " " ? goToBtn() : null
           }
-          className="fixed bottom-6 right-6 bg-teal-500 text-white p-3 rounded-full shadow-lg hover:bg-teal-600 cursor-pointer transition duration-300"
+          className="fixed bottom-6 z-[999] right-6 bg-teal-500 text-white p-3 rounded-full shadow-lg hover:bg-teal-600 cursor-pointer transition duration-300"
           aria-label="Scroll to top"
         >
           <FaArrowUp className="animate-up-down" />
