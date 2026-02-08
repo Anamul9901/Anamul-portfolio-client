@@ -136,7 +136,7 @@ const Skills = () => {
                   className="glass-card p-4 text-center hover:border-teal-500/50 transition-all duration-300 card-hover group"
                 >
                   <div className="flex items-center justify-center gap-3">
-                    <span className="text-sm font-medium text-default-300 group-hover:text-teal-400 transition-colors">
+                    <span className="text-sm font-medium text-default-500 group-hover:text-teal-400 transition-colors">
                       {skill.name}
                     </span>
                   </div>

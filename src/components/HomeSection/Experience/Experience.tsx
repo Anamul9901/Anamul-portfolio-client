@@ -1,10 +1,12 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useScrollAnimation, staggerContainer, staggerItem } from "@/src/hooks/useScrollAnimation";
-import { FaBriefcase, FaCalendar, FaMapMarkerAlt } from "react-icons/fa";
+import { FaCalendar, FaMapMarkerAlt } from "react-icons/fa";
 
 const Experience = () => {
     const { ref, controls } = useScrollAnimation(0.2);
+    const [activeTab, setActiveTab] = useState(0);
 
     const experiences = [
         {
@@ -22,23 +24,42 @@ const Experience = () => {
                 "Developed image optimization and upload system for compressed images",
                 "Led and guided frontend developers for proper API integration and consistent performance",
             ],
-            technologies: ["Node.js", "NestJS", "MongoDB", "Redis", "Docker", "AWS"],
+            technologies: ["Node.js", "NestJS", "MongoDB", "TypeScript", "Cache Server", "Redis", "Docker", "AWS"],
+        },
+        {
+            title: "Team Lead - SCIC Program",
+            company: "Programming Hero",
+            location: "Remote",
+            period: "December 2023 - March 2024",
+            type: "Team Project",
+            responsibilities: [
+                "Led a 5-member development team for 4 months to build an online voting and polling system",
+                "Designed and implemented core voting logic, poll creation, and real-time result features",
+                "Managed team coordination, task distribution, and sprint planning throughout the project",
+                "Developed secure authentication and authorization for poll management",
+                "Ensured code quality through regular code reviews and best practices enforcement",
+                "Received official recommendation letter from Programming Hero for leadership excellence",
+            ],
+            technologies: ["Next.js", "Node.js", "Express.js", "MongoDB", "JWT", "Tailwind CSS"],
         },
     ];
 
     return (
         <section className="py-20 md:py-32 relative" ref={ref}>
-            {/* Background */}
+            {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
+            <div className="absolute top-1/4 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
 
             <div className="section-container relative z-10">
                 <motion.div
                     initial="hidden"
                     animate={controls}
                     variants={staggerContainer}
+                    className="max-w-5xl mx-auto"
                 >
                     {/* Section Header */}
-                    <motion.div variants={staggerItem} className="text-center mb-16">
+                    <motion.div variants={staggerItem} className="text-center mb-12 md:mb-16">
                         <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
                             Career Journey
                         </span>
@@ -47,75 +68,92 @@ const Experience = () => {
                         </h2>
                     </motion.div>
 
-                    {/* Timeline */}
-                    <div className="max-w-4xl mx-auto relative">
-                        {/* Timeline line */}
-                        <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 to-purple-500 transform md:-translate-x-1/2" />
+                    <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+                        {/* Tabs List */}
+                        <motion.div
+                            variants={staggerItem}
+                            className="flex md:flex-col overflow-x-auto md:overflow-visible gap-2 pb-4 md:pb-0 md:w-64 flex-shrink-0 scrollbar-hide border-b md:border-b-0 md:border-l border-default-200/20"
+                        >
+                            {experiences.map((exp, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setActiveTab(index)}
+                                    className={`relative px-4 py-3 text-left transition-all duration-300 whitespace-nowrap md:whitespace-normal rounded-md md:rounded-r-md md:rounded-l-none
+                                        ${activeTab === index
+                                            ? "text-teal-500 bg-teal-500/10"
+                                            : "text-default-400 hover:text-default-200 hover:bg-default-100/5"
+                                        }`}
+                                >
+                                    {activeTab === index && (
+                                        <motion.div
+                                            layoutId="activeTab"
+                                            className="absolute bottom-0 left-0 right-0 h-0.5 md:bottom-0 md:top-0 md:left-0 md:right-auto md:h-auto md:w-1 bg-teal-500"
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        />
+                                    )}
+                                    <span className="font-medium relative z-10">{exp.company}</span>
+                                </button>
+                            ))}
+                        </motion.div>
 
-                        {experiences.map((exp, index) => (
-                            <motion.div
-                                key={index}
-                                variants={staggerItem}
-                                className={`relative flex flex-col md:flex-row gap-8 mb-12 ${index % 2 === 0 ? "md:flex-row-reverse" : ""
-                                    }`}
-                            >
-                                {/* Timeline dot */}
-                                <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-teal-500 rounded-full transform -translate-x-1/2 mt-8 z-10 animate-pulse-glow" />
-
-                                {/* Content card */}
-                                <div className={`flex-1 ml-8 md:ml-0 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
-                                    <div className="glass-card p-6 hover:shadow-xl transition-all duration-300 card-hover">
-                                        {/* Header */}
-                                        <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                                            <div>
-                                                <h3 className="text-xl font-bold text-white">{exp.title}</h3>
-                                                <p className="text-teal-500 font-medium">{exp.company}</p>
-                                            </div>
-                                            <span className="px-3 py-1 rounded-full bg-teal-500/20 text-teal-400 text-sm">
-                                                {exp.type}
-                                            </span>
+                        {/* Content Area */}
+                        <div className="flex-1 min-h-[400px]">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={activeTab}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -20 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="glass-card p-6 md:p-8"
+                                >
+                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                                        <div>
+                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
+                                                {experiences[activeTab].title}
+                                            </h3>
+                                            <p className="text-teal-500 font-medium text-lg">
+                                                @ {experiences[activeTab].company}
+                                            </p>
                                         </div>
+                                        <span className="px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-sm w-fit">
+                                            {experiences[activeTab].type}
+                                        </span>
+                                    </div>
 
-                                        {/* Meta info */}
-                                        <div className="flex flex-wrap gap-4 mb-4 text-sm text-default-500">
-                                            <div className="flex items-center gap-2">
-                                                <FaCalendar className="text-teal-500" />
-                                                {exp.period}
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <FaMapMarkerAlt className="text-teal-500" />
-                                                {exp.location}
-                                            </div>
+                                    <div className="flex flex-wrap gap-4 md:gap-6 mb-6 text-sm text-default-400 border-b border-default-200/20 pb-6">
+                                        <div className="flex items-center gap-2">
+                                            <FaCalendar className="text-teal-500" />
+                                            {experiences[activeTab].period}
                                         </div>
-
-                                        {/* Responsibilities */}
-                                        <ul className="space-y-2 mb-4">
-                                            {exp.responsibilities.map((resp, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-default-400 text-sm">
-                                                    <span className="text-teal-500 mt-1">▹</span>
-                                                    {resp}
-                                                </li>
-                                            ))}
-                                        </ul>
-
-                                        {/* Technologies */}
-                                        <div className="flex flex-wrap gap-2 pt-4 border-t border-default-200/20">
-                                            {exp.technologies.map((tech, i) => (
-                                                <span
-                                                    key={i}
-                                                    className="px-2 py-1 rounded-md bg-default-100/50 text-xs text-default-400"
-                                                >
-                                                    {tech}
-                                                </span>
-                                            ))}
+                                        <div className="flex items-center gap-2">
+                                            <FaMapMarkerAlt className="text-teal-500" />
+                                            {experiences[activeTab].location}
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* Empty space for timeline alignment */}
-                                <div className="hidden md:block flex-1" />
-                            </motion.div>
-                        ))}
+                                    <ul className="space-y-3 mb-8">
+                                        {experiences[activeTab].responsibilities.map((resp, i) => (
+                                            <li key={i} className="flex items-start gap-3 text-default-300 text-sm md:text-base leading-relaxed">
+                                                <span className="text-teal-500 mt-1.5 text-xs">▹</span>
+                                                {resp}
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <div className="flex flex-wrap gap-2">
+                                        {experiences[activeTab].technologies.map((tech, i) => (
+                                            <span
+                                                key={i}
+                                                className="px-3 py-1.5 rounded-md bg-default-100/50 hover:bg-teal-500/10 hover:text-teal-400 transition-colors text-xs text-default-400 border border-transparent hover:border-teal-500/20"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
                     </div>
                 </motion.div>
             </div>

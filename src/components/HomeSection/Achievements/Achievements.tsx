@@ -13,7 +13,7 @@ const Achievements = () => {
             subtitle: "Finalist",
             description: "Competed at BUBT University in the prestigious ICPC Asia Dhaka Regional Contest.",
             link: "#",
-            color: "from-yellow-500 to-orange-500",
+            color: "from-violet-500 to-purple-500",
         },
         {
             icon: FaMedal,

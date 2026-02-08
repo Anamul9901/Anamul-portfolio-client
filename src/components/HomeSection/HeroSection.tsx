@@ -78,7 +78,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="min-h-screen relative overflow-hidden flex items-center">
+    <section className="min-h-screen py-20 md:py-32 relative overflow-hidden flex items-center">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 via-transparent to-purple-500/5" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />

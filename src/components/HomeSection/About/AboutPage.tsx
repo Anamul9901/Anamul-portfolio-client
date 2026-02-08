@@ -87,7 +87,7 @@ const AboutPage = () => {
                 <div className="text-sm text-default-500">Years Experience</div>
               </div>
               <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold gradient-text">5+</div>
+                <div className="text-2xl font-bold gradient-text">25+</div>
                 <div className="text-sm text-default-500">Projects Completed</div>
               </div>
               <div className="glass-card p-4 text-center">

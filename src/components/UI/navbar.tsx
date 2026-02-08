@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 import NextLink from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 
 const navItems = [
@@ -19,6 +20,20 @@ const navItems = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   const menuVariants = {
     closed: {
@@ -42,6 +57,10 @@ export const Navbar = () => {
     }),
   };
 
+  const handleNavClick = () => {
+    setIsOpen(false);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -53,7 +72,7 @@ export const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <NextLink href="/" className="flex items-center gap-2">
+            <NextLink href="/" className="flex items-center gap-2" onClick={handleNavClick}>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="text-xl font-bold"
@@ -65,19 +84,56 @@ export const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  spy={true}
-                  smooth={true}
-                  offset={-80}
-                  duration={500}
-                  activeClass="text-teal-500 bg-teal-500/10"
-                  className="px-3 py-2 rounded-lg text-sm font-medium text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer"
-                >
-                  {item.label}
-                </Link>
+              {navItems.map((item) => (
+                <div key={item.to}>
+                  {isHomePage ? (
+                    item.to === 'projects' || item.to === 'blogs' ? (
+                      // Special case: Projects/Blogs might be actual pages?
+                      // Based on "navItems", "projects" is in valid items.
+                      // Assuming "projects" links to SECTION on home page OR separate page?
+                      // Wait, previous turn created "/projects" page.
+                      // If item.to is "projects", we should link to "/projects" PAGE?
+                      // Or is there a "projects" section on home? 
+                      // "RecentProject" section exists.
+                      // Let's assume standard behavior:
+                      // If separate page exists, link to it. 
+                      // BUT standard nav usually scrolls to section.
+                      // The user said "view all projects" page.
+                      // If the nav item "Projects" is clicked, does user expect section or page?
+                      // Usually section.
+                      <ScrollLink
+                        to={item.to}
+                        spy={true}
+                        smooth={true}
+                        offset={-80}
+                        duration={500}
+                        activeClass="text-teal-500 bg-teal-500/10"
+                        className="px-3 py-2 rounded-lg text-sm font-medium text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer block"
+                      >
+                        {item.label}
+                      </ScrollLink>
+                    ) : (
+                      <ScrollLink
+                        to={item.to}
+                        spy={true}
+                        smooth={true}
+                        offset={-80}
+                        duration={500}
+                        activeClass="text-teal-500 bg-teal-500/10"
+                        className="px-3 py-2 rounded-lg text-sm font-medium text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer block"
+                      >
+                        {item.label}
+                      </ScrollLink>
+                    )
+                  ) : (
+                    <NextLink
+                      href={item.to === "projects" ? "/projects" : `/#${item.to}`}
+                      className="px-3 py-2 rounded-lg text-sm font-medium text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer block"
+                    >
+                      {item.label}
+                    </NextLink>
+                  )}
+                </div>
               ))}
             </div>
 
@@ -114,18 +170,28 @@ export const Navbar = () => {
                   custom={index}
                   variants={itemVariants}
                 >
-                  <Link
-                    to={item.to}
-                    spy={true}
-                    smooth={true}
-                    offset={-80}
-                    duration={500}
-                    activeClass="text-teal-500 bg-teal-500/10"
-                    className="block px-4 py-3 rounded-lg text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
+                  {isHomePage ? (
+                    <ScrollLink
+                      to={item.to}
+                      spy={true}
+                      smooth={true}
+                      offset={-80}
+                      duration={500}
+                      activeClass="text-teal-500 bg-teal-500/10"
+                      className="block px-4 py-3 rounded-lg text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </ScrollLink>
+                  ) : (
+                    <NextLink
+                      href={item.to === "projects" ? "/projects" : `/#${item.to}`}
+                      className="block px-4 py-3 rounded-lg text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </NextLink>
+                  )}
                 </motion.div>
               ))}
             </div>
