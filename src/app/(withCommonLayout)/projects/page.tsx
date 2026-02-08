@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub, FaArrowRight, FaSearch } from "react-icons/fa";
+import { mockProjects } from "@/src/data/mockProjects";
 
 interface Project {
     _id: string;
@@ -21,10 +22,15 @@ const ProjectsPage = () => {
     const [loading, setLoading] = useState(true);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
-
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        // Mock Data Implementation
+        setProjects(mockProjects);
+        setLoading(false);
+
+        // Original API Logic (Commented Out)
+        /*
         const fetchProjects = async () => {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -32,7 +38,7 @@ const ProjectsPage = () => {
             try {
                 const res = await fetch(
                     "https://anamul-portfolio-backend.vercel.app/api/v1/project/all",
-                    {
+                    { 
                         cache: "no-store",
                         signal: controller.signal
                     }
@@ -53,6 +59,7 @@ const ProjectsPage = () => {
             }
         };
         fetchProjects();
+        */
     }, []);
 
     const filteredProjects = projects.filter((project) =>

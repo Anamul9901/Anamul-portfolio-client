@@ -14,6 +14,7 @@ import {
   FaCalendar,
   FaCode
 } from "react-icons/fa";
+import { mockProjects } from "@/src/data/mockProjects";
 
 interface Project {
   _id: string;
@@ -36,6 +37,15 @@ const SingleProject = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
+    // Mock Data Implementation
+    if (projectId) {
+      const foundProject = mockProjects.find((p) => p._id === projectId);
+      setProject(foundProject as unknown as Project || null);
+      setLoading(false);
+    }
+
+    // Original API Logic (Commented Out)
+    /*
     const fetchProject = async () => {
       try {
         const res = await fetch(
@@ -54,6 +64,7 @@ const SingleProject = () => {
     if (projectId) {
       fetchProject();
     }
+    */
   }, [projectId]);
 
   if (loading) {

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub, FaEye, FaArrowRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { mockProjects } from "@/src/data/mockProjects";
 
 interface Project {
   _id: string;
@@ -22,21 +23,41 @@ const RecentProject = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
+    // Mock Data Implementation
+    setProjects(mockProjects);
+    setLoading(false);
+
+    // Original API Logic (Commented Out)
+    /*
     const fetchProjects = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
       try {
         const res = await fetch(
           "https://anamul-portfolio-backend.vercel.app/api/v1/project/all",
-          { cache: "no-cache" }
+          {
+            cache: "no-store",
+            signal: controller.signal
+          }
         );
+        clearTimeout(timeoutId);
+
+        if (!res.ok) {
+          throw new Error(`API Error: ${res.status}`);
+        }
+
         const data = await res.json();
         setProjects(data?.data || []);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
+      } catch (err: any) {
+        console.error("Error fetching projects:", err);
+        // setError(err.message || "Failed to load projects"); // Removed as error state is not used
       } finally {
         setLoading(false);
       }
     };
     fetchProjects();
+    */
   }, []);
 
   if (loading) {
@@ -208,7 +229,7 @@ const RecentProject = () => {
                     </a>
                     <Link
                       href={`/project/${project._id}`}
-                      className="flex-1 py-2.5 text-center rounded-xl bg-white/5 border border-white/10 text-default-300 text-sm font-medium hover:bg-white/10 hover:text-white transition-all duration-300"
+                      className="flex-1 py-2.5 text-center rounded-xl bg-white/5 border border-white/20 text-default-600 text-sm font-medium hover:bg-white/10 hover:text-white transition-all duration-300"
                     >
                       View Details
                     </Link>
