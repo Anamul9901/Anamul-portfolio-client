@@ -19,7 +19,7 @@ const ContactInfo = () => {
 
     emailjs
       .sendForm(
-        "service_qo1r6jo",
+        "service_i93d0u4",
         "template_0h2ytja",
         formRef.current!,
         "pbLzIm3Ta3Mtb_nbp"
@@ -34,7 +34,7 @@ const ContactInfo = () => {
         },
         (error) => {
           setIsLoading(false);
-          console.log(error.text);
+          console.log(error);
           toast.error("Error sending message. Please try again.");
         }
       );
