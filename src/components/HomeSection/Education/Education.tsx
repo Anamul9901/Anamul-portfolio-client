@@ -57,7 +57,7 @@ const Education = () => {
         >
           {/* Section Header */}
           <motion.div variants={staggerItem} className="text-center mb-16">
-            <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
+            <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
               Academic Background
             </span>
             <h2 className="section-heading mt-2 mb-0">
@@ -76,8 +76,8 @@ const Education = () => {
                 {/* Status indicator */}
                 <div
                   className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium ${edu.status === "Running"
-                      ? "bg-teal-500/20 text-teal-400"
-                      : "bg-green-500/20 text-green-400"
+                    ? "bg-teal-500/20 text-teal-400"
+                    : "bg-green-500/20 text-green-400"
                     }`}
                 >
                   {edu.status}

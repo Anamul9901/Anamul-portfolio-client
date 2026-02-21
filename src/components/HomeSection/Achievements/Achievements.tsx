@@ -13,7 +13,7 @@ const Achievements = () => {
             subtitle: "Finalist",
             description: "Competed at BUBT University in the prestigious ICPC Asia Dhaka Regional Contest.",
             link: "#",
-            color: "from-violet-500 to-purple-500",
+            color: "from-teal-500 to-teal-300",
         },
         {
             icon: FaMedal,
@@ -29,7 +29,7 @@ const Achievements = () => {
             subtitle: "Programming Hero",
             description: "Comprehensive full-stack web development course covering modern technologies.",
             link: "#",
-            color: "from-teal-500 to-cyan-500",
+            color: "from-gray-500 to-gray-300",
         },
         {
             icon: FaCertificate,
@@ -37,7 +37,7 @@ const Achievements = () => {
             subtitle: "Programming Hero",
             description: "Advanced course covering Next.js, TypeScript, and enterprise-level development.",
             link: "#",
-            color: "from-purple-500 to-pink-500",
+            color: "from-teal-300 to-teal-500",
         },
     ];
 
@@ -53,7 +53,7 @@ const Achievements = () => {
                 >
                     {/* Section Header */}
                     <motion.div variants={staggerItem} className="text-center mb-16">
-                        <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
+                        <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
                             Recognition
                         </span>
                         <h2 className="section-heading mt-2 mb-0">

@@ -60,7 +60,7 @@ const Experience = () => {
                 >
                     {/* Section Header */}
                     <motion.div variants={staggerItem} className="text-center mb-12 md:mb-16">
-                        <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
+                        <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
                             Career Journey
                         </span>
                         <h2 className="section-heading mt-2 mb-0">

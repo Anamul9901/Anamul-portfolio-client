@@ -91,7 +91,7 @@ const Skills = () => {
         >
           {/* Section Header */}
           <motion.div variants={staggerItem} className="text-center mb-12">
-            <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
+            <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
               Technical Arsenal
             </span>
             <h2 className="section-heading mt-2 mb-0">
@@ -109,8 +109,8 @@ const Skills = () => {
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                    ? "bg-teal-500 text-white shadow-lg shadow-teal-500/30"
-                    : "bg-default-100/50 text-default-500 hover:bg-default-200/50"
+                  ? "bg-teal-500 text-white shadow-lg shadow-teal-500/30"
+                  : "bg-default-100/50 text-default-500 hover:bg-default-200/50"
                   }`}
               >
                 {skillCategories[category].label}

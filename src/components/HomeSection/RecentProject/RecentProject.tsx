@@ -110,13 +110,14 @@ const RecentProject = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+             {/* here portfolio name has a simple designe, now add this designe in all section name */}
           <motion.span
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4"
           >
-            ✨ Portfolio
+            Portfolio
           </motion.span>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Recent <span className="gradient-text">Projects</span>

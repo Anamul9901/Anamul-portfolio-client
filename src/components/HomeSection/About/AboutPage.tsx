@@ -52,7 +52,7 @@ const AboutPage = () => {
             <div>
               <motion.span
                 variants={fadeInUp}
-                className="text-teal-500 font-medium uppercase tracking-wider text-sm"
+                className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4"
               >
                 About Me
               </motion.span>
