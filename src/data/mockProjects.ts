@@ -83,8 +83,8 @@ export const mockProjects = [
     },
     {
         _id: "676e49d7882d081ece95460d",
-        name: "Digital Voting System",
-        description: "This is an online voting system web. Where any user can create elections.",
+        name: "Digital Voting System (Team Project & I Led The Team)",
+        description: "A collaborative team project where I led the development of a full-featured online voting system. As team lead, I coordinated the architecture decisions, task distribution, and code reviews while ensuring smooth delivery. The platform allows any user to create and manage elections with real-time vote tracking.",
         image: "https://i.ibb.co.com/998wmTz/Screenshot-2024-12-14-164614.png",
         frLive: "https://electronic-voting-system-beta.vercel.app/",
         bcLive: "",
@@ -92,7 +92,14 @@ export const mockProjects = [
         bcRepo: "https://github.com/dreamwarrior6m/EVS-server",
         createdAt: "2024-12-27T06:31:51.460+00:00",
         updatedAt: "2024-12-29T07:22:44.732+00:00",
-        technologies: ["MERN Stack", "Socket.io"]
+        technologies: ["MERN Stack", "Socket.io"],
+        features: [
+            "Led the team as the project lead, overseeing architecture design, task delegation, and code reviews.",
+            "Built a secure online voting system where users can create and manage their own elections.",
+            "Implemented real-time vote tracking and live result updates using Socket.io.",
+            "Designed role-based access for election creators, voters, and admins.",
+            "Coordinated team collaboration using GitHub workflows and ensured on-time delivery."
+        ]
     },
     {
         _id: "676e404bd99be4a4056c02f4",

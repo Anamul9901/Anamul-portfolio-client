@@ -128,7 +128,7 @@ const RecentProject = () => {
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 items-stretch">
           {projects.map((project, index) => (
             <motion.div
               key={project._id}
@@ -137,11 +137,9 @@ const RecentProject = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="group relative"
-            >
-              {/* Card with gradient border on hover */}
-              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-default-100/80 to-default-200/50 backdrop-blur-sm border border-white/5 hover:border-teal-500/30 transition-all duration-500">
+              onMouseLeave={() => setHoveredIndex(null)}              className="group relative flex"
+            >{/* Card with gradient border on hover */}
+              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-default-100/80 to-default-200/50 backdrop-blur-sm border border-white/5 hover:border-teal-500/30 transition-all duration-500 flex flex-col h-full">
                 {/* Image Container with aspect ratio */}
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -190,13 +188,11 @@ const RecentProject = () => {
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm text-white/80 text-xs font-medium">
                     0{index + 1}
                   </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
+                </div>                {/* Content */}
+                <div className="p-6 flex flex-col flex-1">
                   {/* Title with arrow */}
                   <div className="flex items-start justify-between gap-4 mb-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-teal-400 transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-white group-hover:text-teal-400 transition-colors duration-300 line-clamp-2">
                       {project.name}
                     </h3>
                     <motion.div
@@ -208,15 +204,13 @@ const RecentProject = () => {
                     >
                       <FaArrowRight size={14} />
                     </motion.div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-default-500 text-sm line-clamp-2 mb-5 leading-relaxed">
+                  </div>                  {/* Description */}
+                  <p className="text-default-500 text-sm line-clamp-2 mb-5 leading-relaxed flex-1">
                     {project.description}
                   </p>
 
                   {/* Divider */}
-                  <div className="h-px bg-gradient-to-r from-transparent via-default-300/30 to-transparent mb-5" />
+                  <div className="h-px bg-gradient-to-r from-transparent via-default-300/30 to-transparent mb-5 mt-auto" />
 
                   {/* Action Buttons */}
                   <div className="flex gap-3">
