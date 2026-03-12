@@ -10,10 +10,11 @@ const Achievements = () => {
         {
             icon: FaTrophy,
             title: "ICPC Asia Dhaka Regional 2025",
-            subtitle: "Finalist",
+            subtitle: "Finalist @ BUBT University",
             description: "Competed at BUBT University in the prestigious ICPC Asia Dhaka Regional Contest.",
             link: "#",
             color: "from-teal-500 to-teal-300",
+            certificateLink: "https://drive.google.com/file/d/1LdwOuwgBsdmsvzZ0LiJwx-PFc-m0OHE6/view",
         },
         {
             icon: FaMedal,
@@ -22,6 +23,7 @@ const Achievements = () => {
             description: "Secured second place in an 8-hour hackathon at Tejgaon College, Dhaka.",
             link: "#",
             color: "from-gray-300 to-gray-500",
+            certificateLink: "https://drive.google.com/file/d/1AwGPUR8xhLDuA5HyHuojao1EzJQoxce5/view"
         },
         {
             icon: FaCertificate,
@@ -30,6 +32,7 @@ const Achievements = () => {
             description: "Comprehensive full-stack web development course covering modern technologies.",
             link: "#",
             color: "from-gray-500 to-gray-300",
+            certificateLink: "https://drive.google.com/file/d/1EnOksrjswUENRzXZMJ1F7l8Z4yjLqmFd/view"
         },
         {
             icon: FaCertificate,
@@ -38,6 +41,7 @@ const Achievements = () => {
             description: "Advanced course covering Next.js, TypeScript, and enterprise-level development.",
             link: "#",
             color: "from-teal-300 to-teal-500",
+            certificateLink: "https://web.programming-hero.com/verification?validationNumber=PHlevel2-batch-3-fullstackWEB8-32581068"
         },
     ];
 
@@ -67,7 +71,7 @@ const Achievements = () => {
                             <motion.div
                                 key={index}
                                 variants={staggerItem}
-                                className="glass-card p-6 relative overflow-hidden group card-hover"
+                                className="glass-card p-6 pb-4 relative overflow-hidden group card-hover"
                             >
                                 {/* Gradient accent */}
                                 <div
@@ -93,20 +97,21 @@ const Achievements = () => {
                                                     {achievement.subtitle}
                                                 </p>
                                             </div>
-                                            {achievement.link !== "#" && (
-                                                <a
-                                                    href={achievement.link}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-default-500 hover:text-teal-500 transition-colors"
-                                                >
-                                                    <FaExternalLinkAlt className="text-sm" />
-                                                </a>
-                                            )}
                                         </div>
-                                        <p className="text-default-500 text-sm mt-2">
+                                        <p className="text-default-500 text-sm mt-2 mb-4">
                                             {achievement.description}
                                         </p>
+                                        {achievement.certificateLink && (
+                                            <a
+                                                href={achievement.certificateLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal-500/40 text-teal-500 text-xs font-medium hover:bg-teal-500 hover:text-white transition-all duration-300"
+                                            >
+                                                <FaExternalLinkAlt size={10} />
+                                                View Certificate
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
                             </motion.div>

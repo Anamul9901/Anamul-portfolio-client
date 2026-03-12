@@ -69,7 +69,7 @@ that prioritizes performance, security, and maintainability.
 <h3 align="center">🏆 Achievements</h3>
 
 <p align="center">
-🥈 <strong>ICPC Asia Dhaka Regional 2025 Finalist</strong><br/>
+🥈 <strong>ICPC Asia Dhaka Regional 2025 Regionalist</strong><br/>
 🥈 <strong>Hackathon Runner-up (2024)</strong><br/>
 📜 <strong>Programming Hero Certifications</strong>
 </p>

@@ -13,7 +13,7 @@ const HeroSection = () => {
       strings: [
         "Full-Stack Web Developer",
         "Backend Specialist",
-        "ICPC Finalist 2025",
+        "ICPC Regionalist 2025",
         "Problem Solver",
       ],
       autoStart: true,
@@ -66,7 +66,7 @@ const HeroSection = () => {
   const stats = [
     { value: "2+", label: "Years Exp" },
     { value: "25+", label: "Projects" },
-    { value: "ICPC", label: "Finalist" },
+    { value: "ICPC", label: "Regionalist" },
   ];
 
   const socialLinks = [

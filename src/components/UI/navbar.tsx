@@ -13,6 +13,7 @@ const navItems = [
   { label: "About", to: "about" },
   { label: "Experience", to: "experience" },
   { label: "Skills", to: "skills" },
+  { label: "Achievements", to: "achievements" },
   { label: "Education", to: "education" },
   { label: "Projects", to: "projects" },
   // { label: "Blogs", to: "blogs" },
@@ -125,7 +126,7 @@ export const Navbar = () => {
                         to={item.to}
                         spy={true}
                         smooth={true}
-                        offset={-50}
+                        offset={-2}
                         duration={500}
                         activeClass="text-teal-500 bg-teal-500/10"
                         className="px-3 py-2 rounded-lg text-sm font-medium text-default-400 hover:text-teal-500 hover:bg-teal-500/5 transition-all duration-300 cursor-pointer block"

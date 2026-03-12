@@ -92,7 +92,7 @@ const AboutPage = () => {
               </div>
               <div className="glass-card p-4 text-center">
                 <div className="text-2xl font-bold gradient-text">ICPC</div>
-                <div className="text-sm text-default-500">Finalist 2025</div>
+                <div className="text-sm text-default-500">Regionalist 2025</div>
               </div>
               <div className="glass-card p-4 text-center">
                 <div className="text-2xl font-bold gradient-text">1st</div>
