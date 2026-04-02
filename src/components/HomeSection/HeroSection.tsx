@@ -70,9 +70,9 @@ const HeroSection = () => {
   ];
 
   const socialLinks = [
-    { href: "https://www.linkedin.com/in/anamul-haque-772264299/", icon: FaLinkedin, label: "LinkedIn" },
+    { href: "https://www.linkedin.com/in/anamul9901/", icon: FaLinkedin, label: "LinkedIn" },
     { href: "https://github.com/Anamul9901", icon: FaGithub, label: "GitHub" },
-    { href: "https://www.facebook.com/Anamul114", icon: FaFacebook, label: "Facebook" },
+    { href: "https://www.facebook.com/anamul9901", icon: FaFacebook, label: "Facebook" },
     { href: "https://www.codechef.com/users/anamul9901", icon: SiCodechef, label: "CodeChef" },
     { href: "https://codeforces.com/profile/Anamul9901", icon: SiCodeforces, label: "Codeforces" },
   ];
