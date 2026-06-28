@@ -1,126 +1,98 @@
 "use client";
 import { motion } from "framer-motion";
-import { useScrollAnimation, staggerContainer, staggerItem } from "@/src/hooks/useScrollAnimation";
-import { FaTrophy, FaMedal, FaCertificate, FaExternalLinkAlt } from "react-icons/fa";
+import {
+  useScrollAnimation,
+  staggerContainer,
+  staggerItem,
+} from "@/src/hooks/useScrollAnimation";
+import SectionHeader from "@/src/components/UI/SectionHeader";
+
+interface Item {
+  year: string;
+  title: string;
+  issuer: string;
+  href?: string;
+}
+
+const items: Item[] = [
+  {
+    year: "2025",
+    title: "ICPC Asia Dhaka Regional — Finalist",
+    issuer: "BUBT University",
+    href: "https://drive.google.com/file/d/1LdwOuwgBsdmsvzZ0LiJwx-PFc-m0OHE6/view",
+  },
+  {
+    year: "2024",
+    title: "Hackathon — 2nd Place",
+    issuer: "Tejgaon College, Dhaka",
+    href: "https://drive.google.com/file/d/1AwGPUR8xhLDuA5HyHuojao1EzJQoxce5/view",
+  },
+  {
+    year: "2024",
+    title: "Next Level Web Development",
+    issuer: "Programming Hero",
+    href: "https://web.programming-hero.com/verification?validationNumber=PHlevel2-batch-3-fullstackWEB8-32581068",
+  },
+  {
+    year: "2023",
+    title: "Complete Web Development",
+    issuer: "Programming Hero",
+    href: "https://drive.google.com/file/d/1EnOksrjswUENRzXZMJ1F7l8Z4yjLqmFd/view",
+  },
+];
 
 const Achievements = () => {
-    const { ref, controls } = useScrollAnimation(0.2);
+  const { ref, controls } = useScrollAnimation(0.18);
 
-    const achievements = [
-        {
-            icon: FaTrophy,
-            title: "ICPC Asia Dhaka Regional 2025",
-            subtitle: "Finalist @ BUBT University",
-            description: "Competed at BUBT University in the prestigious ICPC Asia Dhaka Regional Contest.",
-            link: "#",
-            color: "from-teal-500 to-teal-300",
-            certificateLink: "https://drive.google.com/file/d/1LdwOuwgBsdmsvzZ0LiJwx-PFc-m0OHE6/view",
-        },
-        {
-            icon: FaMedal,
-            title: "Hackathon 2024",
-            subtitle: "2nd Place",
-            description: "Secured second place in an 8-hour hackathon at Tejgaon College, Dhaka.",
-            link: "#",
-            color: "from-gray-300 to-gray-500",
-            certificateLink: "https://drive.google.com/file/d/1AwGPUR8xhLDuA5HyHuojao1EzJQoxce5/view"
-        },
-        {
-            icon: FaCertificate,
-            title: "Complete Web Development",
-            subtitle: "Programming Hero",
-            description: "Comprehensive full-stack web development course covering modern technologies.",
-            link: "#",
-            color: "from-gray-500 to-gray-300",
-            certificateLink: "https://drive.google.com/file/d/1EnOksrjswUENRzXZMJ1F7l8Z4yjLqmFd/view"
-        },
-        {
-            icon: FaCertificate,
-            title: "Next Level Web Development",
-            subtitle: "Programming Hero",
-            description: "Advanced course covering Next.js, TypeScript, and enterprise-level development.",
-            link: "#",
-            color: "from-teal-300 to-teal-500",
-            certificateLink: "https://web.programming-hero.com/verification?validationNumber=PHlevel2-batch-3-fullstackWEB8-32581068"
-        },
-    ];
+  return (
+    <section className="relative py-20 md:py-28" ref={ref}>
+      <div className="section-container">
+        <motion.div initial="hidden" animate={controls} variants={staggerContainer}>
+          <SectionHeader
+            index="04"
+            label="Achievements"
+            title={<>Recognition, <span className="text-[--accent]">selected</span>.</>}
+            subtitle="Competitions, hackathons, and meaningful certifications."
+          />
 
-    return (
-        <section className="py-14 md:py-20 relative" ref={ref}>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
+          <ul className="divide-y divide-[--hairline] hairline-t hairline-b">
+            {items.map((item) => (
+              <motion.li
+                key={item.title}
+                variants={staggerItem}
+                className="group grid grid-cols-12 items-baseline gap-4 py-6"
+              >
+                <span className="col-span-2 md:col-span-1 mono-label text-[--accent]">
+                  {item.year}
+                </span>
 
-            <div className="section-container relative z-10">
-                <motion.div
-                    initial="hidden"
-                    animate={controls}
-                    variants={staggerContainer}
-                >
-                    {/* Section Header */}
-                    <motion.div variants={staggerItem} className="text-center mb-10">
-                        <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
-                            Recognition
-                        </span>
-                        <h2 className="section-heading mt-2 mb-0">
-                            Achievements & <span className="gradient-text">Certifications</span>
-                        </h2>
-                    </motion.div>
+                <div className="col-span-7 md:col-span-9">
+                  <h3 className="text-[16px] md:text-[17px] font-medium tracking-tight text-[--text-0] group-hover:text-[--accent] transition-colors duration-200">
+                    {item.title}
+                  </h3>
+                  <p className="text-[13px] text-[--text-2] mt-0.5">{item.issuer}</p>
+                </div>
 
-                    {/* Achievements Grid */}
-                    <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                        {achievements.map((achievement, index) => (
-                            <motion.div
-                                key={index}
-                                variants={staggerItem}
-                                className="glass-card p-6 pb-4 relative overflow-hidden group card-hover"
-                            >
-                                {/* Gradient accent */}
-                                <div
-                                    className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${achievement.color}`}
-                                />
-
-                                <div className="flex items-start gap-4">
-                                    {/* Icon */}
-                                    <div
-                                        className={`p-3 rounded-xl bg-gradient-to-br ${achievement.color} text-white text-xl flex-shrink-0`}
-                                    >
-                                        <achievement.icon />
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="flex-1">
-                                        <div className="flex items-start justify-between gap-2">
-                                            <div>
-                                                <h3 className="font-bold text-white group-hover:text-teal-400 transition-colors">
-                                                    {achievement.title}
-                                                </h3>
-                                                <p className="text-teal-500 text-sm font-medium">
-                                                    {achievement.subtitle}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <p className="text-default-500 text-sm mt-2 mb-4">
-                                            {achievement.description}
-                                        </p>
-                                        {achievement.certificateLink && (
-                                            <a
-                                                href={achievement.certificateLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal-500/40 text-teal-500 text-xs font-medium hover:bg-teal-500 hover:text-white transition-all duration-300"
-                                            >
-                                                <FaExternalLinkAlt size={10} />
-                                                View Certificate
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
-            </div>
-        </section>
-    );
+                <div className="col-span-3 md:col-span-2 text-right">
+                  {item.href && (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[13px] text-[--text-1] hover:text-[--accent] transition-colors duration-200"
+                    >
+                      <span className="hidden md:inline">Certificate</span>
+                      <span aria-hidden>↗</span>
+                    </a>
+                  )}
+                </div>
+              </motion.li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Achievements;

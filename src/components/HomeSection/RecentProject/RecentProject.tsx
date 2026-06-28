@@ -2,8 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt, FaGithub, FaEye, FaArrowRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import {
+  useScrollAnimation,
+  staggerContainer,
+  staggerItem,
+} from "@/src/hooks/useScrollAnimation";
+import SectionHeader from "@/src/components/UI/SectionHeader";
 import { mockProjects } from "@/src/data/mockProjects";
 
 interface Project {
@@ -18,251 +23,116 @@ interface Project {
 }
 
 const RecentProject = () => {
+  const { ref, controls } = useScrollAnimation(0.12);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    // Mock Data Implementation
     setProjects(mockProjects);
     setLoading(false);
-
-    // Original API Logic (Commented Out)
-    /*
-    const fetchProjects = async () => {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-
-      try {
-        const res = await fetch(
-          "https://anamul-portfolio-backend.vercel.app/api/v1/project/all",
-          {
-            cache: "no-store",
-            signal: controller.signal
-          }
-        );
-        clearTimeout(timeoutId);
-
-        if (!res.ok) {
-          throw new Error(`API Error: ${res.status}`);
-        }
-
-        const data = await res.json();
-        setProjects(data?.data || []);
-      } catch (err: any) {
-        console.error("Error fetching projects:", err);
-        // setError(err.message || "Failed to load projects"); // Removed as error state is not used
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProjects();
-    */
   }, []);
 
-  if (loading) {
-    return (
-      <section className="py-14 md:py-20">
-        <div className="section-container">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <div className="relative w-16 h-16">
-              <div className="absolute inset-0 rounded-full border-4 border-teal-500/20" />
-              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-teal-500 animate-spin" />
-            </div>
-            <p className="text-default-500 animate-pulse">Loading amazing projects...</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (!projects || projects.length === 0) {
-    return (
-      <section className="py-14 md:py-20">
-        <div className="section-container text-center">
-          <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
-            Portfolio
-          </span>
-          <h2 className="section-heading mt-2 mb-8">
-            Recent <span className="gradient-text">Projects</span>
-          </h2>
-          <div className="glass-card p-12 max-w-md mx-auto">
-            <p className="text-default-500">No projects available at the moment.</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const visible = projects.slice(0, 4);
 
   return (
-    <section className="py-14 md:py-20 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
-      <div className="absolute top-1/3 -left-32 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 -right-32 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
+    <section className="relative py-20 md:py-28" ref={ref}>
+      <div className="section-container">
+        <motion.div initial="hidden" animate={controls} variants={staggerContainer}>
+          <SectionHeader
+            index="06"
+            label="Projects"
+            title={<>Selected <span className="text-[--accent]">work</span>.</>}
+            subtitle="Things I shipped — pick any to see it live."
+          />
 
-      <div className="section-container relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-             {/* here portfolio name has a simple designe, now add this designe in all section name */}
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4"
-          >
-            Portfolio
-          </motion.span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Recent <span className="gradient-text">Projects</span>
-          </h2>
-          <p className="text-default-500 max-w-2xl mx-auto">
-            Explore my latest work showcasing full-stack development, scalable architectures, and modern design principles.
-          </p>
-        </motion.div>
-
-        {/* Projects Grid */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 items-stretch">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project._id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}              className="group relative flex"
-            >{/* Card with gradient border on hover */}
-              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-default-100/80 to-default-200/50 backdrop-blur-sm border border-white/5 hover:border-teal-500/30 transition-all duration-500 flex flex-col h-full">
-                {/* Image Container with aspect ratio */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.name}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-                  {/* Floating action buttons */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                      opacity: hoveredIndex === index ? 1 : 0,
-                      y: hoveredIndex === index ? 0 : 20,
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute top-4 right-4 flex gap-2"
+          {loading ? (
+            <div className="mono-label text-[--text-2]">Loading…</div>
+          ) : visible.length === 0 ? (
+            <div className="mono-label text-[--text-2]">No projects yet.</div>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-x-8 gap-y-14">
+              {visible.map((project, index) => (
+                <motion.article
+                  key={project._id}
+                  variants={staggerItem}
+                  className="group"
+                >
+                  <Link
+                    href={`/project/${project._id}`}
+                    className="block"
+                    aria-label={project.name}
                   >
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl hairline bg-[--bg-2]">
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        fill
+                        sizes="(min-width: 768px) 45vw, 100vw"
+                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[--bg-0]/40 via-transparent to-transparent" />
+                      <div className="absolute top-3 left-3 mono-label text-[--text-1]">
+                        / {String(index + 1).padStart(2, "0")}
+                      </div>
+                    </div>
+
+                    <div className="mt-5 flex items-start justify-between gap-4">
+                      <h3 className="text-[18px] md:text-[20px] font-medium tracking-tight text-[--text-0] group-hover:text-[--accent] transition-colors duration-200">
+                        {project.name}
+                      </h3>
+                      <span
+                        className="text-[--text-2] group-hover:text-[--accent] transition-all duration-200 group-hover:translate-x-0.5 mt-1"
+                        aria-hidden
+                      >
+                        ↗
+                      </span>
+                    </div>
+
+                    <p className="mt-2 text-[14px] text-[--text-1] leading-[1.7] line-clamp-2">
+                      {project.description}
+                    </p>
+
+                    {project.technologies && project.technologies.length > 0 && (
+                      <div className="mt-3 mono text-[12px] text-[--text-2] tracking-wide">
+                        {project.technologies.slice(0, 5).join(" · ").toLowerCase()}
+                      </div>
+                    )}
+                  </Link>
+
+                  <div className="mt-3 flex items-center gap-5 text-[13px]">
                     <a
                       href={project.frLive}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-teal-500 text-white shadow-lg shadow-teal-500/30 hover:bg-teal-400 transition-colors"
-                      title="Live Demo"
+                      className="link-inline"
                     >
-                      <FaExternalLinkAlt size={14} />
+                      Live <span className="text-[--text-2]" aria-hidden>↗</span>
                     </a>
                     {project.frRepo && (
                       <a
                         href={project.frRepo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2.5 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
-                        title="Source Code"
+                        className="link-inline"
                       >
-                        <FaGithub size={14} />
+                        Code <span className="text-[--text-2]" aria-hidden>↗</span>
                       </a>
                     )}
-                  </motion.div>
-
-                  {/* Project number badge */}
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm text-white/80 text-xs font-medium">
-                    0{index + 1}
                   </div>
-                </div>                {/* Content */}
-                <div className="p-6 flex flex-col flex-1">
-                  {/* Title with arrow */}
-                  <div className="flex items-start justify-between gap-4 mb-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-teal-400 transition-colors duration-300 line-clamp-2">
-                      {project.name}
-                    </h3>
-                    <motion.div
-                      animate={{
-                        x: hoveredIndex === index ? 5 : 0,
-                        opacity: hoveredIndex === index ? 1 : 0.5,
-                      }}
-                      className="mt-1 text-teal-500"
-                    >
-                      <FaArrowRight size={14} />
-                    </motion.div>
-                  </div>                  {/* Description */}
-                  <p className="text-default-500 text-sm line-clamp-2 mb-5 leading-relaxed flex-1">
-                    {project.description}
-                  </p>
+                </motion.article>
+              ))}
+            </div>
+          )}
 
-                  {/* Divider */}
-                  <div className="h-px bg-gradient-to-r from-transparent via-default-300/30 to-transparent mb-5 mt-auto" />
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <a
-                      href={project.frLive}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 py-2.5 text-center rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-teal-500/30 transition-all duration-300 hover:-translate-y-0.5"
-                    >
-                      Live Demo
-                    </a>
-                    <Link
-                      href={`/project/${project._id}`}
-                      className="flex-1 py-2.5 text-center rounded-xl bg-white/5 border border-white/20 text-default-600 text-sm font-medium hover:bg-white/10 hover:text-white transition-all duration-300"
-                    >
-                      View Details
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Hover glow effect */}
-                <motion.div
-                  animate={{
-                    opacity: hoveredIndex === index ? 1 : 0,
-                  }}
-                  className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{
-                    boxShadow: "inset 0 0 60px rgba(20, 184, 166, 0.1)",
-                  }}
-                />
-              </div>
+          {projects.length > visible.length && (
+            <motion.div variants={staggerItem} className="mt-14">
+              <Link href="/projects" className="link-inline">
+                View all {projects.length} projects
+                <span aria-hidden>→</span>
+              </Link>
             </motion.div>
-          ))}
-        </div>
-
-        {/* View All Projects Button */}
-        {projects.length > 3 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white/5 border border-white/10 text-default-300 font-medium hover:bg-teal-500 hover:border-teal-500 hover:text-white transition-all duration-300"
-            >
-              View All Projects
-              <FaArrowRight size={12} />
-            </Link>
-          </motion.div>
-        )}
+          )}
+        </motion.div>
       </div>
     </section>
   );

@@ -1,121 +1,122 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useScrollAnimation, fadeInUp, fadeInLeft, fadeInRight } from "@/src/hooks/useScrollAnimation";
+import {
+  useScrollAnimation,
+  fadeInUp,
+  fadeInLeft,
+  fadeInRight,
+  staggerContainer,
+  staggerItem,
+} from "@/src/hooks/useScrollAnimation";
+import SectionHeader from "@/src/components/UI/SectionHeader";
 import myImage from "../../../../public/Anamul-Haque-removebg.png";
 
+const meta = [
+  { label: "Location",  value: "Dhaka, Bangladesh" },
+  { label: "Focus",     value: "Backend systems" },
+  { label: "Stack",     value: "TS · Node · Next" },
+  { label: "Available", value: "Select work, 2026" },
+];
+
+const stats = [
+  { value: "2+",   label: "Years experience" },
+  { value: "25+",  label: "Projects shipped" },
+  { value: "ICPC", label: "Regionalist '25" },
+  { value: "1st",  label: "Hackathon win" },
+];
+
 const AboutPage = () => {
-  const { ref, controls } = useScrollAnimation(0.3);
+  const { ref, controls } = useScrollAnimation(0.18);
 
   return (
-    <section className="py-14 md:py-20 relative" ref={ref}>
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-teal-500/5 to-transparent" />
-
-      <div className="section-container relative z-10">
+    <section className="relative py-20 md:py-28" ref={ref}>
+      <div className="section-container">
         <motion.div
-          className="grid md:grid-cols-2 gap-12 items-center"
           initial="hidden"
           animate={controls}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.2 },
-            },
-          }}
+          variants={staggerContainer}
         >
-          {/* Image Section */}
-          <motion.div
-            variants={fadeInLeft}
-            className="flex justify-center p-10 md:p-0"
-          >
-            <div className="relative">
-              {/* Decorative frame */}
-              <div className="absolute -inset-4 border-2 border-teal-500/30 rounded-2xl -rotate-6" />
-              <div className="absolute -inset-4 border-2 border-purple-500/30 rounded-2xl rotate-3" />
+          <SectionHeader
+            index="01"
+            label="About"
+            title={<>A quiet build for <span className="text-[--accent]">durable software</span>.</>}
+            subtitle="Two years building backends in production. Sharpened on competitive programming, refined by client work."
+          />
 
-              <div className="relative glass-card overflow-hidden p-4">
+          <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-start">
+
+            {/* Left — portrait + meta */}
+            <motion.div variants={fadeInLeft} className="md:col-span-5">
+              <div className="relative aspect-[4/5] surface overflow-hidden">
                 <Image
                   src={myImage}
                   alt="Anamul Haque"
-                  height={400}
-                  width={400}
-                  className="rounded-xl"
+                  fill
+                  sizes="(min-width: 768px) 40vw, 100vw"
+                  className="object-cover object-top"
                 />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[--bg-0] to-transparent" />
               </div>
-            </div>
-          </motion.div>
 
-          {/* Content Section */}
-          <motion.div variants={fadeInRight} className="space-y-6">
-            <div>
-              <motion.span
-                variants={fadeInUp}
-                className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4"
-              >
-                About Me
-              </motion.span>
-              <motion.h2
-                variants={fadeInUp}
-                className="text-3xl md:text-4xl font-bold mt-2"
-              >
-                Building Digital{" "}
-                <span className="gradient-text">Experiences</span>
-              </motion.h2>
-            </div>
-
-            <motion.p variants={fadeInUp} className="text-default-500 leading-relaxed text-lg">
-              Full-stack web developer with <span className="text-teal-500 font-semibold">2 years of experience</span>,
-              specializing in high-performance backend systems. Proven track record in optimizing
-              application speed and building scalable architectures that maximize user impact.
-            </motion.p>
-
-            <motion.p variants={fadeInUp} className="text-default-500 leading-relaxed">
-              Currently working as a <span className="text-teal-500 font-semibold">Backend Developer at Strvia</span>,
-              where I design and maintain scalable multi-vendor platforms using microservices architecture.
-              I&apos;m passionate about clean code, performance optimization, and creating seamless user experiences.
-            </motion.p>
-
-            {/* Info cards */}
-            <motion.div
-              variants={fadeInUp}
-              className="grid grid-cols-2 gap-4 pt-4"
-            >
-              <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold gradient-text">2+</div>
-                <div className="text-sm text-default-500">Years Experience</div>
-              </div>
-              <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold gradient-text">25+</div>
-                <div className="text-sm text-default-500">Projects Completed</div>
-              </div>
-              <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold gradient-text">ICPC</div>
-                <div className="text-sm text-default-500">Regionalist 2025</div>
-              </div>
-              <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold gradient-text">1st</div>
-                <div className="text-sm text-default-500">Hackathon Win</div>
-              </div>
+              <dl className="mt-6 divide-y divide-[--hairline]">
+                {meta.map((row) => (
+                  <div key={row.label} className="flex items-baseline justify-between py-3">
+                    <dt className="mono-label">{row.label}</dt>
+                    <dd className="text-[14px] text-[--text-0]">{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </motion.div>
 
-            {/* Languages */}
-            <motion.div variants={fadeInUp} className="pt-4">
-              <h4 className="font-semibold mb-2">Languages</h4>
-              <div className="flex flex-wrap gap-1 md:gap-2">
-                <span className="md:px-3 px-1 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
-                  Bangla (Native)
+            {/* Right — bio + stats + languages */}
+            <motion.div variants={fadeInRight} className="md:col-span-7 space-y-7">
+              <motion.p variants={fadeInUp} className="text-[--text-1] text-[16px] leading-[1.8]">
+                Full-stack web developer focused on{" "}
+                <span className="text-[--text-0]">high-performance backend systems</span>.
+                Track record of optimizing application speed and shipping scalable architectures
+                that survive real traffic.
+              </motion.p>
+
+              <motion.p variants={fadeInUp} className="text-[--text-1] text-[15px] leading-[1.8]">
+                Currently a Backend Developer at{" "}
+                <span className="text-[--text-0]">Strvia</span> — designing and maintaining
+                multi-vendor platforms on a microservices stack. Off-hours: ICPC regionalist,
+                hackathon winner, and the occasional UI experiment.
+              </motion.p>
+
+              {/* Stats strip */}
+              <motion.div
+                variants={staggerContainer}
+                className="grid grid-cols-2 sm:grid-cols-4 hairline-t hairline-b"
+              >
+                {stats.map((s, i) => (
+                  <motion.div
+                    key={s.label}
+                    variants={staggerItem}
+                    className={`py-5 ${i !== 0 ? "sm:border-l border-[--hairline]" : ""} ${i % 2 === 1 ? "border-l border-[--hairline] sm:border-l" : ""}`}
+                  >
+                    <div className="mono text-[24px] tracking-tight text-[--text-0]">
+                      {s.value}
+                    </div>
+                    <div className="mono-label mt-1">{s.label}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* Languages — single line */}
+              <motion.div variants={fadeInUp} className="flex items-baseline gap-3 text-[14px]">
+                <span className="mono-label shrink-0">Speaks</span>
+                <span className="text-[--text-1]">
+                  Bangla <span className="text-[--text-2]">(native)</span>
+                  <span className="mx-2 text-[--text-2]">·</span>
+                  English <span className="text-[--text-2]">(proficient)</span>
+                  <span className="mx-2 text-[--text-2]">·</span>
+                  Hindi <span className="text-[--text-2]">(basic)</span>
                 </span>
-                <span className="md:px-3 px-1 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
-                  English (Proficient)
-                </span>
-                <span className="md:px-3 px-1 py-1 rounded-full bg-teal-500/10 text-teal-500 text-sm">
-                  Hindi (Basic)
-                </span>
-              </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

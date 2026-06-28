@@ -1,118 +1,102 @@
 "use client";
 import { motion } from "framer-motion";
-import { useScrollAnimation, staggerContainer, staggerItem } from "@/src/hooks/useScrollAnimation";
-import { FaGraduationCap, FaUniversity, FaSchool } from "react-icons/fa";
+import {
+  useScrollAnimation,
+  staggerContainer,
+  staggerItem,
+} from "@/src/hooks/useScrollAnimation";
+import SectionHeader from "@/src/components/UI/SectionHeader";
+
+interface Edu {
+  period: string;
+  level: string;
+  title: string;
+  institution: string;
+  grade?: string;
+  status: "Running" | "Completed";
+}
+
+const items: Edu[] = [
+  {
+    period: "2024 — Present",
+    level: "BSc",
+    title: "Computer Science & Engineering",
+    institution: "Tejgaon College, Dhaka",
+    status: "Running",
+  },
+  {
+    period: "2020 — 2022",
+    level: "HSC",
+    title: "Higher Secondary Certificate",
+    institution: "Narsingdi Gov College, Narsingdi",
+    grade: "A+",
+    status: "Completed",
+  },
+  {
+    period: "2018 — 2020",
+    level: "SSC",
+    title: "Secondary School Certificate",
+    institution: "Prijkandi High School, Raipura",
+    grade: "A+",
+    status: "Completed",
+  },
+  {
+    period: "2016 — 2018",
+    level: "JSC",
+    title: "Junior School Certificate",
+    institution: "Prijkandi High School, Raipura",
+    grade: "A+",
+    status: "Completed",
+  },
+];
 
 const Education = () => {
-  const { ref, controls } = useScrollAnimation(0.2);
-
-  const educationData = [
-    {
-      icon: FaUniversity,
-      level: "BSc",
-      title: "Computer Science and Engineering",
-      institution: "Tejgaon College, Dhaka",
-      period: "Currently in 3rd Semester",
-      status: "Running",
-      grade: null,
-    },
-    {
-      icon: FaGraduationCap,
-      level: "HSC",
-      title: "Higher Secondary Certificate",
-      institution: "Narsingdi Gov College, Narsingdi, Dhaka",
-      period: "2022",
-      status: "Completed",
-      grade: "A+",
-    },
-    {
-      icon: FaSchool,
-      level: "SSC",
-      title: "Secondary School Certificate",
-      institution: "Prijkandi High School, Raipura, Narsingdi",
-      period: "2020",
-      status: "Completed",
-      grade: "A+",
-    },
-    {
-      icon: FaSchool,
-      level: "JSC",
-      title: "Junior School Certificate",
-      institution: "Prijkandi High School, Raipura, Narsingdi",
-      period: "2018",
-      status: "Completed",
-      grade: "A+",
-    },
-  ];
+  const { ref, controls } = useScrollAnimation(0.18);
 
   return (
-    <section className="py-14 md:py-20 relative" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-teal-500/5 to-transparent" />
+    <section className="relative py-20 md:py-28" ref={ref}>
+      <div className="section-container">
+        <motion.div initial="hidden" animate={controls} variants={staggerContainer}>
+          <SectionHeader
+            index="05"
+            label="Education"
+            title={<>Where I was <span className="text-[--accent]">trained</span>.</>}
+            subtitle="A complete academic record — formal degree in progress."
+          />
 
-      <div className="section-container relative z-10">
-        <motion.div
-          initial="hidden"
-          animate={controls}
-          variants={staggerContainer}
-        >
-          {/* Section Header */}
-          <motion.div variants={staggerItem} className="text-center mb-10">
-            <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
-              Academic Background
-            </span>
-            <h2 className="section-heading mt-2 mb-0">
-              My <span className="gradient-text">Education</span>
-            </h2>
-          </motion.div>
-
-          {/* Education Grid */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {educationData.map((edu, index) => (
-              <motion.div
-                key={index}
+          <ul className="divide-y divide-[--hairline] hairline-t hairline-b">
+            {items.map((e) => (
+              <motion.li
+                key={e.level + e.period}
                 variants={staggerItem}
-                className="glass-card p-6 relative overflow-hidden group card-hover"
+                className="grid grid-cols-12 items-baseline gap-4 py-6"
               >
-                {/* Status indicator */}
-                <div
-                  className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium ${edu.status === "Running"
-                    ? "bg-teal-500/20 text-teal-400"
-                    : "bg-green-500/20 text-green-400"
-                    }`}
-                >
-                  {edu.status}
-                </div>
+                <span className="col-span-12 md:col-span-3 mono-label text-[--text-2]">
+                  {e.period}
+                </span>
 
-                <div className="flex items-start gap-4">
-                  {/* Icon */}
-                  <div className="p-3 rounded-xl bg-teal-500/10 text-teal-500 text-2xl flex-shrink-0 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300">
-                    <edu.icon />
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-teal-500 font-bold text-lg">
-                        {edu.level}
-                      </span>
-                      {edu.grade && (
-                        <span className="px-2 py-0.5 rounded bg-teal-500/20 text-teal-400 text-xs font-medium">
-                          Grade: {edu.grade}
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="font-semibold text-white text-sm mb-1">
-                      {edu.title}
+                <div className="col-span-9 md:col-span-7">
+                  <div className="flex items-baseline gap-3 flex-wrap">
+                    <h3 className="text-[16px] md:text-[17px] font-medium tracking-tight text-[--text-0]">
+                      <span className="text-[--accent] mono mr-2 text-[13px]">{e.level}</span>
+                      {e.title}
                     </h3>
-                    <p className="text-default-500 text-sm">{edu.institution}</p>
-                    <p className="text-teal-500 text-sm mt-2 font-medium">
-                      {edu.period}
-                    </p>
                   </div>
+                  <p className="text-[13px] text-[--text-2] mt-0.5">{e.institution}</p>
                 </div>
-              </motion.div>
+
+                <div className="col-span-3 md:col-span-2 text-right">
+                  <span
+                    className={`inline-block mono-label ${
+                      e.status === "Running" ? "text-[--accent]" : "text-[--text-2]"
+                    }`}
+                  >
+                    {e.grade ? `Grade ${e.grade}` : e.status}
+                  </span>
+                </div>
+              </motion.li>
             ))}
-          </div>
+          </ul>
         </motion.div>
       </div>
     </section>

@@ -3,7 +3,9 @@
 import { useInView, useAnimation, Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
 
-export const useScrollAnimation = (threshold: number = 0.2) => {
+const ease = [0.22, 1, 0.36, 1] as const;
+
+export const useScrollAnimation = (threshold: number = 0.18) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: threshold });
     const controls = useAnimation();
@@ -17,95 +19,55 @@ export const useScrollAnimation = (threshold: number = 0.2) => {
     return { ref, controls, isInView };
 };
 
-// Reusable animation variants
+/* ===== Quiet futurism motion language =====
+   - All distance reductions: 40px -> 16px
+   - All durations: 0.6s, single easing
+   - Stagger: 60ms between children, 80ms initial delay
+*/
+
 export const fadeInUp: Variants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
 };
 
 export const fadeInLeft: Variants = {
-    hidden: { opacity: 0, x: -40 },
-    visible: {
-        opacity: 1,
-        x: 0,
-        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
+    hidden: { opacity: 0, x: -16 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease } },
 };
 
 export const fadeInRight: Variants = {
-    hidden: { opacity: 0, x: 40 },
-    visible: {
-        opacity: 1,
-        x: 0,
-        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
+    hidden: { opacity: 0, x: 16 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease } },
 };
 
 export const scaleIn: Variants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-        opacity: 1,
-        scale: 1,
-        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-    },
+    hidden: { opacity: 0, scale: 0.96 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease } },
 };
 
 export const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
-        transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.1,
-        },
+        transition: { staggerChildren: 0.06, delayChildren: 0.08 },
     },
 };
 
 export const staggerItem: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-    },
+    hidden: { opacity: 0, y: 12 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
 };
 
+export const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+};
+
+/* Retired but kept as no-op exports so any stragglers don't break imports */
 export const floatAnimation = {
-    animate: {
-        y: [0, -10, 0],
-        transition: {
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-        },
-    },
+    animate: { y: [0, -6, 0], transition: { duration: 4, repeat: Infinity, ease: "easeInOut" } },
 };
 
 export const glowPulse = {
-    animate: {
-        boxShadow: [
-            "0 0 20px rgba(20, 184, 166, 0.3)",
-            "0 0 40px rgba(20, 184, 166, 0.5)",
-            "0 0 20px rgba(20, 184, 166, 0.3)",
-        ],
-        transition: {
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-        },
-    },
-};
-
-// Section wrapper animation
-export const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
+    animate: { opacity: [0.8, 1, 0.8], transition: { duration: 3, repeat: Infinity, ease: "easeInOut" } },
 };

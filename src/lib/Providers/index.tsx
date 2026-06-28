@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { Toaster } from "sonner";
 import GoToTop from "@/src/components/GoToTop/GoToTop";
+import SmoothScrollProvider from "@/src/components/Providers/SmoothScrollProvider";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -18,7 +19,9 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <NextUIProvider navigate={router.push}>
       <Toaster />
-      <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+      <NextThemesProvider {...themeProps}>
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      </NextThemesProvider>
       <GoToTop />
     </NextUIProvider>
   );
