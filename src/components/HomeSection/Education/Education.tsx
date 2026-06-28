@@ -69,15 +69,20 @@ const Education = () => {
               <motion.li
                 key={e.level + e.period}
                 variants={staggerItem}
-                className="grid grid-cols-12 items-baseline gap-4 py-6"
+                className="group relative grid grid-cols-12 items-baseline gap-4 py-6 pl-5 transition-transform duration-300 hover:translate-x-1"
               >
-                <span className="col-span-12 md:col-span-3 mono-label text-[--text-2]">
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-1/4 bottom-1/4 w-0 bg-[--accent] transition-[width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-[2px]"
+                />
+
+                <span className="col-span-12 md:col-span-3 mono-label text-[--text-2] group-hover:text-[--accent] transition-colors duration-300 delay-75">
                   {e.period}
                 </span>
 
                 <div className="col-span-9 md:col-span-7">
                   <div className="flex items-baseline gap-3 flex-wrap">
-                    <h3 className="text-[16px] md:text-[17px] font-medium tracking-tight text-[--text-0]">
+                    <h3 className="text-[16px] md:text-[17px] font-medium tracking-tight text-[--text-0] group-hover:text-[--accent] transition-colors duration-300">
                       <span className="text-[--accent] mono mr-2 text-[13px]">{e.level}</span>
                       {e.title}
                     </h3>

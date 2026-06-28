@@ -1,10 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import {
-  useScrollAnimation,
-  staggerContainer,
-  staggerItem,
-} from "@/src/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/src/hooks/useScrollAnimation";
 import SectionHeader from "@/src/components/UI/SectionHeader";
 import {
   SiReact, SiNextdotjs, SiTypescript, SiRedux, SiHtml5, SiCss3, SiTailwindcss,
@@ -42,11 +38,11 @@ const groups: Group[] = [
     index: "02",
     label: "Backend",
     skills: [
-      { name: "Node.js",       Icon: SiNodedotjs,    color: "#339933" },
+      { name: "Node.js",       Icon: SiNodedotjs,    color: "#84CC16" },
       { name: "Express",       Icon: SiExpress,      color: "#FFFFFF" },
       { name: "NestJS",        Icon: SiNestjs,       color: "#E0234E" },
       { name: "Prisma",        Icon: SiPrisma,       color: "#7AB6F7" },
-      { name: "TypeORM",       Icon: FaDatabase,     color: "#FE0902" },
+      { name: "TypeORM",       Icon: FaDatabase,     color: "#FE5F4D" },
       { name: "Microservices", Icon: FaNetworkWired, color: "#F59E0B" },
       { name: "REST",          Icon: FaServer,       color: "#10B981" },
       { name: "GraphQL",       Icon: SiGraphql,      color: "#E10098" },
@@ -58,9 +54,9 @@ const groups: Group[] = [
     label: "Data",
     skills: [
       { name: "MongoDB",       Icon: SiMongodb,      color: "#47A248" },
-      { name: "PostgreSQL",    Icon: SiPostgresql,   color: "#5B95C9" },
+      { name: "PostgreSQL",    Icon: SiPostgresql,   color: "#7AB6F7" },
       { name: "Redis",         Icon: SiRedis,        color: "#DC382D" },
-      { name: "Mongoose",      Icon: SiMongoose,     color: "#A02E2E" },
+      { name: "Mongoose",      Icon: SiMongoose,     color: "#B5403F" },
       { name: "Indexing",      Icon: FaSearch,       color: "#F59E0B" },
       { name: "Schema",        Icon: FaLayerGroup,   color: "#8B5CF6" },
     ],
@@ -74,14 +70,14 @@ const groups: Group[] = [
       { name: "GH Actions",    Icon: SiGithubactions, color: "#2088FF" },
       { name: "Vercel",        Icon: SiVercel,        color: "#FFFFFF" },
       { name: "Nginx",         Icon: SiNginx,         color: "#009639" },
-      { name: "PM2",           Icon: FaServer,        color: "#7C5DC1" },
+      { name: "PM2",           Icon: FaServer,        color: "#A78BFA" },
     ],
   },
   {
     index: "05",
     label: "Practice",
     skills: [
-      { name: "Unit testing",  Icon: SiJest,         color: "#C21325" },
+      { name: "Unit testing",  Icon: SiJest,         color: "#E53935" },
       { name: "Team lead",     Icon: FaUsers,        color: "#F59E0B" },
       { name: "Problem solving", Icon: FaSearch,     color: "#10B981" },
       { name: "Client comm.",  Icon: FaComments,     color: "#60A5FA" },
@@ -91,54 +87,110 @@ const groups: Group[] = [
   },
 ];
 
+const containerVar = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.04, delayChildren: 0.05 } },
+};
+
+const tileVar = {
+  hidden: { opacity: 0, y: 20, scale: 0.92 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring" as const, damping: 18, stiffness: 220 },
+  },
+};
+
+const rowVar = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
+const SkillTile = ({ skill }: { skill: Skill }) => {
+  const { name, Icon, color } = skill;
+  return (
+    <motion.div
+      variants={tileVar}
+      whileHover={{ y: -6, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] as const } }}
+      className="group relative aspect-square rounded-2xl hairline bg-[--bg-2] overflow-hidden cursor-default"
+      style={{ ["--brand" as any]: color }}
+    >
+      {/* Tinted background that brightens on hover */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle at 50% 30%, ${color}26 0%, transparent 70%)`,
+        }}
+      />
+
+      {/* Mint border ring on hover */}
+      <div
+        aria-hidden
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{ boxShadow: `inset 0 0 0 1px ${color}55` }}
+      />
+
+      {/* Shimmer sweep on hover */}
+      <span className="shimmer" aria-hidden />
+
+      <div className="relative h-full flex flex-col items-center justify-center gap-2 px-2">
+        <Icon
+          className="transition-all duration-300 ease-out text-[--text-1] group-hover:text-[color:var(--brand)] group-hover:scale-110"
+          size={34}
+        />
+        <span className="mono-label text-center text-[--text-2] group-hover:text-[--text-0] transition-colors duration-300 leading-tight px-1">
+          {name}
+        </span>
+      </div>
+    </motion.div>
+  );
+};
+
 const Skills = () => {
-  const { ref, controls } = useScrollAnimation(0.15);
+  const { ref, controls } = useScrollAnimation(0.12);
 
   return (
     <section className="relative py-20 md:py-28" ref={ref}>
       <div className="section-container">
-        <motion.div initial="hidden" animate={controls} variants={staggerContainer}>
+        <motion.div initial="hidden" animate={controls} variants={containerVar}>
           <SectionHeader
             index="03"
             label="Skills"
             title={<>The toolkit, <span className="text-[--accent]">unhidden</span>.</>}
-            subtitle="No tabs to click — everything I work with, at a glance."
+            subtitle="Every technology I work with, at a glance — hover any tile."
           />
 
-          <div className="divide-y divide-[--hairline] hairline-t hairline-b">
+          <div className="space-y-10 md:space-y-12">
             {groups.map((g) => (
               <motion.div
                 key={g.label}
-                variants={staggerItem}
-                className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-7"
+                variants={rowVar}
+                className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6"
               >
-                <div className="md:col-span-3 flex items-baseline gap-3">
-                  <span className="mono-label text-[--accent]">{g.index}</span>
-                  <span className="text-[18px] font-medium tracking-tight text-[--text-0]">
+                {/* Label rail */}
+                <div className="md:col-span-2 md:pt-3">
+                  <div className="mono-label text-[--accent]">{g.index}</div>
+                  <h3 className="text-[18px] md:text-[19px] font-medium tracking-tight text-[--text-0] mt-1">
                     {g.label}
-                  </span>
+                  </h3>
                 </div>
 
-                <div className="md:col-span-9 flex flex-wrap gap-2">
-                  {g.skills.map(({ name, Icon, color }) => (
-                    <span
-                      key={name}
-                      className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full hairline bg-[--bg-2] text-[13px] text-[--text-1] hover:border-[--hairline-strong] hover:text-[--text-0] transition-all duration-200"
-                      style={{ ["--icon-color" as any]: color }}
-                    >
-                      <Icon className="w-[14px] h-[14px] text-[--text-2] group-hover:text-[color:var(--icon-color)] transition-colors duration-200" />
-                      <span>{name}</span>
-                    </span>
+                {/* Tile grid */}
+                <motion.div
+                  variants={containerVar}
+                  className="md:col-span-10 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3"
+                >
+                  {g.skills.map((s) => (
+                    <SkillTile key={s.name} skill={s} />
                   ))}
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
 
-          <motion.p
-            variants={staggerItem}
-            className="mono-label text-[--text-2] mt-10"
-          >
+          <motion.p variants={rowVar} className="mono-label text-[--text-2] mt-12">
             ↗ Continuously learning — open to new technologies.
           </motion.p>
         </motion.div>

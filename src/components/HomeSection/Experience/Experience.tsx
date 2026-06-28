@@ -78,13 +78,35 @@ const Experience = () => {
                 <motion.article
                   key={exp.company}
                   variants={staggerItem}
-                  className="relative"
+                  className="group relative pl-6 md:pl-8"
+                  whileHover={{ x: 4, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const } }}
                 >
-                  {/* Dot */}
-                  <span className="absolute -left-8 md:-left-10 top-2 flex items-center justify-center w-4 h-4">
+                  {/* Animated dot */}
+                  <motion.span
+                    className="absolute -left-[34px] md:-left-[38px] top-2 flex items-center justify-center w-4 h-4"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.2 + i * 0.1, ease: [0.22, 1, 0.36, 1] as const }}
+                  >
                     <span className="w-2 h-2 rounded-full bg-[--accent]" />
-                    <span className="absolute inset-0 rounded-full hairline" />
-                  </span>
+                    <motion.span
+                      className="absolute inset-0 rounded-full"
+                      initial={{ boxShadow: "0 0 0 0px var(--accent-glow-soft)" }}
+                      animate={{ boxShadow: ["0 0 0 0px var(--accent-glow-soft)", "0 0 0 8px transparent"] }}
+                      transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.4 }}
+                    />
+                  </motion.span>
+
+                  {/* Per-role left accent (height: 0 → 100% in view) */}
+                  <motion.span
+                    aria-hidden
+                    className="absolute left-0 top-1 w-px bg-[--accent]"
+                    initial={{ height: 0 }}
+                    whileInView={{ height: "85%" }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.8, delay: 0.35 + i * 0.1, ease: [0.22, 1, 0.36, 1] as const }}
+                  />
 
                   <div className="mono-label mb-3">{exp.period}</div>
 
@@ -105,7 +127,7 @@ const Experience = () => {
                   <ul className="mt-5 space-y-2.5 max-w-2xl">
                     {exp.outcomes.map((o, j) => (
                       <li key={j} className="flex gap-3 text-[14.5px] text-[--text-1] leading-[1.7]">
-                        <span className="mono text-[11px] text-[--text-2] pt-1.5 shrink-0">
+                        <span className="mono text-[11px] text-[--accent] pt-1.5 shrink-0 opacity-70">
                           0{j + 1}
                         </span>
                         <span>{o}</span>
@@ -113,8 +135,16 @@ const Experience = () => {
                     ))}
                   </ul>
 
-                  <div className="mt-5 mono text-[12.5px] text-[--text-2] tracking-wide">
-                    {exp.tech.join(" · ")}
+                  {/* Tech tags with hover lift */}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {exp.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="mono text-[11.5px] uppercase tracking-wider px-2.5 py-1 rounded-full hairline text-[--text-2] hover:text-[--accent] hover:border-[--accent] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_18px_var(--accent-glow-soft)] cursor-default"
+                      >
+                        {t}
+                      </span>
+                    ))}
                   </div>
                 </motion.article>
               ))}

@@ -10,6 +10,66 @@ import {
   fadeInUp,
 } from "@/src/hooks/useScrollAnimation";
 import SectionHeader from "@/src/components/UI/SectionHeader";
+import MagneticButton from "@/src/components/UI/MagneticButton";
+
+const FloatField = ({
+  id,
+  label,
+  type = "text",
+  textarea = false,
+  required = true,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  textarea?: boolean;
+  required?: boolean;
+}) => {
+  const [val, setVal] = useState("");
+  const [focus, setFocus] = useState(false);
+  const isUp = focus || val.length > 0;
+
+  const InputEl: any = textarea ? "textarea" : "input";
+
+  return (
+    <div className="relative pt-6 pb-2">
+      <label
+        htmlFor={id}
+        className={`absolute left-0 mono-label pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isUp
+            ? "top-0 text-[10px] text-[--accent]"
+            : "top-7 text-[12px] text-[--text-2]"
+        }`}
+      >
+        {label}
+      </label>
+
+      <InputEl
+        id={id}
+        name={id}
+        type={textarea ? undefined : type}
+        rows={textarea ? 4 : undefined}
+        required={required}
+        value={val}
+        onChange={(e: any) => setVal(e.target.value)}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
+        className={`w-full bg-transparent border-0 outline-none text-[15px] text-[--text-0] placeholder:text-transparent py-1.5 ${
+          textarea ? "resize-none min-h-[100px]" : ""
+        }`}
+      />
+
+      {/* Animated underline */}
+      <span aria-hidden className="absolute left-0 right-0 bottom-0 h-px bg-[--hairline]" />
+      <span
+        aria-hidden
+        className={`absolute left-0 bottom-0 h-px bg-[--accent] transition-[width] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          focus ? "w-full" : "w-0"
+        }`}
+      />
+    </div>
+  );
+};
 
 const ContactInfo = () => {
   const { ref, controls } = useScrollAnimation(0.18);
@@ -42,9 +102,6 @@ const ContactInfo = () => {
       );
   };
 
-  const inputClass =
-    "w-full bg-transparent border-0 border-b border-[--hairline] focus:border-[--accent] focus:outline-none transition-colors duration-200 py-3 text-[15px] text-[--text-0] placeholder:text-[--text-2]";
-
   return (
     <section className="relative py-20 md:py-28 overflow-hidden" ref={ref}>
       <div className="spotlight spotlight-drift" style={{ bottom: "-10%", left: "30%" }} />
@@ -69,67 +126,33 @@ const ContactInfo = () => {
             ref={formRef}
             onSubmit={sendEmail}
             variants={fadeInUp}
-            className="space-y-6"
+            className="space-y-2"
           >
-            <div>
-              <label htmlFor="from_name" className="mono-label block mb-1">
-                Name
-              </label>
-              <input
-                id="from_name"
-                type="text"
-                name="from_name"
-                required
-                placeholder="What should I call you?"
-                className={inputClass}
-              />
-            </div>
+            <FloatField id="from_name"  label="Name" />
+            <FloatField id="from_email" label="Email" type="email" />
+            <FloatField id="message"    label="Message" textarea />
 
-            <div>
-              <label htmlFor="from_email" className="mono-label block mb-1">
-                Email
-              </label>
-              <input
-                id="from_email"
-                type="email"
-                name="from_email"
-                required
-                placeholder="you@somewhere.com"
-                className={inputClass}
-              />
+            <div className="pt-6 flex justify-center">
+              <MagneticButton strength={6} radius={120}>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? (
+                    <>
+                      <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                      Sending
+                    </>
+                  ) : (
+                    <>
+                      Send message
+                      <span aria-hidden>→</span>
+                    </>
+                  )}
+                </button>
+              </MagneticButton>
             </div>
-
-            <div>
-              <label htmlFor="message" className="mono-label block mb-1">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={4}
-                placeholder="Tell me about the project, role, or idea."
-                className={`${inputClass} resize-none`}
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="btn-primary w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-            >
-              {isLoading ? (
-                <>
-                  <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                  Sending
-                </>
-              ) : (
-                <>
-                  Send message
-                  <span aria-hidden>→</span>
-                </>
-              )}
-            </button>
           </motion.form>
 
           {/* Direct contact strip */}

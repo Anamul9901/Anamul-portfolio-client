@@ -89,13 +89,21 @@ export const Navbar = () => {
                     (!isHomePage && item.to === "projects" && pathname.startsWith("/projects"));
 
                   const className =
-                    "relative px-3 py-1.5 rounded-full text-[12.5px] font-medium transition-colors duration-200 cursor-pointer";
+                    "group/nav relative px-3 py-1.5 rounded-full text-[12.5px] font-medium transition-colors duration-200 cursor-pointer";
                   const colorClass = isActive
                     ? "text-[--text-0]"
                     : "text-[--text-2] hover:text-[--text-0]";
 
                   const inner = (
-                    <span className="relative z-10">{item.label}</span>
+                    <span className="relative z-10 inline-flex items-center">
+                      {item.label}
+                      {!isActive && (
+                        <span
+                          aria-hidden
+                          className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-px w-0 bg-[--accent] transition-[width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/nav:w-3/5"
+                        />
+                      )}
+                    </span>
                   );
 
                   const pill = isActive && (

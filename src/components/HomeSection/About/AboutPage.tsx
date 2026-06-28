@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import {
   useScrollAnimation,
   fadeInUp,
@@ -10,6 +11,7 @@ import {
   staggerItem,
 } from "@/src/hooks/useScrollAnimation";
 import SectionHeader from "@/src/components/UI/SectionHeader";
+import Counter from "@/src/components/UI/Counter";
 import myImage from "../../../../public/Anamul-Haque-removebg.png";
 
 const meta = [
@@ -19,20 +21,35 @@ const meta = [
   { label: "Available", value: "Select work, 2026" },
 ];
 
-const stats = [
-  { value: "2+",   label: "Years experience" },
-  { value: "25+",  label: "Projects shipped" },
-  { value: "ICPC", label: "Regionalist '25" },
-  { value: "1st",  label: "Hackathon win" },
+interface Stat {
+  numeric?: number;
+  suffix?: string;
+  text?: string;
+  label: string;
+}
+
+const stats: Stat[] = [
+  { numeric: 2,  suffix: "+",   label: "Years experience" },
+  { numeric: 25, suffix: "+",   label: "Projects shipped" },
+  { text: "ICPC",                label: "Regionalist '25" },
+  { text: "1st",                 label: "Hackathon win" },
 ];
 
 const AboutPage = () => {
   const { ref, controls } = useScrollAnimation(0.18);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const portraitY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section className="relative py-20 md:py-28" ref={ref}>
+    <section ref={sectionRef} className="relative py-20 md:py-28">
       <div className="section-container">
         <motion.div
+          ref={ref as any}
           initial="hidden"
           animate={controls}
           variants={staggerContainer}
@@ -48,16 +65,22 @@ const AboutPage = () => {
 
             {/* Left — portrait + meta */}
             <motion.div variants={fadeInLeft} className="md:col-span-5">
-              <div className="relative aspect-[4/5] surface overflow-hidden">
+              <motion.div
+                style={{ y: portraitY }}
+                className="relative aspect-[4/5] surface overflow-hidden will-change-transform"
+              >
                 <Image
                   src={myImage}
                   alt="Anamul Haque"
                   fill
                   sizes="(min-width: 768px) 40vw, 100vw"
-                  className="object-cover object-top"
+                  className="object-cover object-top scale-105"
                 />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[--bg-0] to-transparent" />
-              </div>
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[--bg-0] to-transparent pointer-events-none" />
+                {/* Hairline corner accents */}
+                <span aria-hidden className="absolute top-2 right-2 w-4 h-4" style={{ borderTop: "1px solid var(--accent)", borderRight: "1px solid var(--accent)" }} />
+                <span aria-hidden className="absolute bottom-2 left-2 w-4 h-4" style={{ borderBottom: "1px solid var(--accent)", borderLeft: "1px solid var(--accent)" }} />
+              </motion.div>
 
               <dl className="mt-6 divide-y divide-[--hairline]">
                 {meta.map((row) => (
@@ -94,12 +117,21 @@ const AboutPage = () => {
                   <motion.div
                     key={s.label}
                     variants={staggerItem}
-                    className={`py-5 ${i !== 0 ? "sm:border-l border-[--hairline]" : ""} ${i % 2 === 1 ? "border-l border-[--hairline] sm:border-l" : ""}`}
+                    className={`group relative py-5 px-1 ${i !== 0 ? "sm:border-l border-[--hairline]" : ""} ${i % 2 === 1 ? "border-l border-[--hairline] sm:border-l" : ""}`}
                   >
-                    <div className="mono text-[24px] tracking-tight text-[--text-0]">
-                      {s.value}
+                    <div className="mono text-[26px] tracking-tight text-[--text-0]">
+                      {s.numeric !== undefined ? (
+                        <Counter to={s.numeric} suffix={s.suffix ?? ""} />
+                      ) : (
+                        s.text
+                      )}
                     </div>
                     <div className="mono-label mt-1">{s.label}</div>
+                    {/* underline draw on hover */}
+                    <span
+                      aria-hidden
+                      className="absolute left-0 bottom-0 h-px w-0 bg-[--accent] transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full"
+                    />
                   </motion.div>
                 ))}
               </motion.div>

@@ -60,14 +60,20 @@ const Achievements = () => {
               <motion.li
                 key={item.title}
                 variants={staggerItem}
-                className="group grid grid-cols-12 items-baseline gap-4 py-6"
+                className="group relative grid grid-cols-12 items-baseline gap-4 py-6 pl-5 transition-transform duration-300 hover:translate-x-1"
               >
-                <span className="col-span-2 md:col-span-1 mono-label text-[--accent]">
+                {/* Left-edge mint bar that grows on hover */}
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-1/4 bottom-1/4 w-0 bg-[--accent] transition-[width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-[2px]"
+                />
+
+                <span className="col-span-2 md:col-span-1 mono-label text-[--text-2] group-hover:text-[--accent] transition-colors duration-300 delay-75">
                   {item.year}
                 </span>
 
                 <div className="col-span-7 md:col-span-9">
-                  <h3 className="text-[16px] md:text-[17px] font-medium tracking-tight text-[--text-0] group-hover:text-[--accent] transition-colors duration-200">
+                  <h3 className="text-[16px] md:text-[17px] font-medium tracking-tight text-[--text-0] group-hover:text-[--accent] transition-colors duration-300">
                     {item.title}
                   </h3>
                   <p className="text-[13px] text-[--text-2] mt-0.5">{item.issuer}</p>
@@ -82,7 +88,7 @@ const Achievements = () => {
                       className="inline-flex items-center gap-1 text-[13px] text-[--text-1] hover:text-[--accent] transition-colors duration-200"
                     >
                       <span className="hidden md:inline">Certificate</span>
-                      <span aria-hidden>↗</span>
+                      <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
                     </a>
                   )}
                 </div>
