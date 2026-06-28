@@ -8,7 +8,7 @@ const AboutPage = () => {
   const { ref, controls } = useScrollAnimation(0.3);
 
   return (
-    <section className="py-20 md:py-32 relative" ref={ref}>
+    <section className="py-14 md:py-20 relative" ref={ref}>
       {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-teal-500/5 to-transparent" />
 

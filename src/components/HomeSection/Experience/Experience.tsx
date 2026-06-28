@@ -45,7 +45,7 @@ const Experience = () => {
     ];
 
     return (
-        <section className="py-20 md:py-32 relative" ref={ref}>
+        <section className="py-14 md:py-20 relative" ref={ref}>
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
             <div className="absolute top-1/4 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
@@ -59,7 +59,7 @@ const Experience = () => {
                     className="max-w-5xl mx-auto"
                 >
                     {/* Section Header */}
-                    <motion.div variants={staggerItem} className="text-center mb-12 md:mb-16">
+                    <motion.div variants={staggerItem} className="text-center mb-10">
                         <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
                             Career Journey
                         </span>

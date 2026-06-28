@@ -62,7 +62,7 @@ const RecentProject = () => {
 
   if (loading) {
     return (
-      <section className="py-20 md:py-32">
+      <section className="py-14 md:py-20">
         <div className="section-container">
           <div className="flex flex-col items-center justify-center gap-4">
             <div className="relative w-16 h-16">
@@ -78,7 +78,7 @@ const RecentProject = () => {
 
   if (!projects || projects.length === 0) {
     return (
-      <section className="py-20 md:py-32">
+      <section className="py-14 md:py-20">
         <div className="section-container text-center">
           <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
             Portfolio
@@ -95,7 +95,7 @@ const RecentProject = () => {
   }
 
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden">
+    <section className="py-14 md:py-20 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
       <div className="absolute top-1/3 -left-32 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
@@ -108,7 +108,7 @@ const RecentProject = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
              {/* here portfolio name has a simple designe, now add this designe in all section name */}
           <motion.span

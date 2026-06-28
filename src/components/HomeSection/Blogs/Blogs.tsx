@@ -40,7 +40,7 @@ const Blogs = () => {
 
   if (loading) {
     return (
-      <section className="py-20 md:py-32">
+      <section className="py-14 md:py-20">
         <div className="section-container">
           <div className="text-center">
             <div className="inline-block w-8 h-8 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
@@ -55,7 +55,7 @@ const Blogs = () => {
   }
 
   return (
-    <section className="py-20 md:py-32 relative" ref={ref}>
+    <section className="py-14 md:py-20 relative" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-teal-500/5 to-transparent" />
 
       <div className="section-container relative z-10">
@@ -65,7 +65,7 @@ const Blogs = () => {
           variants={staggerContainer}
         >
           {/* Section Header */}
-          <motion.div variants={staggerItem} className="text-center mb-16">
+          <motion.div variants={staggerItem} className="text-center mb-10">
             <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
               Latest Articles
             </span>

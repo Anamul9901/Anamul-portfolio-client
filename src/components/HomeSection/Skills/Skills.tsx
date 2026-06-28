@@ -94,14 +94,14 @@ const Skills = () => {
   const [activeCategory, setActiveCategory] = useState("frontend");
 
   return (
-    <section className="py-20 md:py-32 relative" ref={ref}>
+    <section className="py-14 md:py-20 relative" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-teal-500/5 to-transparent" />
 
       <div className="section-container relative z-10">
         <motion.div initial="hidden" animate={controls} variants={staggerContainer}>
 
           {/* Section Header */}
-          <motion.div variants={staggerItem} className="text-center mb-12">
+          <motion.div variants={staggerItem} className="text-center mb-10">
             <span className="inline-block px-4 py-2 rounded-full bg-teal-500/10 text-teal-500 font-medium uppercase tracking-wider text-sm mb-4">
               Technical Arsenal
             </span>
