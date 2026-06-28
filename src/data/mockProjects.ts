@@ -1,5 +1,26 @@
 export const mockProjects = [
     {
+        _id: "67b864d4d385f45tf7f0e0a1",
+        name: "RedLab Studio LMS (Batch-Based Learning Management System)",
+        description: "A scalable Learning Management System (LMS) designed for batch-based course enrollment and online learning. The platform enables course management, student enrollment, structured learning content, secure authentication, and an intuitive dashboard, providing a seamless experience for both learners and administrators.",
+        image: "https://i.ibb.co.com/gMN5MShb/Screenshot-2026-06-28-at-9-04-28-PM.png",
+        frLive: "https://redlabstudio.com/",
+        bcLive: "",
+        frRepo: "",
+        bcRepo: "",
+        createdAt: "2026-02-21T22:24:41+06:00",
+        updatedAt: "2026-02-21T22:24:41+06:00",
+        technologies: ["Next.js", "Redux", "Node.js", "Express.js", "TypeScript", "MongoDB", "VPS"],
+        features: [
+            "Developed a scalable Learning Management System (LMS) with batch-based course enrollment and management.",
+            "Implemented dynamic course, batch, and student management modules with secure role-based access control.",
+            "Designed responsive dashboards and structured course pages to deliver an intuitive online learning experience.",
+            "Maintained a secure video streaming server to protect premium course content and ensure reliable media delivery.",
+            "Optimized backend APIs, database indexing, and query performance for scalable course delivery.",
+            "Deployed and maintained the application on a VPS using Nginx and PM2, ensuring reliable hosting, process management, and production readiness."
+        ]
+    },
+    {
         _id: "67b864d4d385f9e9d7f0e0a1",
         name: "SebaPrime (Location-Based Social & Marketplace Platform)",
         description: "A scalable social media and marketplace platform featuring a hybrid feed algorithm that combines follow relationships and location-based prioritization. It includes a structured geolocation system for intelligent search, real-time messaging, and an optimized backend with efficient query indexing and role-based access control.",
