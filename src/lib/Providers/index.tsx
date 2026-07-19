@@ -20,7 +20,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <NextUIProvider navigate={router.push}>
       <Toaster />
-      {/* WebGL fluid paint-trail cursor. Fixed, pointer-events:none, auto-disabled
+      {/* WebGL fluid paint-trail cursor. Fixed, pointer-events:none, auto-disabled 
           on touch devices + prefers-reduced-motion. Tuned to the ember accent. */}
       <SplashCursor
         DENSITY_DISSIPATION={2.5}
