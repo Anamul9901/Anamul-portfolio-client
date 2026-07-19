@@ -56,7 +56,7 @@ const FloatField = ({
         onChange={(e: any) => setVal(e.target.value)}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        className={`w-full bg-transparent border-0 outline-none text-[15px] text-[--text-0] placeholder:text-transparent py-1.5 ${
+        className={`field-underline w-full bg-transparent border-0 outline-none text-[15px] text-[--text-0] placeholder:text-transparent py-1.5 ${
           textarea ? "resize-none min-h-[100px]" : ""
         }`}
       />
