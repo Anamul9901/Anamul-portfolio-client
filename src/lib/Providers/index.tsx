@@ -23,12 +23,12 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       {/* WebGL fluid paint-trail cursor. Fixed, pointer-events:none, auto-disabled
           on touch devices + prefers-reduced-motion. Tuned to the ember accent. */}
       <SplashCursor
-        DENSITY_DISSIPATION={3.5}
+        DENSITY_DISSIPATION={2.5}
         VELOCITY_DISSIPATION={2}
         PRESSURE={0.1}
-        CURL={3}
+        CURL={5}
         SPLAT_RADIUS={0.2}
-        SPLAT_FORCE={6000}
+        SPLAT_FORCE={4500}
         COLOR_UPDATE_SPEED={10}
         SHADING
         RAINBOW_MODE={false}
