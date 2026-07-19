@@ -3,231 +3,190 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt, FaGithub, FaArrowRight, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { mockProjects } from "@/src/data/mockProjects";
+import { useScrollAnimation, staggerContainer, staggerItem, fadeInUp } from "@/src/hooks/useScrollAnimation";
+import SectionHeader from "@/src/components/UI/SectionHeader";
+import TiltCard from "@/src/components/UI/TiltCard";
 
 interface Project {
-    _id: string;
-    name: string;
-    description: string;
-    image: string;
-    frLive: string;
-    frRepo?: string;
-    bcRepo?: string;
-    technologies?: string[];
+  _id: string;
+  name: string;
+  description: string;
+  image: string;
+  frLive: string;
+  frRepo?: string;
+  bcRepo?: string;
+  technologies?: string[];
 }
 
-const ProjectsPage = () => {
-    const [projects, setProjects] = useState<Project[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [error, setError] = useState<string | null>(null);
+const ease = [0.22, 1, 0.36, 1] as const;
 
-    useEffect(() => {
-        // Mock Data Implementation
-        setProjects(mockProjects);
-        setLoading(false);
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  return (
+    <motion.article variants={staggerItem} className="group">
+      <TiltCard max={4} className="block will-change-transform">
+        <Link href={`/project/${project._id}`} className="block" aria-label={project.name}>
+          {/* Image */}
+          <div className="relative aspect-[16/10] overflow-hidden rounded-xl hairline bg-[--bg-2]">
+            <motion.div
+              className="absolute inset-0"
+              whileHover={{ y: -14, scale: 1.04 }}
+              transition={{ duration: 0.7, ease }}
+              style={{ transform: "translateZ(30px)" }}
+            >
+              <Image
+                src={project.image}
+                alt={project.name}
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="object-cover"
+              />
+            </motion.div>
 
-        // Original API Logic (Commented Out)
-        /*
-        const fetchProjects = async () => {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000);
+            <div className="absolute inset-0 bg-gradient-to-t from-[--bg-0]/60 via-transparent to-transparent pointer-events-none" />
 
-            try {
-                const res = await fetch(
-                    "https://anamul-portfolio-backend.vercel.app/api/v1/project/all",
-                    { 
-                        cache: "no-store",
-                        signal: controller.signal
-                    }
-                );
-                clearTimeout(timeoutId);
-
-                if (!res.ok) {
-                    throw new Error(`API Error: ${res.status}`);
-                }
-
-                const data = await res.json();
-                setProjects(data?.data || []);
-            } catch (err: any) {
-                console.error("Error fetching projects:", err);
-                setError(err.message || "Failed to load projects");
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProjects();
-        */
-    }, []);
-
-    const filteredProjects = projects.filter((project) =>
-        project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    return (
-        <div className="min-h-screen pt-24 pb-20 relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent pointer-events-none" />
-            <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-teal-500/5 to-transparent pointer-events-none" />
-
-            <div className="section-container relative z-10">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-12"
-                >
-                    <span className="text-teal-500 font-medium uppercase tracking-wider text-sm">
-                        Portfolio Showcase
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold mt-2 mb-6">
-                        All <span className="gradient-text">Projects</span>
-                    </h1>
-                    <p className="text-default-500 max-w-2xl mx-auto mb-8">
-                        A complete collection of my works, ranging from full-stack applications to experimental prototypes.
-                    </p>
-
-                    {/* Search Bar */}
-                    <div className="max-w-md mx-auto relative group">
-                        <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-default-400 group-focus-within:text-teal-500 transition-colors">
-                            <FaSearch />
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Search projects by name or description..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 rounded-full bg-default-100/50 border border-default-200/50 text-default-100 placeholder:text-default-500 focus:outline-none focus:border-teal-500/50 focus:bg-default-100 transition-all duration-300 backdrop-blur-sm"
-                        />
-                    </div>
-                </motion.div>
-
-                {/* Loading State */}
-                {error ? (
-                    <div className="text-center py-20">
-                        <div className="glass-card p-8 max-w-md mx-auto border-red-500/20">
-                            <h3 className="text-xl font-bold text-red-500 mb-2">Error Loading Projects</h3>
-                            <p className="text-default-400 mb-4">{error}</p>
-                            <button
-                                onClick={() => window.location.reload()}
-                                className="px-6 py-2 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all"
-                            >
-                                Retry
-                            </button>
-                        </div>
-                    </div>
-                ) : loading ? (
-                    <div className="flex flex-col items-center justify-center py-20">
-                        <div className="w-16 h-16 border-4 border-teal-500/20 border-t-teal-500 rounded-full animate-spin mb-4" />
-                        <p className="text-default-500 animate-pulse">Loading projects...</p>
-                    </div>
-                ) : filteredProjects.length === 0 ? (
-                    <div className="text-center py-20 glass-card">
-                        <p className="text-default-400 text-lg">No projects found matching "{searchTerm}"</p>
-                        <button
-                            onClick={() => setSearchTerm("")}
-                            className="mt-4 px-6 py-2 text-teal-500 hover:text-teal-400 font-medium hover:underline transition-all"
-                        >
-                            Clear Search
-                        </button>
-                    </div>
-                ) : (
-                    /* Projects Grid */
-                    <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-                        {filteredProjects.map((project, index) => (
-                            <motion.div
-                                key={project._id}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.05 }}
-                                onMouseEnter={() => setHoveredIndex(index)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                                className="group relative"
-                            >
-                                {/* Card */}
-                                <div className="relative h-full flex flex-col rounded-2xl overflow-hidden bg-gradient-to-br from-default-100/80 to-default-200/50 backdrop-blur-sm border border-white/5 hover:border-teal-500/30 transition-all duration-500">
-                                    {/* Image */}
-                                    <div className="relative aspect-[16/10] overflow-hidden">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.name}
-                                            fill
-                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-                                        {/* Floating Links */}
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{
-                                                opacity: hoveredIndex === index ? 1 : 0,
-                                                y: hoveredIndex === index ? 0 : 20,
-                                            }}
-                                            className="absolute top-4 right-4 flex gap-2"
-                                        >
-                                            <a
-                                                href={project.frLive}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="p-2.5 rounded-full bg-teal-500 text-white shadow-lg hover:bg-teal-400 transition-colors"
-                                                title="Live Demo"
-                                            >
-                                                <FaExternalLinkAlt size={14} />
-                                            </a>
-                                            {project.frRepo && (
-                                                <a
-                                                    href={project.frRepo}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="p-2.5 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
-                                                    title="Frontend Code"
-                                                >
-                                                    <FaGithub size={14} />
-                                                </a>
-                                            )}
-                                        </motion.div>
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="p-6 flex-1 flex flex-col">
-                                        <div className="mb-4">
-                                            <h3 className="text-xl font-bold text-white group-hover:text-teal-400 transition-colors mb-2">
-                                                {project.name}
-                                            </h3>
-                                            <p className="text-default-400 text-sm line-clamp-2 leading-relaxed">
-                                                {project.description}
-                                            </p>
-                                        </div>
-
-                                        <div className="mt-auto pt-4 border-t border-white/5 flex gap-3">
-                                            <a
-                                                href={project.frLive}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex-1 py-2 text-center rounded-lg bg-teal-500/10 text-teal-500 text-sm font-medium hover:bg-teal-500 hover:text-white transition-all duration-300"
-                                            >
-                                                Live Demo
-                                            </a>
-                                            <Link
-                                                href={`/project/${project._id}`}
-                                                className="flex-1 py-2 text-center rounded-lg bg-white/5 text-default-300 text-sm font-medium hover:bg-white/10 hover:text-white transition-all duration-300"
-                                            >
-                                                Details
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                )}
+            {/* Project index */}
+            <div className="absolute top-3 left-3 mono-label text-[--text-1] group-hover:text-[--accent] group-hover:-translate-y-0.5 transition-all duration-300">
+              / {String(index + 1).padStart(2, "0")}
             </div>
-        </div>
-    );
+
+            {/* Hairline ring on hover */}
+            <div className="absolute inset-0 rounded-xl pointer-events-none group-hover:shadow-[inset_0_0_0_1px_rgba(245,158,11,0.35)] transition-shadow duration-300" />
+          </div>
+
+          {/* Title + meta */}
+          <div className="mt-5 flex items-start justify-between gap-4">
+            <h3 className="relative text-[18px] md:text-[20px] font-medium tracking-tight text-[--text-0]">
+              <span className="relative inline-block">
+                {project.name}
+                <span
+                  aria-hidden
+                  className="absolute left-0 -bottom-0.5 h-px w-0 bg-[--accent] transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full"
+                />
+              </span>
+            </h3>
+            <span
+              className="text-[--text-2] group-hover:text-[--accent] transition-all duration-300 group-hover:translate-x-0.5 mt-1"
+              aria-hidden
+            >
+              ↗
+            </span>
+          </div>
+
+          <p className="mt-2 text-[14px] text-[--text-1] leading-[1.7] line-clamp-2">
+            {project.description}
+          </p>
+
+          {project.technologies && project.technologies.length > 0 && (
+            <div className="mt-3 mono text-[12px] text-[--text-2] tracking-wide">
+              {project.technologies.slice(0, 5).join(" · ").toLowerCase()}
+            </div>
+          )}
+        </Link>
+      </TiltCard>
+
+      {/* Action links */}
+      <div className="mt-3 flex items-center gap-5 text-[13px]">
+        <a
+          href={project.frLive}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-inline"
+        >
+          Live <span className="text-[--text-2]" aria-hidden>↗</span>
+        </a>
+        {project.frRepo && (
+          <a
+            href={project.frRepo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-inline"
+          >
+            Code <span className="text-[--text-2]" aria-hidden>↗</span>
+          </a>
+        )}
+      </div>
+    </motion.article>
+  );
+};
+
+const ProjectsPage = () => {
+  const { ref, controls } = useScrollAnimation(0.1);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    setProjects(mockProjects);
+    setLoading(false);
+  }, []);
+
+  const filteredProjects = projects.filter(
+    (p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      p.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="min-h-screen pt-24 pb-8 relative overflow-hidden">
+      {/* Background accent */}
+      <div className="spotlight spotlight-drift" style={{ top: "-10%", right: "-20%", opacity: 0.4 }} />
+
+      <div className="section-container relative z-10 section-pad" ref={ref}>
+        <motion.div initial="hidden" animate={controls} variants={staggerContainer}>
+          <SectionHeader
+            index="06"
+            label="Projects"
+            title={<>All <span className="text-[--accent]">work</span>.</>}
+            subtitle="A complete collection of shipped projects — from full-stack platforms to experimental prototypes."
+            align="center"
+            className="items-center text-center"
+          />
+
+          {/* Search */}
+          <motion.div variants={fadeInUp} className="max-w-md mx-auto mb-14 md:mb-16">
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-[--text-2] group-focus-within:text-[--accent] transition-colors">
+                <FaSearch />
+              </div>
+              <input
+                type="text"
+                placeholder="Search projects…"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-11 pr-4 py-3 rounded-full bg-[--bg-2] hairline text-[--text-0] text-[14px] placeholder:text-[--text-2] focus:outline-none focus:border-[--accent] transition-all duration-300"
+              />
+            </div>
+          </motion.div>
+
+          {/* Results */}
+          {loading ? (
+            <div className="mono-label text-[--text-2] text-center py-20">Loading…</div>
+          ) : filteredProjects.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-[--text-1] mb-4">No projects matching &ldquo;{searchTerm}&rdquo;</p>
+              <button
+                onClick={() => setSearchTerm("")}
+                className="link-inline"
+              >
+                Clear search
+              </button>
+            </div>
+          ) : (
+            <motion.div
+              variants={staggerContainer}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14"
+            >
+              {filteredProjects.map((project, index) => (
+                <ProjectCard key={project._id} project={project} index={index} />
+              ))}
+            </motion.div>
+          )}
+        </motion.div>
+      </div>
+    </div>
+  );
 };
 
 export default ProjectsPage;

@@ -1,13 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { Link as ScrollLink } from "react-scroll";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { useScrollAnimation, fadeInUp } from "@/src/hooks/useScrollAnimation";
-
-const socials = [
-  { href: "https://github.com/Anamul9901",                       icon: FaGithub,   label: "GitHub" },
-  { href: "https://www.linkedin.com/in/anamul-haque9901/",       icon: FaLinkedin, label: "LinkedIn" },
-];
+import { scrollToTop } from "@/src/lib/lenis";
+import { siteConfig } from "@/src/config/site";
+import SocialLinks from "@/src/components/UI/SocialLinks";
 
 const Footer = () => {
   const { ref, controls } = useScrollAnimation(0.3);
@@ -31,28 +27,15 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-6 mono-label">
-            {socials.map(({ href, icon: Icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex items-center gap-2 text-[--text-1] hover:text-[--accent] transition-colors duration-200"
-              >
-                <Icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{label}</span>
-              </a>
-            ))}
-            <ScrollLink
-              to="home"
-              smooth
-              duration={700}
+            <SocialLinks className="mono-label" iconOnly />
+
+            <button
+              onClick={scrollToTop}
               className="cursor-pointer flex items-center gap-1 text-[--text-1] hover:text-[--accent] transition-colors duration-200"
             >
               <span>Back to top</span>
               <span aria-hidden>↑</span>
-            </ScrollLink>
+            </button>
           </div>
         </motion.div>
 

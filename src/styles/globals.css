@@ -7,57 +7,73 @@
    Dark monochrome base + single mint accent. Hairlines over glass.
    ============================================================ */
 
-:root {
-  /* Legacy light tokens (kept for non-dark contexts; site defaults to dark) */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-card: #ffffff;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --border-color: rgba(0, 0, 0, 0.1);
-  --accent-primary: #2dd4bf;
-  --accent-secondary: #14b8a6;
-  --accent-glow: rgba(45, 212, 191, 0.3);
+/* ============================================================
+   Design System — "Ember Editorial"
+   Warm amber accent over deep ink. Hairlines over surface.
+   One spacing rhythm (8px base). Default theme: dark.
+   ============================================================ */
 
-  /* New tokens */
-  --bg-0: #ffffff;
-  --bg-1: #f8fafc;
-  --bg-2: #ffffff;
-  --hairline: rgba(0, 0, 0, 0.08);
-  --hairline-strong: rgba(0, 0, 0, 0.16);
-  --text-0: #0a0a0c;
-  --text-1: #475569;
-  --text-2: #94a3b8;
-  --accent: #14b8a6;
-  --accent-soft: rgba(20, 184, 166, 0.12);
-  --accent-glow-soft: rgba(45, 212, 191, 0.18);
+:root {
+  /* Surface stack */
+  --bg-0: #08090B; /* page */
+  --bg-1: #101218; /* raised */
+  --bg-2: #161A22; /* card */
+
+  /* Hairlines */
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-strong: rgba(255, 255, 255, 0.14);
+
+  /* Text */
+  --text-0: #F5F6F8; /* primary */
+  --text-1: #A3A8B3; /* secondary */
+  --text-2: #6B7280; /* muted */
+
+  /* Accent — ember/amber. Single source of truth, swap here to re-skin. */
+  --accent: #F59E0B;
+  --accent-bright: #FBBF24;
+  --accent-soft: rgba(245, 158, 11, 0.12);
+  --accent-glow-soft: rgba(245, 158, 11, 0.22);
+  --accent-contrast: #1A1206; /* text color on accent fills */
+
+  /* Spacing scale (8px base) */
+  --space-section: 6rem;     /* py-24  */
+  --space-section-md: 8rem;  /* py-32  */
+  --space-grid: 1.5rem;      /* gap-6  */
+  --space-grid-md: 2rem;     /* gap-8  */
+
+  /* Radii */
+  --r-sm: 0.5rem;
+  --r-md: 0.75rem;
+  --r-lg: 1rem;
+  --r-xl: 1.25rem;
+
+  /* Easing */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Legacy aliases (kept so any unmigrated markup doesn't break) */
+  --bg-primary: var(--bg-0);
+  --bg-secondary: var(--bg-1);
+  --bg-card: var(--bg-2);
+  --text-primary: var(--text-0);
+  --text-secondary: var(--text-1);
+  --text-muted: var(--text-2);
+  --border-color: var(--hairline);
+  --accent-primary: var(--accent);
+  --accent-secondary: var(--accent-bright);
+  --accent-glow: var(--accent-glow-soft);
 }
 
-.dark {
-  --bg-primary: #08090c;
-  --bg-secondary: #0c0e13;
-  --bg-card: #11141b;
-  --text-primary: #f5f6f8;
-  --text-secondary: #a3a8b3;
-  --text-muted: #6b7280;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --accent-primary: #2dd4bf;
-  --accent-secondary: #14b8a6;
-  --accent-glow: rgba(45, 212, 191, 0.35);
-
-  /* New tokens (dark) */
-  --bg-0: #08090c;
-  --bg-1: #0c0e13;
-  --bg-2: #11141b;
-  --hairline: rgba(255, 255, 255, 0.07);
-  --hairline-strong: rgba(255, 255, 255, 0.14);
-  --text-0: #f5f6f8;
-  --text-1: #a3a8b3;
-  --text-2: #6b7280;
-  --accent: #2dd4bf;
-  --accent-soft: rgba(45, 212, 191, 0.12);
-  --accent-glow-soft: rgba(45, 212, 191, 0.22);
+/* Light theme fallback (not used in production — site is dark by default) */
+:root:not(.dark) {
+  --bg-0: #FFFFFF;
+  --bg-1: #F8FAFC;
+  --bg-2: #FFFFFF;
+  --hairline: rgba(0, 0, 0, 0.08);
+  --hairline-strong: rgba(0, 0, 0, 0.16);
+  --text-0: #0A0A0C;
+  --text-1: #475569;
+  --text-2: #94A3B8;
+  --accent-contrast: #FFFFFF;
 }
 
 /* ===== Global ===== */
@@ -97,11 +113,32 @@ body {
   @apply max-w-6xl mx-auto px-5 md:px-8;
 }
 
+/* Consistent vertical rhythm — one rule across every section. */
+.section-pad {
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: var(--space-section-md);
+    padding-bottom: var(--space-section-md);
+  }
+}
+
+.hairline-l {
+  border-left: 1px solid var(--hairline);
+}
+
+.hairline-r {
+  border-right: 1px solid var(--hairline);
+}
+
 .section-heading {
   font-weight: 600;
   letter-spacing: -0.025em;
   line-height: 1.05;
-  font-size: clamp(1.875rem, 3vw, 2.75rem);
+  font-size: clamp(2rem, 3.2vw, 3rem);
   color: var(--text-0);
 }
 
@@ -109,7 +146,7 @@ body {
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.02;
-  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-size: clamp(2.75rem, 6vw, 5rem);
   color: var(--text-0);
 }
 
@@ -188,13 +225,13 @@ body {
   padding: 0.75rem 1.25rem;
   border-radius: 999px;
   background: var(--accent);
-  color: #06141c;
+  color: var(--accent-contrast);
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: -0.01em;
-  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
-              background-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 200ms var(--ease),
+              box-shadow 200ms var(--ease),
+              background-color 200ms var(--ease);
   border: 1px solid transparent;
 }
 
@@ -354,7 +391,7 @@ body {
     100deg,
     transparent 0%,
     rgba(255, 255, 255, 0.05) 30%,
-    rgba(45, 212, 191, 0.18) 50%,
+    rgba(245, 158, 11, 0.20) 50%,
     rgba(255, 255, 255, 0.05) 70%,
     transparent 100%
   );
@@ -443,7 +480,7 @@ body {
 /* ===== Selection ===== */
 ::selection {
   background: var(--accent);
-  color: #06141c;
+  color: var(--accent-contrast);
 }
 
 /* ===== Reduced motion ===== */

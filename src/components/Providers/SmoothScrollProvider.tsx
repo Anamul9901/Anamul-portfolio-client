@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { setLenis } from "@/src/lib/lenis";
 
 const SmoothScrollProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const SmoothScrollProvider = ({ children }: { children: React.ReactNode }) => {
       wheelMultiplier: 1,
       touchMultiplier: 1.2,
     });
+    setLenis(lenis);
 
     let rafId: number;
     const raf = (time: number) => {
@@ -25,6 +27,7 @@ const SmoothScrollProvider = ({ children }: { children: React.ReactNode }) => {
 
     return () => {
       cancelAnimationFrame(rafId);
+      setLenis(null);
       lenis.destroy();
     };
   }, []);

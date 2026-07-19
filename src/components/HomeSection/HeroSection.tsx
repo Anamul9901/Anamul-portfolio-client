@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import TiltCard from "@/src/components/UI/TiltCard";
 import MagneticButton from "@/src/components/UI/MagneticButton";
+import { siteConfig } from "@/src/config/site";
 import myImage from "../../../public/Anamul-Haque-removebg.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -150,30 +151,22 @@ const HeroSection = () => {
                 </a>
               </MagneticButton>
               <MagneticButton strength={4} radius={70}>
-                <a href="mailto:anamulhaque9901@gmail.com" className="link-inline">
+                <a href={`mailto:${siteConfig.contact.email}`} className="link-inline">
                   Email <span className="text-[--text-2]" aria-hidden>↗</span>
                 </a>
               </MagneticButton>
-              <MagneticButton strength={4} radius={70}>
-                <a
-                  href="https://github.com/Anamul9901"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-inline"
-                >
-                  GitHub <span className="text-[--text-2]" aria-hidden>↗</span>
-                </a>
-              </MagneticButton>
-              <MagneticButton strength={4} radius={70}>
-                <a
-                  href="https://www.linkedin.com/in/anamul-haque9901/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-inline"
-                >
-                  LinkedIn <span className="text-[--text-2]" aria-hidden>↗</span>
-                </a>
-              </MagneticButton>
+              {siteConfig.socials.map((s) => (
+                <MagneticButton key={s.label} strength={4} radius={70}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-inline"
+                  >
+                    {s.label} <span className="text-[--text-2]" aria-hidden>↗</span>
+                  </a>
+                </MagneticButton>
+              ))}
             </motion.div>
 
             {/* Scroll affordance */}

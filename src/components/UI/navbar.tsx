@@ -1,11 +1,11 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Link as ScrollLink } from "react-scroll";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { scrollToSection } from "@/src/lib/lenis";
 
 const navItems = [
   { label: "Home",         to: "home" },
@@ -17,6 +17,34 @@ const navItems = [
   { label: "Projects",     to: "projects" },
   { label: "Contact",      to: "contact" },
 ];
+
+/**
+ * In-app smooth-scroll link. Uses the Lenis singleton (one scroll driver),
+ * so it stays in sync with smooth-wheel scrolling instead of fighting it.
+ */
+const NavLink = ({
+  to,
+  className,
+  onClick,
+  children,
+}: {
+  to: string;
+  className?: string;
+  onClick?: () => void;
+  children: React.ReactNode;
+}) => (
+  <a
+    href={`#${to}`}
+    className={className}
+    onClick={(e) => {
+      e.preventDefault();
+      scrollToSection(to);
+      onClick?.();
+    }}
+  >
+    {children}
+  </a>
+);
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -115,17 +143,14 @@ export const Navbar = () => {
                   );
 
                   return isHomePage ? (
-                    <ScrollLink
+                    <NavLink
                       key={item.to}
                       to={item.to}
-                      smooth
-                      offset={-40}
-                      duration={600}
                       className={`${className} ${colorClass}`}
                     >
                       {pill}
                       {inner}
-                    </ScrollLink>
+                    </NavLink>
                   ) : (
                     <NextLink
                       key={item.to}
@@ -142,13 +167,13 @@ export const Navbar = () => {
 
             {/* CTA + mobile button */}
             <div className="flex items-center gap-2">
-              <a
-                href="#contact"
+              <NavLink
+                to="contact"
                 className="hidden md:inline-flex items-center gap-1.5 text-[12.5px] font-medium text-[--text-0] hover:text-[--accent] transition-colors duration-200"
               >
                 Let&apos;s talk
                 <span className="text-[--accent]">→</span>
-              </a>
+              </NavLink>
               <button
                 onClick={() => setIsOpen((v) => !v)}
                 className="md:hidden w-9 h-9 flex items-center justify-center rounded-full hairline text-[--text-0]"
@@ -175,6 +200,19 @@ export const Navbar = () => {
               <nav className="flex-1 flex flex-col justify-center gap-1">
                 {navItems.map((item, i) => {
                   const isActive = isHomePage && activeSection === item.to;
+                  const inner = (
+                    <>
+                      <span className="mono-label w-8">{String(i + 1).padStart(2, "0")}</span>
+                      <span
+                        className={`text-[28px] font-semibold tracking-tight transition-colors ${
+                          isActive ? "text-[--accent]" : "text-[--text-0]"
+                        }`}
+                        style={{ letterSpacing: "-0.02em" }}
+                      >
+                        {item.label}
+                      </span>
+                    </>
+                  );
                   return (
                     <motion.div
                       key={item.to}
@@ -182,21 +220,23 @@ export const Navbar = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.05 + i * 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <NextLink
-                        href={isHomePage ? `#${item.to}` : item.to === "projects" ? "/projects" : `/#${item.to}`}
-                        onClick={() => setIsOpen(false)}
-                        className="flex items-baseline gap-4 py-3 hairline-b"
-                      >
-                        <span className="mono-label w-8">{String(i + 1).padStart(2, "0")}</span>
-                        <span
-                          className={`text-[28px] font-semibold tracking-tight transition-colors ${
-                            isActive ? "text-[--accent]" : "text-[--text-0]"
-                          }`}
-                          style={{ letterSpacing: "-0.02em" }}
+                      {isHomePage ? (
+                        <NavLink
+                          to={item.to}
+                          onClick={() => setIsOpen(false)}
+                          className="flex items-baseline gap-4 py-3 hairline-b"
                         >
-                          {item.label}
-                        </span>
-                      </NextLink>
+                          {inner}
+                        </NavLink>
+                      ) : (
+                        <NextLink
+                          href={item.to === "projects" ? "/projects" : `/#${item.to}`}
+                          onClick={() => setIsOpen(false)}
+                          className="flex items-baseline gap-4 py-3 hairline-b"
+                        >
+                          {inner}
+                        </NextLink>
+                      )}
                     </motion.div>
                   );
                 })}

@@ -3,16 +3,17 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/src/hooks/useScrollAnimation";
 import SectionHeader from "@/src/components/UI/SectionHeader";
 import {
-  SiReact, SiNextdotjs, SiTypescript, SiRedux, SiHtml5, SiCss3, SiTailwindcss,
+  SiReact, SiNextdotjs, SiTypescript, SiRedux, SiHtml5, SiCss, SiTailwindcss,
   SiNodedotjs, SiExpress, SiNestjs, SiPrisma, SiGraphql,
   SiMongodb, SiPostgresql, SiRedis, SiMongoose,
-  SiAmazon, SiDocker, SiGithubactions, SiVercel, SiNginx,
-  SiJest, SiOpenai,
+  SiDocker, SiGithubactions, SiVercel, SiNginx,
+  SiJest,
 } from "react-icons/si";
 import {
   FaServer, FaDatabase, FaLayerGroup, FaUsers, FaComments,
   FaSearch, FaCodeBranch, FaTasks, FaNetworkWired,
 } from "react-icons/fa";
+import { FaAws, FaBrain } from "react-icons/fa6";
 import { IconType } from "react-icons";
 
 interface Skill { name: string; Icon: IconType; color: string; }
@@ -28,7 +29,7 @@ const groups: Group[] = [
       { name: "TypeScript",    Icon: SiTypescript,   color: "#3178C6" },
       { name: "Redux",         Icon: SiRedux,        color: "#764ABC" },
       { name: "HTML5",         Icon: SiHtml5,        color: "#E34F26" },
-      { name: "CSS3",          Icon: SiCss3,         color: "#1572B6" },
+      { name: "CSS3",          Icon: SiCss,          color: "#1572B6" },
       { name: "Tailwind",      Icon: SiTailwindcss,  color: "#06B6D4" },
       { name: "Responsive",    Icon: FaLayerGroup,   color: "#A78BFA" },
       { name: "Lazy load",     Icon: FaServer,       color: "#34D399" },
@@ -46,7 +47,7 @@ const groups: Group[] = [
       { name: "Microservices", Icon: FaNetworkWired, color: "#F59E0B" },
       { name: "REST",          Icon: FaServer,       color: "#10B981" },
       { name: "GraphQL",       Icon: SiGraphql,      color: "#E10098" },
-      { name: "AI / LLM",      Icon: SiOpenai,       color: "#74AA9C" },
+      { name: "AI / LLM",      Icon: FaBrain,        color: "#74AA9C" },
     ],
   },
   {
@@ -65,7 +66,7 @@ const groups: Group[] = [
     index: "04",
     label: "DevOps",
     skills: [
-      { name: "AWS",           Icon: SiAmazon,        color: "#FF9900" },
+      { name: "AWS",           Icon: FaAws,           color: "#FF9900" },
       { name: "Docker",        Icon: SiDocker,        color: "#2496ED" },
       { name: "GH Actions",    Icon: SiGithubactions, color: "#2088FF" },
       { name: "Vercel",        Icon: SiVercel,        color: "#FFFFFF" },
@@ -152,7 +153,7 @@ const Skills = () => {
   const { ref, controls } = useScrollAnimation(0.12);
 
   return (
-    <section className="relative py-20 md:py-28" ref={ref}>
+    <section className="relative section-pad" ref={ref}>
       <div className="section-container">
         <motion.div initial="hidden" animate={controls} variants={containerVar}>
           <SectionHeader
@@ -162,7 +163,7 @@ const Skills = () => {
             subtitle="Every technology I work with, at a glance — hover any tile."
           />
 
-          <div className="space-y-10 md:space-y-12">
+          <div className="space-y-12 md:space-y-16">
             {groups.map((g) => (
               <motion.div
                 key={g.label}

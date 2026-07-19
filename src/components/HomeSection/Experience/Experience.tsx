@@ -51,7 +51,7 @@ const Experience = () => {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section className="relative py-20 md:py-28" ref={ref}>
+    <section className="relative section-pad" ref={ref}>
       <div className="section-container">
         <motion.div initial="hidden" animate={controls} variants={staggerContainer}>
           <SectionHeader

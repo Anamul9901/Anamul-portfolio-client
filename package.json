@@ -28,9 +28,7 @@
     "@nextui-org/theme": "2.4.5",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/visually-hidden": "3.8.30",
-    "@reduxjs/toolkit": "^2.11.2",
     "clsx": "2.1.1",
-    "emailjs": "^5.0.0",
     "framer-motion": "~12.33.0",
     "intl-messageformat": "^11.1.2",
     "lenis": "^1.3.25",
@@ -39,14 +37,8 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.71.1",
-    "react-icon": "^1.0.0",
     "react-icons": "^5.5.0",
-    "react-redux": "^9.2.0",
-    "react-scroll": "^1.9.3",
-    "redux-persist": "^6.0.0",
-    "sonner": "^2.0.7",
-    "sweetalert2": "^11.26.18",
-    "typewriter-effect": "^2.22.0"
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.1.6",

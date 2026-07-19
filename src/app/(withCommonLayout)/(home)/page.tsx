@@ -1,6 +1,5 @@
 import AboutPage from "@/src/components/HomeSection/About/AboutPage";
 import Achievements from "@/src/components/HomeSection/Achievements/Achievements";
-import Blogs from "@/src/components/HomeSection/Blogs/Blogs";
 import ContactInfo from "@/src/components/HomeSection/ContactInfo/ContactInfo";
 import Education from "@/src/components/HomeSection/Education/Education";
 import Experience from "@/src/components/HomeSection/Experience/Experience";
@@ -38,10 +37,6 @@ const HomePage = () => {
       <div id="projects">
         <RecentProject />
       </div>
-
-      {/* <div id="blogs">
-        <Blogs />
-      </div> */}
 
       <div id="contact">
         <ContactInfo />

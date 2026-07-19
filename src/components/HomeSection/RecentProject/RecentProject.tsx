@@ -167,7 +167,7 @@ const RecentProject = () => {
   const visible = projects.slice(0, 4);
 
   return (
-    <section className="relative py-20 md:py-28" ref={ref}>
+    <section className="relative section-pad" ref={ref}>
       <div className="section-container">
         <motion.div initial="hidden" animate={controls} variants={staggerContainer}>
           <SectionHeader

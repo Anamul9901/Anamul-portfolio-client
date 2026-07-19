@@ -46,7 +46,7 @@ const AboutPage = () => {
   const portraitY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section ref={sectionRef} className="relative py-20 md:py-28">
+    <section ref={sectionRef} className="relative section-pad">
       <div className="section-container">
         <motion.div
           ref={ref as any}
@@ -61,7 +61,7 @@ const AboutPage = () => {
             subtitle="Two years building backends in production. Sharpened on competitive programming, refined by client work."
           />
 
-          <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-start">
+          <div className="grid md:grid-cols-12 gap-8 md:gap-10 items-start">
 
             {/* Left — portrait + meta */}
             <motion.div variants={fadeInLeft} className="md:col-span-5">

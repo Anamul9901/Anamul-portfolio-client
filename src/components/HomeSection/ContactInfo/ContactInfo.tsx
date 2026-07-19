@@ -11,6 +11,8 @@ import {
 } from "@/src/hooks/useScrollAnimation";
 import SectionHeader from "@/src/components/UI/SectionHeader";
 import MagneticButton from "@/src/components/UI/MagneticButton";
+import { siteConfig } from "@/src/config/site";
+import SocialLinks from "@/src/components/UI/SocialLinks";
 
 const FloatField = ({
   id,
@@ -103,7 +105,7 @@ const ContactInfo = () => {
   };
 
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden" ref={ref}>
+    <section className="relative section-pad overflow-hidden" ref={ref}>
       <div className="spotlight spotlight-drift" style={{ bottom: "-10%", left: "30%" }} />
 
       <div className="section-container relative z-10">
@@ -161,14 +163,14 @@ const ContactInfo = () => {
             className="mt-14 pt-8 hairline-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
           >
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[14px]">
-              <a href="mailto:anamulhaque9901@gmail.com" className="link-inline">
-                anamulhaque9901@gmail.com
+              <a href={`mailto:${siteConfig.contact.email}`} className="link-inline">
+                {siteConfig.contact.email}
               </a>
-              <a href="tel:+8801864668089" className="link-inline">
-                +880 1864 668089
+              <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="link-inline">
+                {siteConfig.contact.phone}
               </a>
             </div>
-            <div className="mono-label">Mirpur, Dhaka — BD</div>
+            <SocialLinks className="mono-label" iconOnly />
           </motion.div>
         </motion.div>
       </div>

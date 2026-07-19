@@ -13,6 +13,8 @@ import {
 } from "react-icons/fa";
 import { mockProjects } from "@/src/data/mockProjects";
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 interface Project {
   _id: string;
   name: string;
@@ -27,17 +29,25 @@ interface Project {
   createdAt: string;
 }
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay, ease },
+  }),
+};
+
 const SingleProject = () => {
   const { projectId } = useParams();
   const router = useRouter();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     if (projectId) {
-      const foundProject = mockProjects.find((p) => p._id === projectId);
-      setProject(foundProject as unknown as Project || null);
+      const found = mockProjects.find((p) => p._id === projectId);
+      setProject((found as unknown as Project) || null);
       setLoading(false);
     }
   }, [projectId]);
@@ -46,11 +56,11 @@ const SingleProject = () => {
     return (
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
-          <div className="relative w-16 h-16 mx-auto mb-4">
-            <div className="absolute inset-0 rounded-full border-4 border-teal-500/20" />
-            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-teal-500 animate-spin" />
+          <div className="relative w-12 h-12 mx-auto mb-4">
+            <div className="absolute inset-0 rounded-full hairline-strong" />
+            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-[--accent] animate-spin" />
           </div>
-          <p className="text-default-500 animate-pulse">Loading...</p>
+          <p className="mono-label text-[--text-2]">Loading…</p>
         </div>
       </div>
     );
@@ -60,14 +70,14 @@ const SingleProject = () => {
     return (
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
-          <div className="glass-card p-12 max-w-md mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-4">Project Not Found</h2>
-            <p className="text-default-500 mb-6">The project you&apos;re looking for doesn&apos;t exist.</p>
+          <div className="surface p-12 max-w-md mx-auto">
+            <h2 className="text-2xl font-semibold text-[--text-0] mb-4">Project Not Found</h2>
+            <p className="text-[--text-1] mb-6">The project you&apos;re looking for doesn&apos;t exist.</p>
             <button
               onClick={() => router.back()}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-teal-500 text-white font-medium hover:bg-teal-600 transition-colors"
+              className="btn-primary"
             >
-              <FaArrowLeft />
+              <FaArrowLeft size={12} />
               Go Back
             </button>
           </div>
@@ -81,51 +91,55 @@ const SingleProject = () => {
       <div className="section-container">
         {/* Back Button */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="mb-6"
+          initial="hidden"
+          animate="visible"
+          custom={0}
+          variants={fadeInUp}
+          className="mb-8"
         >
           <button
             onClick={() => router.back()}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-default-400 hover:text-teal-500 transition-colors text-sm"
+            className="link-inline text-[13px] flex items-center gap-2"
           >
-            <FaArrowLeft size={12} />
+            <FaArrowLeft size={10} />
             Back to Projects
           </button>
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
-          {/* Image at the Top */}
+          {/* Hero Image */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="relative rounded-2xl overflow-hidden mb-10 border border-white/10"
+            initial="hidden"
+            animate="visible"
+            custom={0.05}
+            variants={fadeInUp}
+            className="relative rounded-2xl overflow-hidden mb-10 hairline"
           >
-            <div className={`relative aspect-video ${!imageLoaded ? "bg-white/5 animate-pulse" : ""}`}>
+            <div className="relative aspect-video bg-[--bg-2]">
               <Image
                 src={project.image}
                 alt={project.name}
                 fill
                 priority
                 className="object-cover"
-                onLoad={() => setImageLoaded(true)}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[--bg-0]/60 via-transparent to-transparent pointer-events-none" />
             </div>
           </motion.div>
 
           {/* Title & Date */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            initial="hidden"
+            animate="visible"
+            custom={0.1}
+            variants={fadeInUp}
             className="mb-6"
           >
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-[--text-0] mb-3 leading-tight">
               {project.name}
             </h1>
-            <div className="flex items-center gap-2 text-default-500 text-sm">
-              <FaCalendar className="text-teal-500" size={12} />
+            <div className="flex items-center gap-2 text-[--text-2] text-[13px]">
+              <FaCalendar className="text-[--accent]" size={11} />
               {new Date(project.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -135,19 +149,20 @@ const SingleProject = () => {
 
           {/* Action Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="flex flex-wrap gap-3 mb-8"
+            initial="hidden"
+            animate="visible"
+            custom={0.15}
+            variants={fadeInUp}
+            className="flex flex-wrap gap-3 mb-10"
           >
             {project.frLive && (
               <a
                 href={project.frLive}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-500 text-white font-medium hover:bg-teal-400 transition-colors text-sm"
+                className="btn-primary text-[13px]"
               >
-                <FaExternalLinkAlt size={12} />
+                <FaExternalLinkAlt size={11} />
                 Live Site
               </a>
             )}
@@ -156,10 +171,10 @@ const SingleProject = () => {
                 href={project.frRepo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-default-300 font-medium hover:bg-white/10 transition-colors text-sm"
+                className="btn-ghost text-[13px]"
               >
-                <FaGithub size={14} />
-                Frontend Code
+                <FaGithub size={13} />
+                Frontend
               </a>
             )}
             {project.bcRepo && (
@@ -167,10 +182,10 @@ const SingleProject = () => {
                 href={project.bcRepo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-default-300 font-medium hover:bg-white/10 transition-colors text-sm"
+                className="btn-ghost text-[13px]"
               >
-                <FaGithub size={14} />
-                Backend Code
+                <FaGithub size={13} />
+                Backend
               </a>
             )}
             {project.bcLive && (
@@ -178,9 +193,9 @@ const SingleProject = () => {
                 href={project.bcLive}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-default-300 font-medium hover:bg-white/10 transition-colors text-sm"
+                className="btn-ghost text-[13px]"
               >
-                <FaExternalLinkAlt size={12} />
+                <FaExternalLinkAlt size={11} />
                 API
               </a>
             )}
@@ -188,28 +203,34 @@ const SingleProject = () => {
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-default-400 leading-relaxed mb-10"
+            initial="hidden"
+            animate="visible"
+            custom={0.2}
+            variants={fadeInUp}
+            className="text-[--text-1] text-[15px] leading-[1.8] mb-10 max-w-3xl"
           >
             {project.description}
           </motion.p>
 
-          {/* Features */}
+          {/* Features / Key Highlights */}
           {project.features && project.features.length > 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 }}
+              initial="hidden"
+              animate="visible"
+              custom={0.25}
+              variants={fadeInUp}
               className="mb-10"
             >
-              <h3 className="text-lg font-semibold text-white mb-4">Key Highlights</h3>
-              <ul className="space-y-3">
+              <h3 className="text-[20px] font-semibold tracking-tight text-[--text-0] mb-6">
+                Key Highlights
+              </h3>
+              <ul className="space-y-3 max-w-3xl">
                 {project.features.map((feature, index) => (
-                  <li key={index} className="flex gap-3 text-default-400 text-sm leading-relaxed">
-                    <span className="mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-teal-500" />
-                    {feature}
+                  <li key={index} className="flex gap-3 text-[14.5px] text-[--text-1] leading-[1.7]">
+                    <span className="mono text-[11px] text-[--accent] pt-1.5 shrink-0 opacity-70">
+                      0{index + 1}
+                    </span>
+                    <span>{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -219,17 +240,20 @@ const SingleProject = () => {
           {/* Technologies */}
           {project.technologies && project.technologies.length > 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              initial="hidden"
+              animate="visible"
+              custom={0.3}
+              variants={fadeInUp}
               className="mb-12"
             >
-              <h3 className="text-lg font-semibold text-white mb-4">Technologies</h3>
+              <h3 className="text-[20px] font-semibold tracking-tight text-[--text-0] mb-5">
+                Technologies
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-default-300 text-xs font-medium"
+                    className="mono text-[11.5px] uppercase tracking-wider px-3 py-1.5 rounded-full hairline text-[--text-2] hover:text-[--accent] hover:border-[--accent] transition-all duration-200 cursor-default"
                   >
                     {tech}
                   </span>
@@ -240,14 +264,15 @@ const SingleProject = () => {
 
           {/* Back to All Projects */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.35 }}
-            className="pt-8 border-t border-white/10 text-center"
+            initial="hidden"
+            animate="visible"
+            custom={0.35}
+            variants={fadeInUp}
+            className="pt-8 hairline-t"
           >
             <Link
-              href="/#projects"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-default-400 text-sm font-medium hover:bg-teal-500 hover:text-white hover:border-teal-500 transition-all duration-300"
+              href="/projects"
+              className="link-inline text-[13px]"
             >
               <FaArrowLeft size={10} />
               View All Projects

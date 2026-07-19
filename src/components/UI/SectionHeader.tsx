@@ -18,7 +18,7 @@ const SectionHeader = ({ index, label, title, subtitle, align = "left", classNam
   return (
     <motion.div
       variants={fadeInUp}
-      className={`flex flex-col ${alignClass} gap-4 mb-12 ${className}`}
+      className={`flex flex-col ${alignClass} gap-4 mb-14 md:mb-16 ${className}`}
     >
       <div className="mono-label flex items-center gap-3">
         <span className="text-[--accent]">{index}</span>
