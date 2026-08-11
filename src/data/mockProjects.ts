@@ -20,6 +20,70 @@ export const mockProjects = [
             "Deployed and maintained the application on a VPS using Nginx and PM2, ensuring reliable hosting, process management, and production readiness."
         ]
     },
+
+    {
+    _id: "67b864d4d385f9e9d7f0scg1",
+    name: "SC Group BD (Advanced Multi-Branch E-Commerce & ERP)",
+    description:
+        "A comprehensive, admin-controlled multi-branch e-commerce and ERP platform built for centralized business operations. The system combines advanced affiliate marketing, points and tier-based rewards, POS, inventory management, branch-wise operations, intelligent business automation, and a fully CMS-driven homepage.",
+    image: "https://i.ibb.co.com/h1LhzSLt/Screenshot-2026-08-11-at-4-09-52-PM.png",
+    frLive: "https://scgroupbd.com/",
+    bcLive: "",
+    frRepo: "",
+    bcRepo: "",
+    createdAt: "2026-08-11T00:00:00+06:00",
+    updatedAt: "2026-08-11T00:00:00+06:00",
+    technologies: [
+        "Next.js",
+        "Redux",
+        "Node.js",
+        "Express.js",
+        "TypeScript",
+        "MongoDB",
+        "VPS",
+    ],
+    features: [
+        "Developed a fully admin-controlled multi-branch business management platform with centralized system administration.",
+        "Implemented an advanced affiliate marketing system with configurable affiliate rules and commission management.",
+        "Built a points and tier-based reward system to support customer and affiliate engagement.",
+        "Implemented branch-wise business operations with centralized management and access control.",
+        "Developed an integrated POS system for managing branch-level sales and transactions.",
+        "Implemented inventory management across branches for centralized stock monitoring and control.",
+        "Integrated intelligent business features to support automated and data-driven operational management.",
+        "Built a fully CMS-driven homepage allowing administrators to dynamically manage website content and sections.",
+    ],
+},
+{
+    _id: "67b864d4d385f9e9d7f0hop1",
+    name: "Hope71 (Multi-Branch E-Commerce & ERP)",
+    description:
+        "A comprehensive admin-controlled multi-branch e-commerce and ERP platform designed for centralized business management. The system provides branch-wise operations, integrated POS, inventory management, and a fully CMS-driven homepage that allows administrators to control and manage the website dynamically.",
+    image: "https://i.ibb.co.com/zHNQ9gw9/Screenshot-2026-08-11-at-4-09-17-PM.png",
+    frLive: "https://hope71.com/",
+    bcLive: "",
+    frRepo: "",
+    bcRepo: "",
+    createdAt: "2026-08-11T00:00:00+06:00",
+    updatedAt: "2026-08-11T00:00:00+06:00",
+    technologies: [
+        "Next.js",
+        "Redux",
+        "Node.js",
+        "Express.js",
+        "TypeScript",
+        "MongoDB",
+        "VPS",
+    ],
+    features: [
+        "Developed a fully admin-controlled business management platform with centralized system administration.",
+        "Implemented branch-wise business operations with centralized management and access control.",
+        "Developed an integrated POS system for managing sales and branch-level transactions.",
+        "Implemented inventory management for efficient stock tracking and control.",
+        "Built a fully CMS-driven homepage allowing administrators to dynamically manage website content and sections.",
+    ],
+},
+
+
     {
         _id: "67b864d4d385f9e9d7f0e0a1",
         name: "SebaPrime (Location-Based Social & Marketplace Platform)",
@@ -40,6 +104,7 @@ export const mockProjects = [
             "Integrated real-time messaging, moderation system, and role-based access control."
         ]
     },
+    
     {
         _id: "67b864d4d385f9e9d7f0e0a2",
         name: "SCGroup (Corporate Branch & Inventory Management)",
