@@ -53,7 +53,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       variants={staggerItem}
       className="group"
     >
-      <TiltCard max={4} className="block will-change-transform">
+      <TiltCard max={6} className="block will-change-transform">
         <Link href={`/project/${project._id}`} className="block" aria-label={project.name}>
           {/* Image frame with parallax + cursor dot */}
           <div
@@ -164,7 +164,7 @@ const RecentProject = () => {
     setLoading(false);
   }, []);
 
-  const visible = projects.slice(0, 4);
+  const visible = projects.slice(0, 6);
 
   return (
     <section className="relative section-pad" ref={ref}>
@@ -182,7 +182,7 @@ const RecentProject = () => {
           ) : visible.length === 0 ? (
             <div className="mono-label text-[--text-2]">No projects yet.</div>
           ) : (
-            <div className="grid md:grid-cols-2 gap-x-8 gap-y-14">
+            <div className="grid md:grid-cols-3 gap-x-8 gap-y-14">
               {visible.map((project, index) => (
                 <ProjectCard key={project._id} project={project} index={index} />
               ))}
