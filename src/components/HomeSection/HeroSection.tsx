@@ -178,8 +178,9 @@ const HeroSection = () => {
             >
               <MagneticButton strength={4} radius={70}>
                 <a
-                  href="/Anamul_Haque_Resume_2026.pdf"
-                  download="Anamul_Haque_Resume.pdf"
+                  href="https://drive.google.com/file/d/1oXdHMbY5b8VQONJpAwTxuaNsRvErAl1r/view?usp=drive_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="link-inline"
                 >
                   Resume <span className="text-[--text-2]" aria-hidden>↗</span>

@@ -28,6 +28,12 @@ const items: Item[] = [
     href: "https://drive.google.com/file/d/1AwGPUR8xhLDuA5HyHuojao1EzJQoxce5/view",
   },
   {
+    year: "2026",
+    title: "Top 40 among 700+ Teams in the Codex Community Hackathon",
+    issuer: "SUST CSE Carnival, Sylhet",
+    href: "https://drive.google.com/file/d/1RafVmuqEljkLkui32pOLrY3Wr7lm96xY/view",
+  },
+  {
     year: "2024",
     title: "Next Level Web Development",
     issuer: "Programming Hero",
@@ -38,6 +44,12 @@ const items: Item[] = [
     title: "Complete Web Development",
     issuer: "Programming Hero",
     href: "https://drive.google.com/file/d/1EnOksrjswUENRzXZMJ1F7l8Z4yjLqmFd/view",
+  },
+  {
+    year: "2026",
+    title: "CSE Fundamentals with Phitron",
+    issuer: "Phitron",
+    href: "https://drive.google.com/drive/folders/1qPc0q6-N6J7o5eUHmiaVUPaArTj3LsOG",
   },
 ];
 
